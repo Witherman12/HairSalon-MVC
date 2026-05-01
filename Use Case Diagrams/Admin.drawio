@@ -1,0 +1,40 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.6.6 Chrome/144.0.7559.236 Electron/40.8.4 Safari/537.36" version="29.6.6">
+  <diagram name="Σελίδα-1" id="ZF4d8F1H2mih6BkoKSIr">
+    <mxGraphModel dx="1042" dy="660" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="cSF00I1_CAQoBJSznPDC-1" parent="1" style="swimlane;whiteSpace=wrap;html=1;fontStyle=1;strokeWidth=2;startSize=40;" value="Σύστημα Διαχείρισης Ραντεβού Κομμωτηρίου" vertex="1">
+          <mxGeometry height="560" width="400" x="320" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="cSF00I1_CAQoBJSznPDC-4" parent="cSF00I1_CAQoBJSznPDC-1" style="ellipse;whiteSpace=wrap;html=1;fontStyle=1;strokeWidth=2;" value="4.1 Διαχείριση όλων των ραντεβού" vertex="1">
+          <mxGeometry height="80" width="120" x="140" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="cSF00I1_CAQoBJSznPDC-6" parent="cSF00I1_CAQoBJSznPDC-1" style="ellipse;whiteSpace=wrap;html=1;fontStyle=1;strokeWidth=2;" value="4.2 Προβολή αναφορών" vertex="1">
+          <mxGeometry height="80" width="120" x="140" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="cSF00I1_CAQoBJSznPDC-7" parent="cSF00I1_CAQoBJSznPDC-1" style="ellipse;whiteSpace=wrap;html=1;fontStyle=1;strokeWidth=2;" value="4.3 Διαχείριση των υπαλλήλων" vertex="1">
+          <mxGeometry height="80" width="120" x="140" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="cSF00I1_CAQoBJSznPDC-8" parent="cSF00I1_CAQoBJSznPDC-1" style="ellipse;whiteSpace=wrap;html=1;fontStyle=1;strokeWidth=2;" value="4.4 Διαχείριση υπηρεσιών" vertex="1">
+          <mxGeometry height="80" width="120" x="140" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="ithFncSBJk32T0wA5Xhu-2" edge="1" parent="1" source="cSF00I1_CAQoBJSznPDC-2" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.3333333333333333;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontStyle=1;strokeWidth=2;" target="cSF00I1_CAQoBJSznPDC-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ithFncSBJk32T0wA5Xhu-3" edge="1" parent="1" source="cSF00I1_CAQoBJSznPDC-2" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.3333333333333333;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontStyle=1;strokeWidth=2;" target="cSF00I1_CAQoBJSznPDC-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ithFncSBJk32T0wA5Xhu-4" edge="1" parent="1" source="cSF00I1_CAQoBJSznPDC-2" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.3333333333333333;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontStyle=1;strokeWidth=2;" target="cSF00I1_CAQoBJSznPDC-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ithFncSBJk32T0wA5Xhu-5" edge="1" parent="1" source="cSF00I1_CAQoBJSznPDC-2" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.3333333333333333;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontStyle=1;strokeWidth=2;" target="cSF00I1_CAQoBJSznPDC-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cSF00I1_CAQoBJSznPDC-2" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;fontStyle=1;strokeWidth=2;" value="Admin" vertex="1">
+          <mxGeometry height="80" width="40" x="200" y="200" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
