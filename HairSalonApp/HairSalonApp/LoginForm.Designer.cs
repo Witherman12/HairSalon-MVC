@@ -67,6 +67,7 @@
             // txtUsername
             // 
             txtUsername.BorderStyle = BorderStyle.FixedSingle;
+            txtUsername.Cursor = Cursors.IBeam;
             txtUsername.Location = new Point(205, 159);
             txtUsername.Name = "txtUsername";
             txtUsername.Size = new Size(234, 34);
@@ -75,6 +76,7 @@
             // txtPassword
             // 
             txtPassword.BorderStyle = BorderStyle.FixedSingle;
+            txtPassword.Cursor = Cursors.IBeam;
             txtPassword.Location = new Point(205, 320);
             txtPassword.Name = "txtPassword";
             txtPassword.PasswordChar = '*';
