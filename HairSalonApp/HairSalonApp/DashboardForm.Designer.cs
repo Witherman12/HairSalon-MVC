@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DashboardForm));
             Sidebar = new Panel();
             btnReports = new Button();
+            DashboardImageList = new ImageList(components);
             btnLogout = new Button();
             btnEmployees = new Button();
             btnServices = new Button();
@@ -42,7 +43,6 @@
             lblCurrentUser = new Label();
             MainMenu = new Label();
             MainPanel = new Panel();
-            DashboardImageList = new ImageList(components);
             Sidebar.SuspendLayout();
             Topbar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -84,6 +84,19 @@
             btnReports.TextAlign = ContentAlignment.MiddleLeft;
             btnReports.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnReports.UseVisualStyleBackColor = false;
+            // 
+            // DashboardImageList
+            // 
+            DashboardImageList.ColorDepth = ColorDepth.Depth32Bit;
+            DashboardImageList.ImageStream = (ImageListStreamer)resources.GetObject("DashboardImageList.ImageStream");
+            DashboardImageList.TransparentColor = Color.Transparent;
+            DashboardImageList.Images.SetKeyName(0, "Calendar.png");
+            DashboardImageList.Images.SetKeyName(1, "Customers.png");
+            DashboardImageList.Images.SetKeyName(2, "Reports.png");
+            DashboardImageList.Images.SetKeyName(3, "Services.png");
+            DashboardImageList.Images.SetKeyName(4, "UserIcon.png");
+            DashboardImageList.Images.SetKeyName(5, "Logout.png");
+            DashboardImageList.Images.SetKeyName(6, "Employees.png");
             // 
             // btnLogout
             // 
@@ -211,7 +224,7 @@
             // 
             pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(698, 3);
+            pictureBox1.Location = new Point(686, 10);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(40, 40);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
@@ -225,7 +238,7 @@
             lblCurrentUser.AutoSize = true;
             lblCurrentUser.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 161);
             lblCurrentUser.ForeColor = Color.White;
-            lblCurrentUser.Location = new Point(534, 9);
+            lblCurrentUser.Location = new Point(524, 16);
             lblCurrentUser.Name = "lblCurrentUser";
             lblCurrentUser.Size = new Size(158, 28);
             lblCurrentUser.TabIndex = 0;
@@ -254,19 +267,6 @@
             MainPanel.Size = new Size(738, 493);
             MainPanel.TabIndex = 2;
             MainPanel.Paint += panel1_Paint;
-            // 
-            // DashboardImageList
-            // 
-            DashboardImageList.ColorDepth = ColorDepth.Depth32Bit;
-            DashboardImageList.ImageStream = (ImageListStreamer)resources.GetObject("DashboardImageList.ImageStream");
-            DashboardImageList.TransparentColor = Color.Transparent;
-            DashboardImageList.Images.SetKeyName(0, "Calendar.png");
-            DashboardImageList.Images.SetKeyName(1, "Customers.png");
-            DashboardImageList.Images.SetKeyName(2, "Reports.png");
-            DashboardImageList.Images.SetKeyName(3, "Services.png");
-            DashboardImageList.Images.SetKeyName(4, "UserIcon.png");
-            DashboardImageList.Images.SetKeyName(5, "Logout.png");
-            DashboardImageList.Images.SetKeyName(6, "Employees.png");
             // 
             // DashboardForm
             // 
