@@ -56,5 +56,10 @@ namespace HairSalonApp
             // Την φορτώνει στο MainPanel
             LoadUserControl(uc);
         }
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            Application.Restart();
+        }
     }
 }

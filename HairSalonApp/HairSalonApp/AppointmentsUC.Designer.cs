@@ -81,6 +81,7 @@
             btnNewAppointment.TabIndex = 2;
             btnNewAppointment.Text = "Νέο Ραντεβού";
             btnNewAppointment.UseVisualStyleBackColor = false;
+            btnNewAppointment.Click += btnNewAppointment_Click;
             // 
             // btnEditAppointment
             // 
@@ -120,7 +121,7 @@
             dtpDateFilter.CalendarMonthBackground = Color.WhiteSmoke;
             dtpDateFilter.Cursor = Cursors.Hand;
             dtpDateFilter.Format = DateTimePickerFormat.Short;
-            dtpDateFilter.Location = new Point(611, 4);
+            dtpDateFilter.Location = new Point(611, -2);
             dtpDateFilter.Name = "dtpDateFilter";
             dtpDateFilter.Size = new Size(127, 27);
             dtpDateFilter.TabIndex = 5;

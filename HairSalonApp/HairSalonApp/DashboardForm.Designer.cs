@@ -118,6 +118,7 @@
             btnLogout.TabIndex = 4;
             btnLogout.Text = "Αποσύνδεση";
             btnLogout.UseVisualStyleBackColor = false;
+            btnLogout.Click += btnLogout_Click;
             // 
             // btnEmployees
             // 
