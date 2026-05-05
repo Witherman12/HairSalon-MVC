@@ -58,12 +58,11 @@
             dgvAppointments.BackgroundColor = Color.WhiteSmoke;
             dgvAppointments.BorderStyle = BorderStyle.None;
             dgvAppointments.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvAppointments.Dock = DockStyle.Fill;
-            dgvAppointments.Location = new Point(0, 31);
+            dgvAppointments.Location = new Point(0, 34);
             dgvAppointments.Name = "dgvAppointments";
             dgvAppointments.RowHeadersWidth = 51;
             dgvAppointments.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvAppointments.Size = new Size(738, 412);
+            dgvAppointments.Size = new Size(738, 409);
             dgvAppointments.TabIndex = 1;
             dgvAppointments.CellContentClick += dgvAppointments_CellContentClick;
             // 
