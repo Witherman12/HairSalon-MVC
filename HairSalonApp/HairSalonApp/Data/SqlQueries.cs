@@ -1,5 +1,3 @@
-using System;
-
 namespace HairSalonApp.Data
 {
     /// <summary>
@@ -160,7 +158,7 @@ namespace HairSalonApp.Data
         // +++ APPOINTMENTS TABLE QUERIES +++ //
         public static class Appointments
         {
-            public const string GetAllWithDetails = @"
+            public const string GetAll = @"
                 SELECT 
                     a.Id,
                     a.AppDate,
@@ -184,7 +182,7 @@ namespace HairSalonApp.Data
                 INNER JOIN Services s ON a.ServiceId = s.Id
                 ORDER BY a.AppDate, a.AppTime;";
 
-            public const string GetByIdWithDetails = @"
+            public const string GetById = @"
                 SELECT 
                     a.Id,
                     a.AppDate,
@@ -287,13 +285,13 @@ namespace HairSalonApp.Data
                 DELETE FROM Appointments
                 WHERE Id = @Id;";
 
-                            /// <summary>
-                            /// Checks whether an employee already has an active appointment that overlaps
-                            /// with the new appointment time. The new appointment duration is passed as minutes.
-                            /// If this query returns rows, the appointment slot is not available.
-                            /// Parameters: @EmployeeId, @AppDate, @NewStartTime, @NewDurationMinutes.
-                            /// </summary>
-                            public const string CheckAvailability = @"
+            /// <summary>
+            /// Checks whether an employee already has an active appointment that overlaps
+            /// with the new appointment time. The new appointment duration is passed as minutes.
+            /// If this query returns rows, the appointment slot is not available.
+            /// Parameters: @EmployeeId, @AppDate, @NewStartTime, @NewDurationMinutes.
+            /// </summary>
+            public const string CheckAvailability = @"
                 SELECT a.Id
                 FROM Appointments a
                 INNER JOIN Services s ON a.ServiceId = s.Id
@@ -304,6 +302,20 @@ namespace HairSalonApp.Data
                         @NewStartTime < ADDTIME(a.AppTime, SEC_TO_TIME(s.DurationMinutes * 60))
                         AND ADDTIME(@NewStartTime, SEC_TO_TIME(@NewDurationMinutes * 60)) > a.AppTime
                     );";
+
+            public const string CheckAvailabilityForUpdate = @"
+                SELECT COUNT(*)
+                FROM Appointments a
+                INNER JOIN Services s ON a.ServiceId = s.Id
+                WHERE a.EmployeeId = @EmployeeId
+                AND a.AppDate = @AppDate
+                AND a.Status = 'Ενεργό'
+                AND a.Id <> @AppointmentId
+                AND (
+                        @NewStartTime < ADDTIME(a.AppTime, SEC_TO_TIME(s.DurationMinutes * 60))
+                        AND ADDTIME(@NewStartTime, SEC_TO_TIME(@NewDurationMinutes * 60)) > a.AppTime
+                    );
+            ";
         }
 
         /// <summary>
@@ -311,7 +323,7 @@ namespace HairSalonApp.Data
         /// </summary>
         public static class Reports
         {
-            public const string TotalAppointmentsByDate = @"
+            public const string AppointmentsByDate = @"
                 SELECT AppDate, COUNT(*) AS TotalAppointments
                 FROM Appointments
                 GROUP BY AppDate
@@ -351,6 +363,13 @@ namespace HairSalonApp.Data
                 WHERE a.Status = 'Ολοκληρώθηκε'
                 GROUP BY s.Id, s.ServiceName
                 ORDER BY Revenue DESC;";
+        }
+
+        public static class Common
+        {
+            public const string LastInsertId = @"
+                SELECT LAST_INSERT_ID();
+            ";
         }
     }
 }
