@@ -48,7 +48,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
-            label1.Location = new Point(223, 9);
+            label1.Location = new Point(222, 20);
             label1.Name = "label1";
             label1.Size = new Size(98, 28);
             label1.TabIndex = 0;
@@ -58,7 +58,7 @@
             // 
             cmbCustomer.Cursor = Cursors.Hand;
             cmbCustomer.FormattingEnabled = true;
-            cmbCustomer.Location = new Point(347, 9);
+            cmbCustomer.Location = new Point(347, 20);
             cmbCustomer.Name = "cmbCustomer";
             cmbCustomer.Size = new Size(151, 28);
             cmbCustomer.TabIndex = 1;
@@ -67,7 +67,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
-            label2.Location = new Point(223, 54);
+            label2.Location = new Point(222, 65);
             label2.Name = "label2";
             label2.Size = new Size(108, 28);
             label2.TabIndex = 2;
@@ -77,17 +77,17 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
-            label3.Location = new Point(223, 100);
+            label3.Location = new Point(222, 111);
             label3.Name = "label3";
-            label3.Size = new Size(118, 28);
+            label3.Size = new Size(123, 28);
             label3.TabIndex = 3;
-            label3.Text = "Υπάλληλος";
+            label3.Text = "Υπάλληλος:";
             // 
             // cmbService
             // 
             cmbService.Cursor = Cursors.Hand;
             cmbService.FormattingEnabled = true;
-            cmbService.Location = new Point(347, 54);
+            cmbService.Location = new Point(347, 65);
             cmbService.Name = "cmbService";
             cmbService.Size = new Size(151, 28);
             cmbService.TabIndex = 4;
@@ -96,7 +96,7 @@
             // 
             cmbEmployee.Cursor = Cursors.Hand;
             cmbEmployee.FormattingEnabled = true;
-            cmbEmployee.Location = new Point(347, 100);
+            cmbEmployee.Location = new Point(347, 111);
             cmbEmployee.Name = "cmbEmployee";
             cmbEmployee.Size = new Size(151, 28);
             cmbEmployee.TabIndex = 5;
@@ -105,7 +105,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
-            label4.Location = new Point(220, 189);
+            label4.Location = new Point(222, 191);
             label4.Name = "label4";
             label4.Size = new Size(134, 28);
             label4.TabIndex = 6;
@@ -123,16 +123,17 @@
             // txtTime
             // 
             txtTime.Cursor = Cursors.IBeam;
+            txtTime.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 161);
             txtTime.Location = new Point(376, 224);
             txtTime.Name = "txtTime";
-            txtTime.Size = new Size(125, 27);
+            txtTime.Size = new Size(125, 34);
             txtTime.TabIndex = 8;
             // 
             // label5
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
-            label5.Location = new Point(220, 224);
+            label5.Location = new Point(222, 230);
             label5.Name = "label5";
             label5.Size = new Size(59, 28);
             label5.TabIndex = 9;
@@ -143,6 +144,7 @@
             btnSave.Anchor = AnchorStyles.Bottom;
             btnSave.BackColor = Color.Green;
             btnSave.Cursor = Cursors.Hand;
+            btnSave.FlatAppearance.BorderSize = 0;
             btnSave.FlatStyle = FlatStyle.Flat;
             btnSave.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
             btnSave.ForeColor = Color.WhiteSmoke;
@@ -158,6 +160,7 @@
             btnCancel.Anchor = AnchorStyles.Bottom;
             btnCancel.BackColor = Color.DarkRed;
             btnCancel.Cursor = Cursors.Hand;
+            btnCancel.FlatAppearance.BorderSize = 0;
             btnCancel.FlatStyle = FlatStyle.Flat;
             btnCancel.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
             btnCancel.ForeColor = Color.WhiteSmoke;

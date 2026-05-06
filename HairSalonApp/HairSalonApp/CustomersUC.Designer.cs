@@ -30,9 +30,9 @@
         {
             label1 = new Label();
             dgvCustomers = new DataGridView();
-            btnCancelAppointment = new Button();
-            btnEditAppointment = new Button();
-            btnNewAppointment = new Button();
+            btnDeleteCustomer = new Button();
+            btnEditCustomer = new Button();
+            btnNewCustomer = new Button();
             panel1 = new Panel();
             ((System.ComponentModel.ISupportInitialize)dgvCustomers).BeginInit();
             SuspendLayout();
@@ -52,60 +52,69 @@
             // 
             // dgvCustomers
             // 
+            dgvCustomers.AllowUserToAddRows = false;
             dgvCustomers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvCustomers.BackgroundColor = Color.WhiteSmoke;
             dgvCustomers.BorderStyle = BorderStyle.None;
             dgvCustomers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvCustomers.Location = new Point(0, 34);
+            dgvCustomers.Dock = DockStyle.Fill;
+            dgvCustomers.Location = new Point(0, 31);
             dgvCustomers.Name = "dgvCustomers";
             dgvCustomers.RowHeadersWidth = 51;
-            dgvCustomers.Size = new Size(738, 459);
+            dgvCustomers.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvCustomers.Size = new Size(738, 462);
             dgvCustomers.TabIndex = 2;
             // 
-            // btnCancelAppointment
+            // btnDeleteCustomer
             // 
-            btnCancelAppointment.Anchor = AnchorStyles.Bottom;
-            btnCancelAppointment.BackColor = Color.DarkRed;
-            btnCancelAppointment.Cursor = Cursors.Hand;
-            btnCancelAppointment.FlatStyle = FlatStyle.Flat;
-            btnCancelAppointment.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
-            btnCancelAppointment.ForeColor = Color.WhiteSmoke;
-            btnCancelAppointment.Location = new Point(518, 443);
-            btnCancelAppointment.Name = "btnCancelAppointment";
-            btnCancelAppointment.Size = new Size(220, 50);
-            btnCancelAppointment.TabIndex = 10;
-            btnCancelAppointment.Text = "Διαγραφή";
-            btnCancelAppointment.UseVisualStyleBackColor = false;
+            btnDeleteCustomer.Anchor = AnchorStyles.Bottom;
+            btnDeleteCustomer.BackColor = Color.DarkRed;
+            btnDeleteCustomer.Cursor = Cursors.Hand;
+            btnDeleteCustomer.FlatAppearance.BorderSize = 0;
+            btnDeleteCustomer.FlatStyle = FlatStyle.Flat;
+            btnDeleteCustomer.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
+            btnDeleteCustomer.ForeColor = Color.WhiteSmoke;
+            btnDeleteCustomer.Location = new Point(518, 443);
+            btnDeleteCustomer.Name = "btnDeleteCustomer";
+            btnDeleteCustomer.Size = new Size(220, 50);
+            btnDeleteCustomer.TabIndex = 10;
+            btnDeleteCustomer.Text = "Διαγραφή";
+            btnDeleteCustomer.UseVisualStyleBackColor = false;
+            btnDeleteCustomer.Click += btnDeleteCustomer_Click;
             // 
-            // btnEditAppointment
+            // btnEditCustomer
             // 
-            btnEditAppointment.Anchor = AnchorStyles.Bottom;
-            btnEditAppointment.BackColor = Color.DarkOrange;
-            btnEditAppointment.Cursor = Cursors.Hand;
-            btnEditAppointment.FlatStyle = FlatStyle.Flat;
-            btnEditAppointment.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
-            btnEditAppointment.ForeColor = Color.WhiteSmoke;
-            btnEditAppointment.Location = new Point(259, 443);
-            btnEditAppointment.Name = "btnEditAppointment";
-            btnEditAppointment.Size = new Size(220, 50);
-            btnEditAppointment.TabIndex = 9;
-            btnEditAppointment.Text = "Επεξεργασία";
-            btnEditAppointment.UseVisualStyleBackColor = false;
+            btnEditCustomer.Anchor = AnchorStyles.Bottom;
+            btnEditCustomer.BackColor = Color.DarkOrange;
+            btnEditCustomer.Cursor = Cursors.Hand;
+            btnEditCustomer.FlatAppearance.BorderSize = 0;
+            btnEditCustomer.FlatStyle = FlatStyle.Flat;
+            btnEditCustomer.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
+            btnEditCustomer.ForeColor = Color.WhiteSmoke;
+            btnEditCustomer.Location = new Point(259, 443);
+            btnEditCustomer.Name = "btnEditCustomer";
+            btnEditCustomer.Size = new Size(220, 50);
+            btnEditCustomer.TabIndex = 9;
+            btnEditCustomer.Text = "Επεξεργασία";
+            btnEditCustomer.UseVisualStyleBackColor = false;
+            btnEditCustomer.Click += btnEditCustomer_Click;
             // 
-            // btnNewAppointment
+            // btnNewCustomer
             // 
-            btnNewAppointment.Anchor = AnchorStyles.Bottom;
-            btnNewAppointment.BackColor = Color.Green;
-            btnNewAppointment.Cursor = Cursors.Hand;
-            btnNewAppointment.FlatStyle = FlatStyle.Flat;
-            btnNewAppointment.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
-            btnNewAppointment.ForeColor = Color.WhiteSmoke;
-            btnNewAppointment.Location = new Point(0, 443);
-            btnNewAppointment.Name = "btnNewAppointment";
-            btnNewAppointment.Size = new Size(220, 50);
-            btnNewAppointment.TabIndex = 8;
-            btnNewAppointment.Text = "Νέος Πελάτης";
-            btnNewAppointment.UseVisualStyleBackColor = false;
+            btnNewCustomer.Anchor = AnchorStyles.Bottom;
+            btnNewCustomer.BackColor = Color.Green;
+            btnNewCustomer.Cursor = Cursors.Hand;
+            btnNewCustomer.FlatAppearance.BorderSize = 0;
+            btnNewCustomer.FlatStyle = FlatStyle.Flat;
+            btnNewCustomer.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
+            btnNewCustomer.ForeColor = Color.WhiteSmoke;
+            btnNewCustomer.Location = new Point(0, 443);
+            btnNewCustomer.Name = "btnNewCustomer";
+            btnNewCustomer.Size = new Size(220, 50);
+            btnNewCustomer.TabIndex = 8;
+            btnNewCustomer.Text = "Νέος Πελάτης";
+            btnNewCustomer.UseVisualStyleBackColor = false;
+            btnNewCustomer.Click += btnNewCustomer_Click;
             // 
             // panel1
             // 
@@ -121,9 +130,9 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.WhiteSmoke;
-            Controls.Add(btnCancelAppointment);
-            Controls.Add(btnEditAppointment);
-            Controls.Add(btnNewAppointment);
+            Controls.Add(btnDeleteCustomer);
+            Controls.Add(btnEditCustomer);
+            Controls.Add(btnNewCustomer);
             Controls.Add(panel1);
             Controls.Add(dgvCustomers);
             Controls.Add(label1);
@@ -138,9 +147,9 @@
 
         private Label label1;
         private DataGridView dgvCustomers;
-        private Button btnCancelAppointment;
-        private Button btnEditAppointment;
-        private Button btnNewAppointment;
+        private Button btnDeleteCustomer;
+        private Button btnEditCustomer;
+        private Button btnNewCustomer;
         private Panel panel1;
     }
 }

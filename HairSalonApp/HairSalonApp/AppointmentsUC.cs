@@ -50,5 +50,50 @@ namespace HairSalonApp
         {
 
         }
+
+        private void btnCancelAppointment_Click_1(object sender, EventArgs e)
+        {
+            // 1. Ελέγχουμε ΠΡΩΤΑ αν έχει επιλεγεί έστω και μία γραμμή
+            if (dgvAppointments.SelectedRows.Count > 0)
+            {
+                // 2. Εφόσον έχει επιλέξει, βγάζουμε το μήνυμα επιβεβαίωσης
+                DialogResult result = MessageBox.Show(
+                    "Είστε σίγουροι ότι θέλετε να ακυρώσετε/διαγράψετε το επιλεγμένο ραντεβού;",
+                    "Επιβεβαίωση Διαγραφής",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning);
+
+                // 3. Αν απαντήσει "Ναι", το διαγράφουμε
+                if (result == DialogResult.Yes)
+                {
+                    dgvAppointments.Rows.RemoveAt(dgvAppointments.SelectedRows[0].Index);
+                }
+            }
+            else
+            {
+                // Αν πατήσει το κουμπί ΧΩΡΙΣ να έχει επιλέξει ραντεβού:
+                MessageBox.Show("Παρακαλώ επιλέξτε ένα ραντεβού πρώτα.", "Προσοχή", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btnEditAppointment_Click(object sender, EventArgs e)
+        {
+            // Ελέγχουμε αν έχει επιλεχθεί γραμμή
+            if (dgvAppointments.SelectedRows.Count > 0)
+            {
+                NewAppointmentForm popup = new NewAppointmentForm();
+
+                // Αλλάζουμε τον τίτλο του παραθύρου για να καταλαβαίνει η γραμματεία τι κάνει!
+                popup.Text = "Επεξεργασία Ραντεβού";
+
+                // (Στο μέλλον, εδώ θα παίρνουμε τα δεδομένα της γραμμής και θα τα βάζουμε στα πεδία)
+
+                popup.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Παρακαλώ επιλέξτε ένα ραντεβού πρώτα.");
+            }
+        }
     }
 }

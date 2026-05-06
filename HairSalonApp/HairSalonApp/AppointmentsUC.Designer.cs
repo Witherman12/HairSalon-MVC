@@ -58,11 +58,12 @@
             dgvAppointments.BackgroundColor = Color.WhiteSmoke;
             dgvAppointments.BorderStyle = BorderStyle.None;
             dgvAppointments.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvAppointments.Location = new Point(0, 34);
+            dgvAppointments.Dock = DockStyle.Fill;
+            dgvAppointments.Location = new Point(0, 31);
             dgvAppointments.Name = "dgvAppointments";
             dgvAppointments.RowHeadersWidth = 51;
             dgvAppointments.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvAppointments.Size = new Size(738, 409);
+            dgvAppointments.Size = new Size(738, 412);
             dgvAppointments.TabIndex = 1;
             dgvAppointments.CellContentClick += dgvAppointments_CellContentClick;
             // 
@@ -71,6 +72,7 @@
             btnNewAppointment.Anchor = AnchorStyles.Bottom;
             btnNewAppointment.BackColor = Color.Green;
             btnNewAppointment.Cursor = Cursors.Hand;
+            btnNewAppointment.FlatAppearance.BorderSize = 0;
             btnNewAppointment.FlatStyle = FlatStyle.Flat;
             btnNewAppointment.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
             btnNewAppointment.ForeColor = Color.WhiteSmoke;
@@ -87,6 +89,7 @@
             btnEditAppointment.Anchor = AnchorStyles.Bottom;
             btnEditAppointment.BackColor = Color.DarkOrange;
             btnEditAppointment.Cursor = Cursors.Hand;
+            btnEditAppointment.FlatAppearance.BorderSize = 0;
             btnEditAppointment.FlatStyle = FlatStyle.Flat;
             btnEditAppointment.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
             btnEditAppointment.ForeColor = Color.WhiteSmoke;
@@ -96,12 +99,14 @@
             btnEditAppointment.TabIndex = 3;
             btnEditAppointment.Text = "Επεξεργασία";
             btnEditAppointment.UseVisualStyleBackColor = false;
+            btnEditAppointment.Click += btnEditAppointment_Click;
             // 
             // btnCancelAppointment
             // 
             btnCancelAppointment.Anchor = AnchorStyles.Bottom;
             btnCancelAppointment.BackColor = Color.DarkRed;
             btnCancelAppointment.Cursor = Cursors.Hand;
+            btnCancelAppointment.FlatAppearance.BorderSize = 0;
             btnCancelAppointment.FlatStyle = FlatStyle.Flat;
             btnCancelAppointment.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
             btnCancelAppointment.ForeColor = Color.WhiteSmoke;
@@ -111,6 +116,7 @@
             btnCancelAppointment.TabIndex = 4;
             btnCancelAppointment.Text = "Ακύρωση/Διαγραφή";
             btnCancelAppointment.UseVisualStyleBackColor = false;
+            btnCancelAppointment.Click += btnCancelAppointment_Click_1;
             // 
             // dtpDateFilter
             // 
