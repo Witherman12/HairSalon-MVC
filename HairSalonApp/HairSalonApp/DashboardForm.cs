@@ -61,5 +61,11 @@ namespace HairSalonApp
         {
             Application.Restart();
         }
+
+        private void btnCustomers_Click(object sender, EventArgs e)
+        {
+            CustomersUC uc = new CustomersUC();
+            LoadUserControl(uc);
+        }
     }
 }

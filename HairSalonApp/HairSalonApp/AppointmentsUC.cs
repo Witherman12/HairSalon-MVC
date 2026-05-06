@@ -45,5 +45,10 @@ namespace HairSalonApp
             // 2. Το εμφανίζει στην οθόνη ως Pop-up
             popup.ShowDialog();
         }
+
+        private void btnCancelAppointment_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

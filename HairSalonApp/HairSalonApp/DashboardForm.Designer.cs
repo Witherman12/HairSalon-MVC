@@ -31,9 +31,9 @@
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DashboardForm));
             Sidebar = new Panel();
-            btnReports = new Button();
-            DashboardImageList = new ImageList(components);
             btnLogout = new Button();
+            DashboardImageList = new ImageList(components);
+            btnReports = new Button();
             btnEmployees = new Button();
             btnServices = new Button();
             btnCustomers = new Button();
@@ -51,8 +51,8 @@
             // Sidebar
             // 
             Sidebar.BackColor = Color.Gray;
-            Sidebar.Controls.Add(btnReports);
             Sidebar.Controls.Add(btnLogout);
+            Sidebar.Controls.Add(btnReports);
             Sidebar.Controls.Add(btnEmployees);
             Sidebar.Controls.Add(btnServices);
             Sidebar.Controls.Add(btnCustomers);
@@ -62,41 +62,6 @@
             Sidebar.Name = "Sidebar";
             Sidebar.Size = new Size(244, 553);
             Sidebar.TabIndex = 0;
-            // 
-            // btnReports
-            // 
-            btnReports.BackColor = Color.Transparent;
-            btnReports.Cursor = Cursors.Hand;
-            btnReports.Dock = DockStyle.Top;
-            btnReports.FlatAppearance.BorderSize = 0;
-            btnReports.FlatStyle = FlatStyle.Flat;
-            btnReports.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
-            btnReports.ForeColor = Color.White;
-            btnReports.ImageAlign = ContentAlignment.MiddleLeft;
-            btnReports.ImageIndex = 2;
-            btnReports.ImageList = DashboardImageList;
-            btnReports.Location = new Point(0, 200);
-            btnReports.Name = "btnReports";
-            btnReports.Padding = new Padding(10, 0, 0, 0);
-            btnReports.Size = new Size(244, 50);
-            btnReports.TabIndex = 5;
-            btnReports.Text = "  Αναφορές";
-            btnReports.TextAlign = ContentAlignment.MiddleLeft;
-            btnReports.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnReports.UseVisualStyleBackColor = false;
-            // 
-            // DashboardImageList
-            // 
-            DashboardImageList.ColorDepth = ColorDepth.Depth32Bit;
-            DashboardImageList.ImageStream = (ImageListStreamer)resources.GetObject("DashboardImageList.ImageStream");
-            DashboardImageList.TransparentColor = Color.Transparent;
-            DashboardImageList.Images.SetKeyName(0, "Calendar.png");
-            DashboardImageList.Images.SetKeyName(1, "Customers.png");
-            DashboardImageList.Images.SetKeyName(2, "Reports.png");
-            DashboardImageList.Images.SetKeyName(3, "Services.png");
-            DashboardImageList.Images.SetKeyName(4, "UserIcon.png");
-            DashboardImageList.Images.SetKeyName(5, "Logout.png");
-            DashboardImageList.Images.SetKeyName(6, "Employees.png");
             // 
             // btnLogout
             // 
@@ -119,6 +84,41 @@
             btnLogout.Text = "Αποσύνδεση";
             btnLogout.UseVisualStyleBackColor = false;
             btnLogout.Click += btnLogout_Click;
+            // 
+            // DashboardImageList
+            // 
+            DashboardImageList.ColorDepth = ColorDepth.Depth32Bit;
+            DashboardImageList.ImageStream = (ImageListStreamer)resources.GetObject("DashboardImageList.ImageStream");
+            DashboardImageList.TransparentColor = Color.Transparent;
+            DashboardImageList.Images.SetKeyName(0, "Calendar.png");
+            DashboardImageList.Images.SetKeyName(1, "Customers.png");
+            DashboardImageList.Images.SetKeyName(2, "Reports.png");
+            DashboardImageList.Images.SetKeyName(3, "Services.png");
+            DashboardImageList.Images.SetKeyName(4, "UserIcon.png");
+            DashboardImageList.Images.SetKeyName(5, "Logout.png");
+            DashboardImageList.Images.SetKeyName(6, "Employees.png");
+            // 
+            // btnReports
+            // 
+            btnReports.BackColor = Color.Transparent;
+            btnReports.Cursor = Cursors.Hand;
+            btnReports.Dock = DockStyle.Top;
+            btnReports.FlatAppearance.BorderSize = 0;
+            btnReports.FlatStyle = FlatStyle.Flat;
+            btnReports.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
+            btnReports.ForeColor = Color.White;
+            btnReports.ImageAlign = ContentAlignment.MiddleLeft;
+            btnReports.ImageIndex = 2;
+            btnReports.ImageList = DashboardImageList;
+            btnReports.Location = new Point(0, 200);
+            btnReports.Name = "btnReports";
+            btnReports.Padding = new Padding(10, 0, 0, 0);
+            btnReports.Size = new Size(244, 50);
+            btnReports.TabIndex = 5;
+            btnReports.Text = "  Αναφορές";
+            btnReports.TextAlign = ContentAlignment.MiddleLeft;
+            btnReports.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnReports.UseVisualStyleBackColor = false;
             // 
             // btnEmployees
             // 
@@ -185,6 +185,7 @@
             btnCustomers.TextAlign = ContentAlignment.MiddleLeft;
             btnCustomers.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnCustomers.UseVisualStyleBackColor = false;
+            btnCustomers.Click += btnCustomers_Click;
             // 
             // btnAppointments
             // 

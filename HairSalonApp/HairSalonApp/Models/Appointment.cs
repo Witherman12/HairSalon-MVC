@@ -10,6 +10,6 @@ namespace HairSalonApp.Models
         public int ServiceId { get; set; }
         public DateTime AppDate { get; set; }
         public TimeSpan AppTime { get; set; }
-        public string Status { get; set; }
+        public string Status { get; set; } = string.Empty;
     }
 }
