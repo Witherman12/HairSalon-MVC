@@ -31,19 +31,29 @@
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DashboardForm));
             Sidebar = new Panel();
-            btnLogout = new Button();
-            DashboardImageList = new ImageList(components);
             btnReports = new Button();
+            DashboardImageList = new ImageList(components);
+            barrierBotomPanel = new Panel();
             btnEmployees = new Button();
+            btnLogout = new Button();
+            panel3 = new Panel();
             btnServices = new Button();
+            panel2 = new Panel();
             btnCustomers = new Button();
+            panel1 = new Panel();
             btnAppointments = new Button();
+            barrierTopPanel = new Panel();
+            blackPanel = new Panel();
+            lblLiveDate = new Label();
+            lblLiveTime = new Label();
             Topbar = new Panel();
             pictureBox1 = new PictureBox();
             lblCurrentUser = new Label();
             MainMenu = new Label();
             MainPanel = new Panel();
+            timerClock = new System.Windows.Forms.Timer(components);
             Sidebar.SuspendLayout();
+            blackPanel.SuspendLayout();
             Topbar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -51,17 +61,91 @@
             // Sidebar
             // 
             Sidebar.BackColor = Color.Gray;
-            Sidebar.Controls.Add(btnLogout);
             Sidebar.Controls.Add(btnReports);
+            Sidebar.Controls.Add(barrierBotomPanel);
             Sidebar.Controls.Add(btnEmployees);
+            Sidebar.Controls.Add(btnLogout);
+            Sidebar.Controls.Add(panel3);
             Sidebar.Controls.Add(btnServices);
+            Sidebar.Controls.Add(panel2);
             Sidebar.Controls.Add(btnCustomers);
+            Sidebar.Controls.Add(panel1);
             Sidebar.Controls.Add(btnAppointments);
+            Sidebar.Controls.Add(barrierTopPanel);
+            Sidebar.Controls.Add(blackPanel);
             Sidebar.Dock = DockStyle.Left;
             Sidebar.Location = new Point(0, 0);
             Sidebar.Name = "Sidebar";
             Sidebar.Size = new Size(244, 553);
             Sidebar.TabIndex = 0;
+            Sidebar.Paint += Sidebar_Paint_1;
+            // 
+            // btnReports
+            // 
+            btnReports.BackColor = Color.Transparent;
+            btnReports.Cursor = Cursors.Hand;
+            btnReports.Dock = DockStyle.Bottom;
+            btnReports.FlatAppearance.BorderSize = 0;
+            btnReports.FlatStyle = FlatStyle.Flat;
+            btnReports.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
+            btnReports.ForeColor = Color.White;
+            btnReports.ImageAlign = ContentAlignment.MiddleLeft;
+            btnReports.ImageIndex = 2;
+            btnReports.ImageList = DashboardImageList;
+            btnReports.Location = new Point(0, 403);
+            btnReports.Name = "btnReports";
+            btnReports.Padding = new Padding(10, 0, 0, 0);
+            btnReports.Size = new Size(244, 50);
+            btnReports.TabIndex = 5;
+            btnReports.Text = "  Αναφορές";
+            btnReports.TextAlign = ContentAlignment.MiddleLeft;
+            btnReports.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnReports.UseVisualStyleBackColor = false;
+            // 
+            // DashboardImageList
+            // 
+            DashboardImageList.ColorDepth = ColorDepth.Depth32Bit;
+            DashboardImageList.ImageStream = (ImageListStreamer)resources.GetObject("DashboardImageList.ImageStream");
+            DashboardImageList.TransparentColor = Color.Transparent;
+            DashboardImageList.Images.SetKeyName(0, "Calendar.png");
+            DashboardImageList.Images.SetKeyName(1, "Customers.png");
+            DashboardImageList.Images.SetKeyName(2, "Reports.png");
+            DashboardImageList.Images.SetKeyName(3, "Services.png");
+            DashboardImageList.Images.SetKeyName(4, "UserIcon.png");
+            DashboardImageList.Images.SetKeyName(5, "Logout.png");
+            DashboardImageList.Images.SetKeyName(6, "Employees.png");
+            // 
+            // barrierBotomPanel
+            // 
+            barrierBotomPanel.BackColor = Color.Transparent;
+            barrierBotomPanel.Dock = DockStyle.Bottom;
+            barrierBotomPanel.Location = new Point(0, 453);
+            barrierBotomPanel.Name = "barrierBotomPanel";
+            barrierBotomPanel.Size = new Size(244, 50);
+            barrierBotomPanel.TabIndex = 6;
+            // 
+            // btnEmployees
+            // 
+            btnEmployees.BackColor = Color.Transparent;
+            btnEmployees.Cursor = Cursors.Hand;
+            btnEmployees.Dock = DockStyle.Top;
+            btnEmployees.FlatAppearance.BorderSize = 0;
+            btnEmployees.FlatStyle = FlatStyle.Flat;
+            btnEmployees.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
+            btnEmployees.ForeColor = Color.White;
+            btnEmployees.ImageAlign = ContentAlignment.MiddleLeft;
+            btnEmployees.ImageIndex = 6;
+            btnEmployees.ImageList = DashboardImageList;
+            btnEmployees.Location = new Point(0, 335);
+            btnEmployees.Name = "btnEmployees";
+            btnEmployees.Padding = new Padding(10, 0, 0, 0);
+            btnEmployees.Size = new Size(244, 50);
+            btnEmployees.TabIndex = 3;
+            btnEmployees.Text = "  Προσωπικό";
+            btnEmployees.TextAlign = ContentAlignment.MiddleLeft;
+            btnEmployees.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnEmployees.UseVisualStyleBackColor = false;
+            btnEmployees.Click += btnEmployees_Click;
             // 
             // btnLogout
             // 
@@ -85,62 +169,14 @@
             btnLogout.UseVisualStyleBackColor = false;
             btnLogout.Click += btnLogout_Click;
             // 
-            // DashboardImageList
+            // panel3
             // 
-            DashboardImageList.ColorDepth = ColorDepth.Depth32Bit;
-            DashboardImageList.ImageStream = (ImageListStreamer)resources.GetObject("DashboardImageList.ImageStream");
-            DashboardImageList.TransparentColor = Color.Transparent;
-            DashboardImageList.Images.SetKeyName(0, "Calendar.png");
-            DashboardImageList.Images.SetKeyName(1, "Customers.png");
-            DashboardImageList.Images.SetKeyName(2, "Reports.png");
-            DashboardImageList.Images.SetKeyName(3, "Services.png");
-            DashboardImageList.Images.SetKeyName(4, "UserIcon.png");
-            DashboardImageList.Images.SetKeyName(5, "Logout.png");
-            DashboardImageList.Images.SetKeyName(6, "Employees.png");
-            // 
-            // btnReports
-            // 
-            btnReports.BackColor = Color.Transparent;
-            btnReports.Cursor = Cursors.Hand;
-            btnReports.Dock = DockStyle.Top;
-            btnReports.FlatAppearance.BorderSize = 0;
-            btnReports.FlatStyle = FlatStyle.Flat;
-            btnReports.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
-            btnReports.ForeColor = Color.White;
-            btnReports.ImageAlign = ContentAlignment.MiddleLeft;
-            btnReports.ImageIndex = 2;
-            btnReports.ImageList = DashboardImageList;
-            btnReports.Location = new Point(0, 200);
-            btnReports.Name = "btnReports";
-            btnReports.Padding = new Padding(10, 0, 0, 0);
-            btnReports.Size = new Size(244, 50);
-            btnReports.TabIndex = 5;
-            btnReports.Text = "  Αναφορές";
-            btnReports.TextAlign = ContentAlignment.MiddleLeft;
-            btnReports.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnReports.UseVisualStyleBackColor = false;
-            // 
-            // btnEmployees
-            // 
-            btnEmployees.BackColor = Color.Transparent;
-            btnEmployees.Cursor = Cursors.Hand;
-            btnEmployees.Dock = DockStyle.Top;
-            btnEmployees.FlatAppearance.BorderSize = 0;
-            btnEmployees.FlatStyle = FlatStyle.Flat;
-            btnEmployees.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
-            btnEmployees.ForeColor = Color.White;
-            btnEmployees.ImageAlign = ContentAlignment.MiddleLeft;
-            btnEmployees.ImageIndex = 6;
-            btnEmployees.ImageList = DashboardImageList;
-            btnEmployees.Location = new Point(0, 150);
-            btnEmployees.Name = "btnEmployees";
-            btnEmployees.Padding = new Padding(10, 0, 0, 0);
-            btnEmployees.Size = new Size(244, 50);
-            btnEmployees.TabIndex = 3;
-            btnEmployees.Text = "  Προσωπικό";
-            btnEmployees.TextAlign = ContentAlignment.MiddleLeft;
-            btnEmployees.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnEmployees.UseVisualStyleBackColor = false;
+            panel3.BackColor = Color.Transparent;
+            panel3.Dock = DockStyle.Top;
+            panel3.Location = new Point(0, 310);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(244, 25);
+            panel3.TabIndex = 2;
             // 
             // btnServices
             // 
@@ -154,7 +190,7 @@
             btnServices.ImageAlign = ContentAlignment.MiddleLeft;
             btnServices.ImageIndex = 3;
             btnServices.ImageList = DashboardImageList;
-            btnServices.Location = new Point(0, 100);
+            btnServices.Location = new Point(0, 260);
             btnServices.Name = "btnServices";
             btnServices.Padding = new Padding(10, 0, 0, 0);
             btnServices.Size = new Size(244, 50);
@@ -163,6 +199,15 @@
             btnServices.TextAlign = ContentAlignment.MiddleLeft;
             btnServices.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnServices.UseVisualStyleBackColor = false;
+            // 
+            // panel2
+            // 
+            panel2.BackColor = Color.Transparent;
+            panel2.Dock = DockStyle.Top;
+            panel2.Location = new Point(0, 235);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(244, 25);
+            panel2.TabIndex = 1;
             // 
             // btnCustomers
             // 
@@ -176,7 +221,7 @@
             btnCustomers.ImageAlign = ContentAlignment.MiddleLeft;
             btnCustomers.ImageIndex = 1;
             btnCustomers.ImageList = DashboardImageList;
-            btnCustomers.Location = new Point(0, 50);
+            btnCustomers.Location = new Point(0, 185);
             btnCustomers.Name = "btnCustomers";
             btnCustomers.Padding = new Padding(10, 0, 0, 0);
             btnCustomers.Size = new Size(244, 50);
@@ -186,6 +231,15 @@
             btnCustomers.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnCustomers.UseVisualStyleBackColor = false;
             btnCustomers.Click += btnCustomers_Click;
+            // 
+            // panel1
+            // 
+            panel1.BackColor = Color.Transparent;
+            panel1.Dock = DockStyle.Top;
+            panel1.Location = new Point(0, 160);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(244, 25);
+            panel1.TabIndex = 0;
             // 
             // btnAppointments
             // 
@@ -199,7 +253,7 @@
             btnAppointments.ImageAlign = ContentAlignment.MiddleLeft;
             btnAppointments.ImageIndex = 0;
             btnAppointments.ImageList = DashboardImageList;
-            btnAppointments.Location = new Point(0, 0);
+            btnAppointments.Location = new Point(0, 110);
             btnAppointments.Name = "btnAppointments";
             btnAppointments.Padding = new Padding(10, 0, 0, 0);
             btnAppointments.Size = new Size(244, 50);
@@ -209,6 +263,51 @@
             btnAppointments.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnAppointments.UseVisualStyleBackColor = false;
             btnAppointments.Click += button1_Click;
+            // 
+            // barrierTopPanel
+            // 
+            barrierTopPanel.BackColor = Color.Transparent;
+            barrierTopPanel.Dock = DockStyle.Top;
+            barrierTopPanel.ForeColor = SystemColors.Control;
+            barrierTopPanel.Location = new Point(0, 60);
+            barrierTopPanel.Name = "barrierTopPanel";
+            barrierTopPanel.Size = new Size(244, 50);
+            barrierTopPanel.TabIndex = 0;
+            // 
+            // blackPanel
+            // 
+            blackPanel.BackColor = Color.Black;
+            blackPanel.Controls.Add(lblLiveDate);
+            blackPanel.Controls.Add(lblLiveTime);
+            blackPanel.Dock = DockStyle.Top;
+            blackPanel.Location = new Point(0, 0);
+            blackPanel.Name = "blackPanel";
+            blackPanel.Size = new Size(244, 60);
+            blackPanel.TabIndex = 0;
+            // 
+            // lblLiveDate
+            // 
+            lblLiveDate.AutoSize = true;
+            lblLiveDate.BackColor = Color.Black;
+            lblLiveDate.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
+            lblLiveDate.ForeColor = Color.WhiteSmoke;
+            lblLiveDate.Location = new Point(12, 16);
+            lblLiveDate.Name = "lblLiveDate";
+            lblLiveDate.Size = new Size(126, 28);
+            lblLiveDate.TabIndex = 1;
+            lblLiveDate.Text = "00/00/2000";
+            // 
+            // lblLiveTime
+            // 
+            lblLiveTime.AutoSize = true;
+            lblLiveTime.BackColor = Color.Black;
+            lblLiveTime.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
+            lblLiveTime.ForeColor = Color.WhiteSmoke;
+            lblLiveTime.Location = new Point(144, 16);
+            lblLiveTime.Name = "lblLiveTime";
+            lblLiveTime.Size = new Size(94, 28);
+            lblLiveTime.TabIndex = 0;
+            lblLiveTime.Text = "00:00:00";
             // 
             // Topbar
             // 
@@ -270,6 +369,12 @@
             MainPanel.TabIndex = 2;
             MainPanel.Paint += panel1_Paint;
             // 
+            // timerClock
+            // 
+            timerClock.Enabled = true;
+            timerClock.Interval = 1000;
+            timerClock.Tick += timerClock_Tick;
+            // 
             // DashboardForm
             // 
             AutoScaleDimensions = new SizeF(9F, 23F);
@@ -279,10 +384,13 @@
             Controls.Add(Topbar);
             Controls.Add(Sidebar);
             Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 161);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "DashboardForm";
             Text = "Dashboard";
             WindowState = FormWindowState.Maximized;
             Sidebar.ResumeLayout(false);
+            blackPanel.ResumeLayout(false);
+            blackPanel.PerformLayout();
             Topbar.ResumeLayout(false);
             Topbar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
@@ -304,5 +412,14 @@
         private Button btnCustomers;
         private Button btnReports;
         private ImageList DashboardImageList;
+        private Label lblLiveDate;
+        private Label lblLiveTime;
+        private System.Windows.Forms.Timer timerClock;
+        private Panel blackPanel;
+        private Panel barrierBotomPanel;
+        private Panel barrierTopPanel;
+        private Panel panel2;
+        private Panel panel3;
+        private Panel panel1;
     }
 }

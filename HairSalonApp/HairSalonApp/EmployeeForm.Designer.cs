@@ -1,6 +1,6 @@
 ﻿namespace HairSalonApp
 {
-    partial class CustomerForm
+    partial class EmployeeForm
     {
         /// <summary>
         /// Required designer variable.
@@ -33,16 +33,16 @@
             panel1 = new Panel();
             button1 = new Button();
             button2 = new Button();
-            label1 = new Label();
-            label2 = new Label();
-            label3 = new Label();
-            label4 = new Label();
-            label5 = new Label();
-            txtFirstName = new TextBox();
-            txtNotes = new TextBox();
-            txtEmail = new TextBox();
-            txtPhone = new TextBox();
+            button3 = new Button();
+            button4 = new Button();
             txtLastName = new TextBox();
+            txtPhone = new TextBox();
+            txtSpecialty = new TextBox();
+            txtFirstName = new TextBox();
+            label5 = new Label();
+            label4 = new Label();
+            label3 = new Label();
+            label1 = new Label();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -58,10 +58,9 @@
             btnSave.Location = new Point(180, 0);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(175, 50);
-            btnSave.TabIndex = 11;
+            btnSave.TabIndex = 16;
             btnSave.Text = "Αποθήκευση";
             btnSave.UseVisualStyleBackColor = false;
-            btnSave.Click += btnSave_Click;
             // 
             // btnCancel
             // 
@@ -75,7 +74,7 @@
             btnCancel.Location = new Point(365, 0);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(175, 50);
-            btnCancel.TabIndex = 12;
+            btnCancel.TabIndex = 17;
             btnCancel.Text = "Ακύρωση";
             btnCancel.UseVisualStyleBackColor = false;
             btnCancel.Click += btnCancel_Click;
@@ -85,13 +84,15 @@
             panel1.BackColor = Color.Black;
             panel1.Controls.Add(button1);
             panel1.Controls.Add(btnSave);
-            panel1.Controls.Add(btnCancel);
             panel1.Controls.Add(button2);
+            panel1.Controls.Add(btnCancel);
+            panel1.Controls.Add(button3);
+            panel1.Controls.Add(button4);
             panel1.Dock = DockStyle.Bottom;
             panel1.Location = new Point(0, 315);
             panel1.Name = "panel1";
             panel1.Size = new Size(720, 50);
-            panel1.TabIndex = 13;
+            panel1.TabIndex = 18;
             // 
             // button1
             // 
@@ -102,7 +103,7 @@
             button1.FlatStyle = FlatStyle.Flat;
             button1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
             button1.ForeColor = Color.WhiteSmoke;
-            button1.Location = new Point(439, -50);
+            button1.Location = new Point(699, -100);
             button1.Name = "button1";
             button1.Size = new Size(175, 50);
             button1.TabIndex = 10;
@@ -112,111 +113,124 @@
             // button2
             // 
             button2.Anchor = AnchorStyles.Bottom;
-            button2.BackColor = Color.DarkRed;
+            button2.BackColor = Color.Green;
             button2.Cursor = Cursors.Hand;
             button2.FlatAppearance.BorderSize = 0;
             button2.FlatStyle = FlatStyle.Flat;
             button2.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
             button2.ForeColor = Color.WhiteSmoke;
-            button2.Location = new Point(624, -50);
+            button2.Location = new Point(439, -50);
             button2.Name = "button2";
             button2.Size = new Size(175, 50);
             button2.TabIndex = 11;
-            button2.Text = "Ακύρωση";
+            button2.Text = "Αποθήκευση";
             button2.UseVisualStyleBackColor = false;
             // 
-            // label1
+            // button3
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
-            label1.Location = new Point(167, 50);
-            label1.Name = "label1";
-            label1.Size = new Size(83, 28);
-            label1.TabIndex = 14;
-            label1.Text = "Όνομα:";
+            button3.Anchor = AnchorStyles.Bottom;
+            button3.BackColor = Color.DarkRed;
+            button3.Cursor = Cursors.Hand;
+            button3.FlatAppearance.BorderSize = 0;
+            button3.FlatStyle = FlatStyle.Flat;
+            button3.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
+            button3.ForeColor = Color.WhiteSmoke;
+            button3.Location = new Point(624, -50);
+            button3.Name = "button3";
+            button3.Size = new Size(175, 50);
+            button3.TabIndex = 12;
+            button3.Text = "Ακύρωση";
+            button3.UseVisualStyleBackColor = false;
             // 
-            // label2
+            // button4
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
-            label2.Location = new Point(167, 210);
-            label2.Name = "label2";
-            label2.Size = new Size(124, 28);
-            label2.TabIndex = 15;
-            label2.Text = "Σημειώσεις:";
+            button4.Anchor = AnchorStyles.Bottom;
+            button4.BackColor = Color.DarkRed;
+            button4.Cursor = Cursors.Hand;
+            button4.FlatAppearance.BorderSize = 0;
+            button4.FlatStyle = FlatStyle.Flat;
+            button4.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
+            button4.ForeColor = Color.WhiteSmoke;
+            button4.Location = new Point(884, -100);
+            button4.Name = "button4";
+            button4.Size = new Size(175, 50);
+            button4.TabIndex = 11;
+            button4.Text = "Ακύρωση";
+            button4.UseVisualStyleBackColor = false;
             // 
-            // label3
+            // txtLastName
             // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
-            label3.Location = new Point(167, 170);
-            label3.Name = "label3";
-            label3.Size = new Size(69, 28);
-            label3.TabIndex = 16;
-            label3.Text = "Email:";
+            txtLastName.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 161);
+            txtLastName.Location = new Point(363, 106);
+            txtLastName.Name = "txtLastName";
+            txtLastName.Size = new Size(125, 34);
+            txtLastName.TabIndex = 31;
             // 
-            // label4
+            // txtPhone
             // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
-            label4.Location = new Point(167, 130);
-            label4.Name = "label4";
-            label4.Size = new Size(115, 28);
-            label4.TabIndex = 17;
-            label4.Text = "Τηλέφωνο:";
+            txtPhone.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 161);
+            txtPhone.Location = new Point(363, 146);
+            txtPhone.Name = "txtPhone";
+            txtPhone.Size = new Size(125, 34);
+            txtPhone.TabIndex = 30;
+            // 
+            // txtSpecialty
+            // 
+            txtSpecialty.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 161);
+            txtSpecialty.Location = new Point(363, 186);
+            txtSpecialty.Name = "txtSpecialty";
+            txtSpecialty.Size = new Size(125, 34);
+            txtSpecialty.TabIndex = 29;
+            // 
+            // txtFirstName
+            // 
+            txtFirstName.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 161);
+            txtFirstName.Location = new Point(363, 66);
+            txtFirstName.Name = "txtFirstName";
+            txtFirstName.Size = new Size(125, 34);
+            txtFirstName.TabIndex = 28;
             // 
             // label5
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
-            label5.Location = new Point(167, 90);
+            label5.Location = new Point(233, 109);
             label5.Name = "label5";
             label5.Size = new Size(107, 28);
-            label5.TabIndex = 18;
+            label5.TabIndex = 27;
             label5.Text = "Επώνυμο:";
             // 
-            // txtFirstName
+            // label4
             // 
-            txtFirstName.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 161);
-            txtFirstName.Location = new Point(297, 47);
-            txtFirstName.Name = "txtFirstName";
-            txtFirstName.Size = new Size(125, 34);
-            txtFirstName.TabIndex = 19;
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
+            label4.Location = new Point(233, 149);
+            label4.Name = "label4";
+            label4.Size = new Size(115, 28);
+            label4.TabIndex = 26;
+            label4.Text = "Τηλέφωνο:";
             // 
-            // txtNotes
+            // label3
             // 
-            txtNotes.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 161);
-            txtNotes.Location = new Point(297, 207);
-            txtNotes.Multiline = true;
-            txtNotes.Name = "txtNotes";
-            txtNotes.Size = new Size(250, 34);
-            txtNotes.TabIndex = 20;
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
+            label3.Location = new Point(233, 189);
+            label3.Name = "label3";
+            label3.Size = new Size(124, 28);
+            label3.TabIndex = 25;
+            label3.Text = "Ειδικότητα:";
             // 
-            // txtEmail
+            // label1
             // 
-            txtEmail.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 161);
-            txtEmail.Location = new Point(297, 167);
-            txtEmail.Name = "txtEmail";
-            txtEmail.Size = new Size(250, 34);
-            txtEmail.TabIndex = 21;
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
+            label1.Location = new Point(233, 69);
+            label1.Name = "label1";
+            label1.Size = new Size(83, 28);
+            label1.TabIndex = 24;
+            label1.Text = "Όνομα:";
             // 
-            // txtPhone
-            // 
-            txtPhone.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 161);
-            txtPhone.Location = new Point(297, 127);
-            txtPhone.Name = "txtPhone";
-            txtPhone.Size = new Size(125, 34);
-            txtPhone.TabIndex = 22;
-            // 
-            // txtLastName
-            // 
-            txtLastName.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 161);
-            txtLastName.Location = new Point(297, 87);
-            txtLastName.Name = "txtLastName";
-            txtLastName.Size = new Size(125, 34);
-            txtLastName.TabIndex = 23;
-            // 
-            // CustomerForm
+            // EmployeeForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -224,22 +238,19 @@
             ClientSize = new Size(720, 365);
             Controls.Add(txtLastName);
             Controls.Add(txtPhone);
-            Controls.Add(txtEmail);
-            Controls.Add(txtNotes);
+            Controls.Add(txtSpecialty);
             Controls.Add(txtFirstName);
             Controls.Add(label5);
             Controls.Add(label4);
             Controls.Add(label3);
-            Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             MinimizeBox = false;
-            Name = "CustomerForm";
+            Name = "EmployeeForm";
             StartPosition = FormStartPosition.CenterParent;
-            Text = "Δημιουργία Νέου Πελάτη";
-            Load += CustomerForm_Load;
+            Text = "Δημιουργία Νέου Υπαλλήλου";
             panel1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
@@ -252,15 +263,15 @@
         private Panel panel1;
         private Button button1;
         private Button button2;
-        private Label label1;
-        private Label label2;
-        private Label label3;
-        private Label label4;
-        private Label label5;
-        private TextBox txtFirstName;
-        private TextBox txtNotes;
-        private TextBox txtEmail;
-        private TextBox txtPhone;
+        private Button button3;
+        private Button button4;
         private TextBox txtLastName;
+        private TextBox txtPhone;
+        private TextBox txtSpecialty;
+        private TextBox txtFirstName;
+        private Label label5;
+        private Label label4;
+        private Label label3;
+        private Label label1;
     }
 }
