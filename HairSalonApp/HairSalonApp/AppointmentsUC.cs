@@ -53,7 +53,7 @@ namespace HairSalonApp
 
         private void btnCancelAppointment_Click_1(object sender, EventArgs e)
         {
-            // 1. Ελέγχουμε ΠΡΩΤΑ αν έχει επιλεγεί έστω και μία γραμμή
+            // 1. Ελέγχουμε αν έχει επιλεγεί έστω και μία γραμμή
             if (dgvAppointments.SelectedRows.Count > 0)
             {
                 // 2. Εφόσον έχει επιλέξει, βγάζουμε το μήνυμα επιβεβαίωσης

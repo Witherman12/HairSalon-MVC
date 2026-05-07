@@ -239,6 +239,7 @@
             Name = "CustomerForm";
             StartPosition = FormStartPosition.CenterParent;
             Text = "Δημιουργία Νέου Πελάτη";
+            Load += CustomerForm_Load;
             panel1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
