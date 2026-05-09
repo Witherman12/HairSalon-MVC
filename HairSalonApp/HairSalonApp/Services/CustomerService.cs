@@ -25,7 +25,7 @@ namespace HairSalonApp.Services
         }
 
         // Εύρεση πελάτη βάσει ID (Για το Edit)
-        public Customer GetCustomerById(int id)
+        public Customer? GetCustomerById(int id)
         {
             try
             {
@@ -86,11 +86,11 @@ namespace HairSalonApp.Services
         public OperationResult SaveCustomer(int? id, string firstName, string lastName, string phone, string email, string notes)
         {
             // 1. Καθαρισμός δεδομένων
-            firstName = firstName?.Trim();
-            lastName = lastName?.Trim();
-            phone = phone?.Trim();
-            email = email?.Trim();
-            notes = notes?.Trim();
+            firstName = firstName?.Trim() ?? "";
+            lastName = lastName?.Trim() ?? "";
+            phone = phone?.Trim() ?? "";
+            email = email?.Trim() ?? "";
+            notes = notes?.Trim() ?? "";
 
             // 2. Validation
             if (string.IsNullOrWhiteSpace(firstName))

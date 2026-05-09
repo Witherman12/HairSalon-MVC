@@ -92,5 +92,17 @@ namespace HairSalonApp
         {
 
         }
+
+        private void btnServices_Click(object sender, EventArgs e)
+        {
+            ServicesUC uc = new ServicesUC();
+            LoadUserControl(uc);
+        }
+
+        private void btnReports_Click(object sender, EventArgs e)
+        {
+            ReportsUC uc = new ReportsUC();
+            LoadUserControl(uc);
+        }
     }
 }

@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-    <AssemblyName>HairSalonManagementApp_v2</AssemblyName>
+    <AssemblyName>HairSalonManagementApp</AssemblyName>
     <AssemblyTitle>Hair Salon Management Application</AssemblyTitle>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
   </PropertyGroup>
@@ -31,6 +31,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="ClosedXML" Version="0.105.0" />
     <PackageReference Include="MySql.Data" Version="9.7.0" />
   </ItemGroup>
 

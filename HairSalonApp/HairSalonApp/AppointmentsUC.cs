@@ -78,21 +78,16 @@ namespace HairSalonApp
 
         private void btnEditAppointment_Click(object sender, EventArgs e)
         {
-            // Ελέγχουμε αν έχει επιλεχθεί γραμμή
+            // Ελέγχουμε αν έχει επιλεγεί γραμμή
             if (dgvAppointments.SelectedRows.Count > 0)
             {
                 NewAppointmentForm popup = new NewAppointmentForm();
-
-                // Αλλάζουμε τον τίτλο του παραθύρου για να καταλαβαίνει η γραμματεία τι κάνει!
                 popup.Text = "Επεξεργασία Ραντεβού";
-
-                // (Στο μέλλον, εδώ θα παίρνουμε τα δεδομένα της γραμμής και θα τα βάζουμε στα πεδία)
-
                 popup.ShowDialog();
             }
             else
             {
-                MessageBox.Show("Παρακαλώ επιλέξτε ένα ραντεβού πρώτα.");
+                MessageBox.Show("Παρακαλώ επιλέξτε ένα ραντεβού πρώτα.", "Προσοχή", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }

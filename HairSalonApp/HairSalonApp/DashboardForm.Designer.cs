@@ -101,6 +101,7 @@
             btnReports.TextAlign = ContentAlignment.MiddleLeft;
             btnReports.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnReports.UseVisualStyleBackColor = false;
+            btnReports.Click += btnReports_Click;
             // 
             // DashboardImageList
             // 
@@ -149,14 +150,14 @@
             // 
             // btnLogout
             // 
-            btnLogout.BackColor = Color.DodgerBlue;
+            btnLogout.BackColor = Color.Crimson;
             btnLogout.Cursor = Cursors.Hand;
             btnLogout.Dock = DockStyle.Bottom;
             btnLogout.FlatAppearance.BorderColor = Color.Black;
             btnLogout.FlatAppearance.BorderSize = 0;
             btnLogout.FlatStyle = FlatStyle.Popup;
             btnLogout.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
-            btnLogout.ForeColor = Color.Black;
+            btnLogout.ForeColor = Color.Snow;
             btnLogout.ImageAlign = ContentAlignment.MiddleRight;
             btnLogout.ImageIndex = 5;
             btnLogout.ImageList = DashboardImageList;
@@ -199,6 +200,7 @@
             btnServices.TextAlign = ContentAlignment.MiddleLeft;
             btnServices.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnServices.UseVisualStyleBackColor = false;
+            btnServices.Click += btnServices_Click;
             // 
             // panel2
             // 

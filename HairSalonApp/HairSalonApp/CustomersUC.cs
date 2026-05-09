@@ -94,18 +94,12 @@ namespace HairSalonApp
 
         private void btnEditCustomer_Click(object sender, EventArgs e)
         {
+            // Ελέγχουμε αν έχει επιλεγεί γραμμή
             if (dgvCustomers.SelectedRows.Count > 0)
             {
-                // Διαβάζουμε το ID του πελάτη που επιλέχθηκε
-                int selectedId = Convert.ToInt32(dgvCustomers.SelectedRows[0].Cells["Id"].Value);
-
-                CustomerForm popup = new CustomerForm(selectedId); // Περνάμε το ID = Επεξεργασία
+                CustomerForm popup = new CustomerForm();
                 popup.Text = "Επεξεργασία Πελάτη";
-
-                if (popup.ShowDialog() == DialogResult.OK)
-                {
-                    LoadCustomers(); // Ανανεώνουμε την λίστα αν έγιναν αλλαγές
-                }
+                popup.ShowDialog();
             }
             else
             {
