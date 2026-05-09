@@ -26,6 +26,13 @@ namespace HairSalonApp.Data
                 FROM Users
                 WHERE Id = @Id;";
 
+            // +++ ΑΥΤΟ ΕΙΝΑΙ ΤΟ ΝΕΟ QUERY ΓΙΑ ΤΟ BCRYPT +++
+            public const string GetByUsername = @"
+                SELECT Id, Username, `Password`, Role
+                FROM Users
+                WHERE Username = @Username
+                LIMIT 1;";
+
             public const string Insert = @"
                 INSERT INTO Users (Username, `Password`, Role)
                 VALUES (@Username, @Password, @Role);";

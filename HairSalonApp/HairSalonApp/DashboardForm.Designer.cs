@@ -363,8 +363,10 @@
             // 
             // MainPanel
             // 
+            MainPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             MainPanel.BackColor = Color.WhiteSmoke;
-            MainPanel.Dock = DockStyle.Fill;
+            MainPanel.BackgroundImage = (Image)resources.GetObject("MainPanel.BackgroundImage");
+            MainPanel.BackgroundImageLayout = ImageLayout.Zoom;
             MainPanel.Location = new Point(244, 60);
             MainPanel.Name = "MainPanel";
             MainPanel.Size = new Size(738, 493);

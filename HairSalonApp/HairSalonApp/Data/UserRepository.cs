@@ -45,6 +45,39 @@ namespace HairSalonApp.Data
             return null;
         }
 
+        // =========================================================================
+        // ΝΕΑ ΜΕΘΟΔΟΣ ΓΙΑ ΤΟ BCRYPT (Βρίσκει τον χρήστη ΜΟΝΟ από το Username)
+        // =========================================================================
+        /// <summary>
+        /// Επιστρέφει έναν χρήστη με βάση ΜΟΝΟ το όνομα χρήστη. 
+        /// Χρησιμοποιείται για την επαλήθευση κωδικού με BCrypt.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        public User? GetByUsername(string username)
+        {
+            using (MySqlConnection connection = Database.GetConnection())
+            {
+                connection.Open();
+
+                using (MySqlCommand command = new MySqlCommand(SqlQueries.Users.GetByUsername, connection))
+                {
+                    command.Parameters.AddWithValue("@Username", username);
+
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return MapUser(reader);
+                        }
+                    }
+                }
+            }
+
+            return null;
+        }
+        // =========================================================================
+
         /// <summary>
         /// Επιστρέφει μια λίστα με όλους τους χρήστες από τη βάση δεδομένων.
         /// </summary>

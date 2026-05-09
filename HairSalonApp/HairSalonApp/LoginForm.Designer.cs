@@ -96,6 +96,7 @@
             btnLogin.TabIndex = 4;
             btnLogin.Text = "Σύνδεση";
             btnLogin.UseVisualStyleBackColor = false;
+            btnLogin.Click += btnLogin_Click;
             // 
             // pictureBox1
             // 
@@ -143,6 +144,7 @@
             Name = "LoginForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Login Κομμωτηρίου";
+            Load += LoginForm_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
