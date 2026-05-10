@@ -47,8 +47,9 @@
             lblLiveDate = new Label();
             lblLiveTime = new Label();
             Topbar = new Panel();
-            pictureBox1 = new PictureBox();
             lblCurrentUser = new Label();
+            label1 = new Label();
+            pictureBox1 = new PictureBox();
             MainMenu = new Label();
             MainPanel = new Panel();
             timerClock = new System.Windows.Forms.Timer(components);
@@ -314,8 +315,9 @@
             // Topbar
             // 
             Topbar.BackColor = Color.Indigo;
-            Topbar.Controls.Add(pictureBox1);
             Topbar.Controls.Add(lblCurrentUser);
+            Topbar.Controls.Add(label1);
+            Topbar.Controls.Add(pictureBox1);
             Topbar.Controls.Add(MainMenu);
             Topbar.Dock = DockStyle.Top;
             Topbar.Location = new Point(244, 0);
@@ -323,11 +325,39 @@
             Topbar.Size = new Size(738, 60);
             Topbar.TabIndex = 1;
             // 
+            // lblCurrentUser
+            // 
+            lblCurrentUser.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            lblCurrentUser.AutoSize = true;
+            lblCurrentUser.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 161);
+            lblCurrentUser.ForeColor = Color.White;
+            lblCurrentUser.Location = new Point(615, 14);
+            lblCurrentUser.Name = "lblCurrentUser";
+            lblCurrentUser.Size = new Size(113, 31);
+            lblCurrentUser.TabIndex = 0;
+            lblCurrentUser.Text = "Secretary";
+            lblCurrentUser.TextAlign = ContentAlignment.MiddleLeft;
+            lblCurrentUser.Click += lblCurrentUser_Click;
+            // 
+            // label1
+            // 
+            label1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            label1.AutoSize = true;
+            label1.BackColor = Color.Transparent;
+            label1.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 161);
+            label1.ForeColor = Color.White;
+            label1.Location = new Point(555, 14);
+            label1.Name = "label1";
+            label1.Size = new Size(69, 31);
+            label1.TabIndex = 1;
+            label1.Text = "User:";
+            label1.TextAlign = ContentAlignment.MiddleRight;
+            // 
             // pictureBox1
             // 
             pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(686, 10);
+            pictureBox1.Location = new Point(518, 10);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(40, 40);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
@@ -335,26 +365,13 @@
             pictureBox1.TabStop = false;
             pictureBox1.Click += pictureBox1_Click;
             // 
-            // lblCurrentUser
-            // 
-            lblCurrentUser.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            lblCurrentUser.AutoSize = true;
-            lblCurrentUser.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 161);
-            lblCurrentUser.ForeColor = Color.White;
-            lblCurrentUser.Location = new Point(524, 16);
-            lblCurrentUser.Name = "lblCurrentUser";
-            lblCurrentUser.Size = new Size(158, 28);
-            lblCurrentUser.TabIndex = 0;
-            lblCurrentUser.Text = "Χρήστης: Admin";
-            lblCurrentUser.Click += lblCurrentUser_Click;
-            // 
             // MainMenu
             // 
             MainMenu.Anchor = AnchorStyles.Top;
             MainMenu.AutoSize = true;
             MainMenu.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 161);
             MainMenu.ForeColor = Color.White;
-            MainMenu.Location = new Point(252, 0);
+            MainMenu.Location = new Point(252, 6);
             MainMenu.Name = "MainMenu";
             MainMenu.Size = new Size(235, 38);
             MainMenu.TabIndex = 0;
@@ -369,6 +386,7 @@
             MainPanel.BackgroundImageLayout = ImageLayout.Zoom;
             MainPanel.Location = new Point(244, 60);
             MainPanel.Name = "MainPanel";
+            MainPanel.Padding = new Padding(0, 0, 7, 0);
             MainPanel.Size = new Size(738, 493);
             MainPanel.TabIndex = 2;
             MainPanel.Paint += panel1_Paint;
@@ -392,6 +410,7 @@
             Name = "DashboardForm";
             Text = "Dashboard";
             WindowState = FormWindowState.Maximized;
+            Load += DashboardForm_Load;
             Sidebar.ResumeLayout(false);
             blackPanel.ResumeLayout(false);
             blackPanel.PerformLayout();
@@ -425,5 +444,6 @@
         private Panel panel2;
         private Panel panel3;
         private Panel panel1;
+        private Label label1;
     }
 }

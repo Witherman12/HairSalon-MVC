@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HairSalonApp.Helpers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,6 +14,12 @@ namespace HairSalonApp
         public DashboardForm()
         {
             InitializeComponent();
+
+            if (UserSession.CurrentUser != null)
+            {
+                // Χρησιμοποιούμε το .Role για να δείξει "Secretary" ή "Admin"
+                lblCurrentUser.Text = UserSession.CurrentUser.Role;
+            }
         }
 
         // Βοηθητική μέθοδος για να φορτώνει τα User Controls στο κεντρικό Panel
@@ -103,6 +110,11 @@ namespace HairSalonApp
         {
             ReportsUC uc = new ReportsUC();
             LoadUserControl(uc);
+        }
+
+        private void DashboardForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
