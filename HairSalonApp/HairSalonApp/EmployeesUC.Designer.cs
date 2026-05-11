@@ -46,9 +46,10 @@
             btnDeleteEmployee.FlatStyle = FlatStyle.Flat;
             btnDeleteEmployee.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
             btnDeleteEmployee.ForeColor = Color.WhiteSmoke;
-            btnDeleteEmployee.Location = new Point(518, 443);
+            btnDeleteEmployee.Location = new Point(453, 332);
+            btnDeleteEmployee.Margin = new Padding(3, 2, 3, 2);
             btnDeleteEmployee.Name = "btnDeleteEmployee";
-            btnDeleteEmployee.Size = new Size(220, 50);
+            btnDeleteEmployee.Size = new Size(192, 38);
             btnDeleteEmployee.TabIndex = 10;
             btnDeleteEmployee.Text = "Διαγραφή";
             btnDeleteEmployee.UseVisualStyleBackColor = false;
@@ -63,9 +64,10 @@
             btnEditEmployee.FlatStyle = FlatStyle.Flat;
             btnEditEmployee.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
             btnEditEmployee.ForeColor = Color.WhiteSmoke;
-            btnEditEmployee.Location = new Point(259, 443);
+            btnEditEmployee.Location = new Point(227, 332);
+            btnEditEmployee.Margin = new Padding(3, 2, 3, 2);
             btnEditEmployee.Name = "btnEditEmployee";
-            btnEditEmployee.Size = new Size(220, 50);
+            btnEditEmployee.Size = new Size(192, 38);
             btnEditEmployee.TabIndex = 9;
             btnEditEmployee.Text = "Επεξεργασία";
             btnEditEmployee.UseVisualStyleBackColor = false;
@@ -80,9 +82,10 @@
             btnNewEmployee.FlatStyle = FlatStyle.Flat;
             btnNewEmployee.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
             btnNewEmployee.ForeColor = Color.WhiteSmoke;
-            btnNewEmployee.Location = new Point(0, 443);
+            btnNewEmployee.Location = new Point(0, 332);
+            btnNewEmployee.Margin = new Padding(3, 2, 3, 2);
             btnNewEmployee.Name = "btnNewEmployee";
-            btnNewEmployee.Size = new Size(220, 50);
+            btnNewEmployee.Size = new Size(192, 38);
             btnNewEmployee.TabIndex = 8;
             btnNewEmployee.Text = "Νέος Υπάλληλος";
             btnNewEmployee.UseVisualStyleBackColor = false;
@@ -92,11 +95,11 @@
             // 
             panel1.BackColor = Color.Black;
             panel1.Dock = DockStyle.Bottom;
-            panel1.Location = new Point(0, 443);
+            panel1.Location = new Point(0, 332);
+            panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(738, 50);
+            panel1.Size = new Size(646, 38);
             panel1.TabIndex = 11;
-            panel1.Paint += panel1_Paint;
             // 
             // dgvEmployees
             // 
@@ -105,12 +108,14 @@
             dgvEmployees.BackgroundColor = Color.WhiteSmoke;
             dgvEmployees.BorderStyle = BorderStyle.None;
             dgvEmployees.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvEmployees.Location = new Point(0, 34);
+            dgvEmployees.Location = new Point(0, 26);
+            dgvEmployees.Margin = new Padding(3, 2, 3, 2);
             dgvEmployees.Name = "dgvEmployees";
             dgvEmployees.RowHeadersWidth = 51;
             dgvEmployees.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvEmployees.Size = new Size(735, 409);
+            dgvEmployees.Size = new Size(643, 307);
             dgvEmployees.TabIndex = 12;
+            dgvEmployees.CellContentClick += dgvEmployees_CellContentClick;
             // 
             // label1
             // 
@@ -121,13 +126,13 @@
             label1.ForeColor = Color.Black;
             label1.Location = new Point(0, 0);
             label1.Name = "label1";
-            label1.Size = new Size(144, 31);
+            label1.Size = new Size(121, 25);
             label1.TabIndex = 13;
             label1.Text = "Προσωπικό";
             // 
             // EmployeesUC
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(label1);
             Controls.Add(dgvEmployees);
@@ -135,8 +140,9 @@
             Controls.Add(btnEditEmployee);
             Controls.Add(btnNewEmployee);
             Controls.Add(panel1);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "EmployeesUC";
-            Size = new Size(738, 493);
+            Size = new Size(646, 370);
             ((System.ComponentModel.ISupportInitialize)dgvEmployees).EndInit();
             ResumeLayout(false);
             PerformLayout();

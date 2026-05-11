@@ -47,7 +47,7 @@
             label1.ForeColor = Color.Black;
             label1.Location = new Point(0, 0);
             label1.Name = "label1";
-            label1.Size = new Size(248, 31);
+            label1.Size = new Size(205, 25);
             label1.TabIndex = 0;
             label1.Text = "Διαχείριση Ραντεβού";
             // 
@@ -59,11 +59,12 @@
             dgvAppointments.BorderStyle = BorderStyle.None;
             dgvAppointments.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvAppointments.Dock = DockStyle.Fill;
-            dgvAppointments.Location = new Point(0, 31);
+            dgvAppointments.Location = new Point(0, 25);
+            dgvAppointments.Margin = new Padding(3, 2, 3, 2);
             dgvAppointments.Name = "dgvAppointments";
             dgvAppointments.RowHeadersWidth = 51;
             dgvAppointments.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvAppointments.Size = new Size(738, 412);
+            dgvAppointments.Size = new Size(646, 307);
             dgvAppointments.TabIndex = 1;
             dgvAppointments.CellContentClick += dgvAppointments_CellContentClick;
             // 
@@ -76,9 +77,10 @@
             btnNewAppointment.FlatStyle = FlatStyle.Flat;
             btnNewAppointment.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
             btnNewAppointment.ForeColor = Color.WhiteSmoke;
-            btnNewAppointment.Location = new Point(0, 443);
+            btnNewAppointment.Location = new Point(0, 332);
+            btnNewAppointment.Margin = new Padding(3, 2, 3, 2);
             btnNewAppointment.Name = "btnNewAppointment";
-            btnNewAppointment.Size = new Size(220, 50);
+            btnNewAppointment.Size = new Size(192, 38);
             btnNewAppointment.TabIndex = 2;
             btnNewAppointment.Text = "Νέο Ραντεβού";
             btnNewAppointment.UseVisualStyleBackColor = false;
@@ -93,9 +95,10 @@
             btnEditAppointment.FlatStyle = FlatStyle.Flat;
             btnEditAppointment.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
             btnEditAppointment.ForeColor = Color.WhiteSmoke;
-            btnEditAppointment.Location = new Point(259, 443);
+            btnEditAppointment.Location = new Point(227, 332);
+            btnEditAppointment.Margin = new Padding(3, 2, 3, 2);
             btnEditAppointment.Name = "btnEditAppointment";
-            btnEditAppointment.Size = new Size(220, 50);
+            btnEditAppointment.Size = new Size(192, 38);
             btnEditAppointment.TabIndex = 3;
             btnEditAppointment.Text = "Επεξεργασία";
             btnEditAppointment.UseVisualStyleBackColor = false;
@@ -110,9 +113,10 @@
             btnCancelAppointment.FlatStyle = FlatStyle.Flat;
             btnCancelAppointment.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
             btnCancelAppointment.ForeColor = Color.WhiteSmoke;
-            btnCancelAppointment.Location = new Point(518, 443);
+            btnCancelAppointment.Location = new Point(453, 332);
+            btnCancelAppointment.Margin = new Padding(3, 2, 3, 2);
             btnCancelAppointment.Name = "btnCancelAppointment";
-            btnCancelAppointment.Size = new Size(220, 50);
+            btnCancelAppointment.Size = new Size(192, 38);
             btnCancelAppointment.TabIndex = 4;
             btnCancelAppointment.Text = "Ακύρωση/Διαγραφή";
             btnCancelAppointment.UseVisualStyleBackColor = false;
@@ -126,23 +130,25 @@
             dtpDateFilter.CalendarMonthBackground = Color.WhiteSmoke;
             dtpDateFilter.Cursor = Cursors.Hand;
             dtpDateFilter.Format = DateTimePickerFormat.Short;
-            dtpDateFilter.Location = new Point(611, -2);
+            dtpDateFilter.Location = new Point(535, -2);
+            dtpDateFilter.Margin = new Padding(3, 2, 3, 2);
             dtpDateFilter.Name = "dtpDateFilter";
-            dtpDateFilter.Size = new Size(127, 27);
+            dtpDateFilter.Size = new Size(112, 23);
             dtpDateFilter.TabIndex = 5;
             // 
             // panel1
             // 
             panel1.BackColor = Color.Black;
             panel1.Dock = DockStyle.Bottom;
-            panel1.Location = new Point(0, 443);
+            panel1.Location = new Point(0, 332);
+            panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(738, 50);
+            panel1.Size = new Size(646, 38);
             panel1.TabIndex = 6;
             // 
             // AppointmentsUC
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.WhiteSmoke;
             Controls.Add(dtpDateFilter);
@@ -152,8 +158,9 @@
             Controls.Add(dgvAppointments);
             Controls.Add(label1);
             Controls.Add(panel1);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "AppointmentsUC";
-            Size = new Size(738, 493);
+            Size = new Size(646, 370);
             ((System.ComponentModel.ISupportInitialize)dgvAppointments).EndInit();
             ResumeLayout(false);
             PerformLayout();

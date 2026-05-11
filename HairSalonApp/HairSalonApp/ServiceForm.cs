@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Windows.Forms;
+using HairSalonApp.Models;
+using HairSalonApp.Services;
 
 namespace HairSalonApp
 {
     public partial class ServiceForm : Form
     {
-        // Φτιάχνουμε 3 μεταβλητές (Properties)
-        // Για να μπορεί το κεντρικό μενού να πάρει τις τιμές όταν κλείσει αυτό το παραθυράκι.
-        public string ServiceNameValue { get; private set; } = string.Empty;
-        public decimal PriceValue { get; private set; }
-        public int DurationValue { get; private set; }
+        // 1. Δήλωση του Service και της μεταβλητής Id
+        private readonly ServiceService _serviceService = new ServiceService();
+        private int? _serviceId = null;
 
         // Κανονικός Constructor (Για Νέα Υπηρεσία)
         public ServiceForm()
@@ -17,43 +17,50 @@ namespace HairSalonApp
             InitializeComponent();
         }
 
-        // Δεύτερος Constructor (Για Επεξεργασία Υπάρχουσας Υπηρεσίας)
-        public ServiceForm(string name, decimal price, int duration)
+        // Δεύτερος Constructor (Για Επεξεργασία - Δέχεται πλέον όλο το αντικείμενο Service)
+        public ServiceForm(Service service) : this()
         {
-            InitializeComponent();
-
-            // Γεμίζουμε τα πεδία με τα υπάρχοντα δεδομένα
-            txtServiceName.Text = name;
-            numPrice.Value = price;
-            numDuration.Value = duration;
+            _serviceId = service.Id;
+            txtServiceName.Text = service.ServiceName;
+            numPrice.Value = service.Price;
+            numDuration.Value = service.DurationMinutes;
         }
 
         // Κουμπί Αποθήκευσης
         private void btnSave_Click(object sender, EventArgs e)
         {
-            // 1. Έλεγχος: Μήπως ξέχασε να βάλει όνομα;
-            if (string.IsNullOrWhiteSpace(txtServiceName.Text))
+            // 2. Κλήση του Service για αποθήκευση/ενημέρωση στη βάση
+            // Παίρνουμε τις τιμές απευθείας από τα controls
+            var result = _serviceService.SaveService(
+                _serviceId,
+                txtServiceName.Text,
+                numPrice.Value,
+                (int)numDuration.Value
+            );
+
+            // 3. Έλεγχος αποτελέσματος
+            if (result.Success)
             {
-                MessageBox.Show("Παρακαλώ συμπληρώστε το όνομα της υπηρεσίας.", "Προσοχή", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return; // Σταματάει εδώ τον κώδικα
+                MessageBox.Show("Η υπηρεσία αποθηκεύτηκε επιτυχώς!", "Ενημέρωση", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.DialogResult = DialogResult.OK;
+                this.Close();
             }
-
-            // 2. Αποθήκευση των τιμών στις μεταβλητές μας
-            ServiceNameValue = txtServiceName.Text;
-            PriceValue = numPrice.Value;
-            DurationValue = (int)numDuration.Value;
-
-            // 3. Λέμε στο σύστημα ότι πατήθηκε το "OK" και κλείνουμε τη φόρμα
-            this.DialogResult = DialogResult.OK;
-            this.Close();
+            else
+            {
+                MessageBox.Show(result.ErrorMessage, "Σφάλμα", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         // Κουμπί Ακύρωσης
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            // Λέμε στο σύστημα ότι πατήθηκε "Ακύρωση" και κλείνουμε
             this.DialogResult = DialogResult.Cancel;
             this.Close();
+        }
+
+        private void ServiceForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -56,9 +56,10 @@
             btnSave.FlatStyle = FlatStyle.Flat;
             btnSave.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
             btnSave.ForeColor = Color.WhiteSmoke;
-            btnSave.Location = new Point(180, 0);
+            btnSave.Location = new Point(158, 0);
+            btnSave.Margin = new Padding(3, 2, 3, 2);
             btnSave.Name = "btnSave";
-            btnSave.Size = new Size(175, 50);
+            btnSave.Size = new Size(153, 38);
             btnSave.TabIndex = 12;
             btnSave.Text = "Αποθήκευση";
             btnSave.UseVisualStyleBackColor = false;
@@ -73,9 +74,10 @@
             btnCancel.FlatStyle = FlatStyle.Flat;
             btnCancel.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
             btnCancel.ForeColor = Color.WhiteSmoke;
-            btnCancel.Location = new Point(365, 0);
+            btnCancel.Location = new Point(319, 0);
+            btnCancel.Margin = new Padding(3, 2, 3, 2);
             btnCancel.Name = "btnCancel";
-            btnCancel.Size = new Size(175, 50);
+            btnCancel.Size = new Size(153, 38);
             btnCancel.TabIndex = 13;
             btnCancel.Text = "Ακύρωση";
             btnCancel.UseVisualStyleBackColor = false;
@@ -91,9 +93,10 @@
             panel1.Controls.Add(button3);
             panel1.Controls.Add(button4);
             panel1.Dock = DockStyle.Bottom;
-            panel1.Location = new Point(0, 315);
+            panel1.Location = new Point(0, 236);
+            panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(720, 50);
+            panel1.Size = new Size(630, 38);
             panel1.TabIndex = 14;
             // 
             // button1
@@ -105,9 +108,10 @@
             button1.FlatStyle = FlatStyle.Flat;
             button1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
             button1.ForeColor = Color.WhiteSmoke;
-            button1.Location = new Point(699, -100);
+            button1.Location = new Point(612, -75);
+            button1.Margin = new Padding(3, 2, 3, 2);
             button1.Name = "button1";
-            button1.Size = new Size(175, 50);
+            button1.Size = new Size(153, 38);
             button1.TabIndex = 10;
             button1.Text = "Αποθήκευση";
             button1.UseVisualStyleBackColor = false;
@@ -121,9 +125,10 @@
             button2.FlatStyle = FlatStyle.Flat;
             button2.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
             button2.ForeColor = Color.WhiteSmoke;
-            button2.Location = new Point(440, -50);
+            button2.Location = new Point(385, -38);
+            button2.Margin = new Padding(3, 2, 3, 2);
             button2.Name = "button2";
-            button2.Size = new Size(175, 50);
+            button2.Size = new Size(153, 38);
             button2.TabIndex = 11;
             button2.Text = "Αποθήκευση";
             button2.UseVisualStyleBackColor = false;
@@ -137,9 +142,10 @@
             button3.FlatStyle = FlatStyle.Flat;
             button3.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
             button3.ForeColor = Color.WhiteSmoke;
-            button3.Location = new Point(625, -50);
+            button3.Location = new Point(547, -38);
+            button3.Margin = new Padding(3, 2, 3, 2);
             button3.Name = "button3";
-            button3.Size = new Size(175, 50);
+            button3.Size = new Size(153, 38);
             button3.TabIndex = 12;
             button3.Text = "Ακύρωση";
             button3.UseVisualStyleBackColor = false;
@@ -153,9 +159,10 @@
             button4.FlatStyle = FlatStyle.Flat;
             button4.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
             button4.ForeColor = Color.WhiteSmoke;
-            button4.Location = new Point(884, -100);
+            button4.Location = new Point(774, -75);
+            button4.Margin = new Padding(3, 2, 3, 2);
             button4.Name = "button4";
-            button4.Size = new Size(175, 50);
+            button4.Size = new Size(153, 38);
             button4.TabIndex = 11;
             button4.Text = "Ακύρωση";
             button4.UseVisualStyleBackColor = false;
@@ -163,18 +170,19 @@
             // txtServiceName
             // 
             txtServiceName.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 161);
-            txtServiceName.Location = new Point(382, 64);
+            txtServiceName.Location = new Point(334, 48);
+            txtServiceName.Margin = new Padding(3, 2, 3, 2);
             txtServiceName.Name = "txtServiceName";
-            txtServiceName.Size = new Size(150, 34);
+            txtServiceName.Size = new Size(132, 29);
             txtServiceName.TabIndex = 27;
             // 
             // label5
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
-            label5.Location = new Point(188, 126);
+            label5.Location = new Point(164, 94);
             label5.Name = "label5";
-            label5.Size = new Size(92, 28);
+            label5.Size = new Size(72, 21);
             label5.TabIndex = 26;
             label5.Text = "Τιμή (€):";
             // 
@@ -182,9 +190,9 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
-            label4.Location = new Point(188, 186);
+            label4.Location = new Point(164, 140);
             label4.Name = "label4";
-            label4.Size = new Size(184, 28);
+            label4.Size = new Size(145, 21);
             label4.TabIndex = 25;
             label4.Text = "Διάρκεια (Λεπτά):";
             // 
@@ -192,9 +200,9 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
-            label1.Location = new Point(188, 67);
+            label1.Location = new Point(164, 50);
             label1.Name = "label1";
-            label1.Size = new Size(190, 28);
+            label1.Size = new Size(152, 21);
             label1.TabIndex = 24;
             label1.Text = "Όνομα Υπηρεσίας:";
             // 
@@ -202,27 +210,29 @@
             // 
             numPrice.DecimalPlaces = 2;
             numPrice.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 161);
-            numPrice.Location = new Point(382, 124);
+            numPrice.Location = new Point(334, 93);
+            numPrice.Margin = new Padding(3, 2, 3, 2);
             numPrice.Maximum = new decimal(new int[] { 500, 0, 0, 0 });
             numPrice.Name = "numPrice";
-            numPrice.Size = new Size(150, 34);
+            numPrice.Size = new Size(131, 29);
             numPrice.TabIndex = 30;
             // 
             // numDuration
             // 
             numDuration.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 161);
-            numDuration.Location = new Point(382, 184);
+            numDuration.Location = new Point(334, 138);
+            numDuration.Margin = new Padding(3, 2, 3, 2);
             numDuration.Maximum = new decimal(new int[] { 480, 0, 0, 0 });
             numDuration.Name = "numDuration";
-            numDuration.Size = new Size(150, 34);
+            numDuration.Size = new Size(131, 29);
             numDuration.TabIndex = 31;
             // 
             // ServiceForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.WhiteSmoke;
-            ClientSize = new Size(720, 365);
+            ClientSize = new Size(630, 274);
             Controls.Add(numDuration);
             Controls.Add(numPrice);
             Controls.Add(txtServiceName);
@@ -232,11 +242,13 @@
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(3, 2, 3, 2);
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "ServiceForm";
             StartPosition = FormStartPosition.CenterParent;
             Text = "Προσθήκη Νέας Υπηρεσίας";
+            Load += ServiceForm_Load;
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)numPrice).EndInit();
             ((System.ComponentModel.ISupportInitialize)numDuration).EndInit();
