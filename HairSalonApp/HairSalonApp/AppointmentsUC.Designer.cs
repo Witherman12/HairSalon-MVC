@@ -120,7 +120,7 @@
             btnCancelAppointment.TabIndex = 4;
             btnCancelAppointment.Text = "Ακύρωση/Διαγραφή";
             btnCancelAppointment.UseVisualStyleBackColor = false;
-            btnCancelAppointment.Click += btnCancelAppointment_Click_1;
+            btnCancelAppointment.Click += btnCancelAppointment_Click;
             // 
             // dtpDateFilter
             // 
@@ -135,6 +135,7 @@
             dtpDateFilter.Name = "dtpDateFilter";
             dtpDateFilter.Size = new Size(112, 23);
             dtpDateFilter.TabIndex = 5;
+            dtpDateFilter.ValueChanged += dtpDateFilter_ValueChanged;
             // 
             // panel1
             // 

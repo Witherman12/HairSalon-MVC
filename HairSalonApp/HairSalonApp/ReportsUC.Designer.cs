@@ -65,7 +65,7 @@
             label1.ForeColor = Color.Black;
             label1.Location = new Point(0, 0);
             label1.Name = "label1";
-            label1.Size = new Size(125, 31);
+            label1.Size = new Size(104, 25);
             label1.TabIndex = 16;
             label1.Text = "Αναφορές";
             // 
@@ -78,10 +78,11 @@
             tabControl1.Controls.Add(UseServicesGrid);
             tabControl1.Dock = DockStyle.Fill;
             tabControl1.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold, GraphicsUnit.Point, 161);
-            tabControl1.Location = new Point(0, 31);
+            tabControl1.Location = new Point(0, 25);
+            tabControl1.Margin = new Padding(3, 2, 3, 2);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(738, 412);
+            tabControl1.Size = new Size(646, 307);
             tabControl1.TabIndex = 19;
             // 
             // AppointmentsByDateGrid
@@ -89,10 +90,11 @@
             AppointmentsByDateGrid.BackColor = Color.WhiteSmoke;
             AppointmentsByDateGrid.Controls.Add(dgvAppointmentsByDate);
             AppointmentsByDateGrid.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 161);
-            AppointmentsByDateGrid.Location = new Point(4, 37);
+            AppointmentsByDateGrid.Location = new Point(4, 32);
+            AppointmentsByDateGrid.Margin = new Padding(3, 2, 3, 2);
             AppointmentsByDateGrid.Name = "AppointmentsByDateGrid";
-            AppointmentsByDateGrid.Padding = new Padding(3);
-            AppointmentsByDateGrid.Size = new Size(730, 371);
+            AppointmentsByDateGrid.Padding = new Padding(3, 2, 3, 2);
+            AppointmentsByDateGrid.Size = new Size(638, 271);
             AppointmentsByDateGrid.TabIndex = 0;
             AppointmentsByDateGrid.Text = "Ραντεβού ανά Ημερομηνία";
             // 
@@ -104,23 +106,26 @@
             dgvAppointmentsByDate.BorderStyle = BorderStyle.None;
             dgvAppointmentsByDate.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvAppointmentsByDate.Dock = DockStyle.Fill;
-            dgvAppointmentsByDate.Location = new Point(3, 3);
+            dgvAppointmentsByDate.Location = new Point(3, 2);
+            dgvAppointmentsByDate.Margin = new Padding(3, 2, 3, 2);
             dgvAppointmentsByDate.Name = "dgvAppointmentsByDate";
             dgvAppointmentsByDate.RowHeadersVisible = false;
             dgvAppointmentsByDate.RowHeadersWidth = 51;
             dgvAppointmentsByDate.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvAppointmentsByDate.Size = new Size(724, 365);
+            dgvAppointmentsByDate.Size = new Size(632, 267);
             dgvAppointmentsByDate.TabIndex = 3;
+            dgvAppointmentsByDate.CellContentClick += dgvAppointmentsByDate_CellContentClick;
             // 
             // EmployeeAppointmentsGrid
             // 
             EmployeeAppointmentsGrid.BackColor = Color.WhiteSmoke;
             EmployeeAppointmentsGrid.Controls.Add(dgvEmployeeAppointments);
             EmployeeAppointmentsGrid.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 161);
-            EmployeeAppointmentsGrid.Location = new Point(4, 37);
+            EmployeeAppointmentsGrid.Location = new Point(4, 32);
+            EmployeeAppointmentsGrid.Margin = new Padding(3, 2, 3, 2);
             EmployeeAppointmentsGrid.Name = "EmployeeAppointmentsGrid";
-            EmployeeAppointmentsGrid.Padding = new Padding(3);
-            EmployeeAppointmentsGrid.Size = new Size(730, 371);
+            EmployeeAppointmentsGrid.Padding = new Padding(3, 2, 3, 2);
+            EmployeeAppointmentsGrid.Size = new Size(638, 271);
             EmployeeAppointmentsGrid.TabIndex = 1;
             EmployeeAppointmentsGrid.Text = "Ραντεβού ανά Υπάλληλο";
             // 
@@ -132,12 +137,13 @@
             dgvEmployeeAppointments.BorderStyle = BorderStyle.None;
             dgvEmployeeAppointments.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvEmployeeAppointments.Dock = DockStyle.Fill;
-            dgvEmployeeAppointments.Location = new Point(3, 3);
+            dgvEmployeeAppointments.Location = new Point(3, 2);
+            dgvEmployeeAppointments.Margin = new Padding(3, 2, 3, 2);
             dgvEmployeeAppointments.Name = "dgvEmployeeAppointments";
             dgvEmployeeAppointments.RowHeadersVisible = false;
             dgvEmployeeAppointments.RowHeadersWidth = 51;
             dgvEmployeeAppointments.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvEmployeeAppointments.Size = new Size(724, 365);
+            dgvEmployeeAppointments.Size = new Size(632, 267);
             dgvEmployeeAppointments.TabIndex = 2;
             // 
             // RevenueServiceGrid
@@ -145,10 +151,11 @@
             RevenueServiceGrid.BackColor = Color.WhiteSmoke;
             RevenueServiceGrid.Controls.Add(dgvRevenueService);
             RevenueServiceGrid.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 161);
-            RevenueServiceGrid.Location = new Point(4, 37);
+            RevenueServiceGrid.Location = new Point(4, 32);
+            RevenueServiceGrid.Margin = new Padding(3, 2, 3, 2);
             RevenueServiceGrid.Name = "RevenueServiceGrid";
-            RevenueServiceGrid.Padding = new Padding(3);
-            RevenueServiceGrid.Size = new Size(730, 371);
+            RevenueServiceGrid.Padding = new Padding(3, 2, 3, 2);
+            RevenueServiceGrid.Size = new Size(638, 271);
             RevenueServiceGrid.TabIndex = 2;
             RevenueServiceGrid.Text = "Έσοδα ανά Υπηρεσία";
             // 
@@ -160,23 +167,26 @@
             dgvRevenueService.BorderStyle = BorderStyle.None;
             dgvRevenueService.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvRevenueService.Dock = DockStyle.Fill;
-            dgvRevenueService.Location = new Point(3, 3);
+            dgvRevenueService.Location = new Point(3, 2);
+            dgvRevenueService.Margin = new Padding(3, 2, 3, 2);
             dgvRevenueService.Name = "dgvRevenueService";
             dgvRevenueService.RowHeadersVisible = false;
             dgvRevenueService.RowHeadersWidth = 51;
             dgvRevenueService.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvRevenueService.Size = new Size(724, 365);
+            dgvRevenueService.Size = new Size(632, 267);
             dgvRevenueService.TabIndex = 2;
+            dgvRevenueService.CellContentClick += dgvRevenueService_CellContentClick;
             // 
             // UseServicesGrid
             // 
             UseServicesGrid.BackColor = Color.WhiteSmoke;
             UseServicesGrid.Controls.Add(dgvServiceUsage);
             UseServicesGrid.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 161);
-            UseServicesGrid.Location = new Point(4, 37);
+            UseServicesGrid.Location = new Point(4, 32);
+            UseServicesGrid.Margin = new Padding(3, 2, 3, 2);
             UseServicesGrid.Name = "UseServicesGrid";
-            UseServicesGrid.Padding = new Padding(3);
-            UseServicesGrid.Size = new Size(730, 371);
+            UseServicesGrid.Padding = new Padding(3, 2, 3, 2);
+            UseServicesGrid.Size = new Size(638, 271);
             UseServicesGrid.TabIndex = 3;
             UseServicesGrid.Text = "Χρήση Υπηρεσιών";
             // 
@@ -188,12 +198,13 @@
             dgvServiceUsage.BorderStyle = BorderStyle.None;
             dgvServiceUsage.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvServiceUsage.Dock = DockStyle.Fill;
-            dgvServiceUsage.Location = new Point(3, 3);
+            dgvServiceUsage.Location = new Point(3, 2);
+            dgvServiceUsage.Margin = new Padding(3, 2, 3, 2);
             dgvServiceUsage.Name = "dgvServiceUsage";
             dgvServiceUsage.RowHeadersVisible = false;
             dgvServiceUsage.RowHeadersWidth = 51;
             dgvServiceUsage.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvServiceUsage.Size = new Size(724, 365);
+            dgvServiceUsage.Size = new Size(632, 267);
             dgvServiceUsage.TabIndex = 1;
             dgvServiceUsage.CellContentClick += dataGridView4_CellContentClick;
             // 
@@ -206,8 +217,9 @@
             btnRefresh.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
             btnRefresh.ForeColor = Color.White;
             btnRefresh.Location = new Point(0, 0);
+            btnRefresh.Margin = new Padding(3, 2, 3, 2);
             btnRefresh.Name = "btnRefresh";
-            btnRefresh.Size = new Size(175, 50);
+            btnRefresh.Size = new Size(153, 38);
             btnRefresh.TabIndex = 20;
             btnRefresh.Text = "Ανανέωση";
             btnRefresh.UseVisualStyleBackColor = false;
@@ -221,9 +233,10 @@
             panel1.Controls.Add(btnPrint);
             panel1.Controls.Add(btnRefresh);
             panel1.Dock = DockStyle.Bottom;
-            panel1.Location = new Point(0, 443);
+            panel1.Location = new Point(0, 332);
+            panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(738, 50);
+            panel1.Size = new Size(646, 38);
             panel1.TabIndex = 21;
             // 
             // btnExportExcel
@@ -234,9 +247,10 @@
             btnExportExcel.FlatStyle = FlatStyle.Flat;
             btnExportExcel.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
             btnExportExcel.ForeColor = Color.White;
-            btnExportExcel.Location = new Point(563, -1);
+            btnExportExcel.Location = new Point(493, -1);
+            btnExportExcel.Margin = new Padding(3, 2, 3, 2);
             btnExportExcel.Name = "btnExportExcel";
-            btnExportExcel.Size = new Size(175, 50);
+            btnExportExcel.Size = new Size(153, 38);
             btnExportExcel.TabIndex = 24;
             btnExportExcel.Text = "Εξαγωγή Excel";
             btnExportExcel.UseVisualStyleBackColor = false;
@@ -250,9 +264,10 @@
             btnExportPdf.FlatStyle = FlatStyle.Flat;
             btnExportPdf.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
             btnExportPdf.ForeColor = Color.White;
-            btnExportPdf.Location = new Point(375, 0);
+            btnExportPdf.Location = new Point(328, 0);
+            btnExportPdf.Margin = new Padding(3, 2, 3, 2);
             btnExportPdf.Name = "btnExportPdf";
-            btnExportPdf.Size = new Size(175, 50);
+            btnExportPdf.Size = new Size(153, 38);
             btnExportPdf.TabIndex = 23;
             btnExportPdf.Text = "Εξαγωγή PDF";
             btnExportPdf.UseVisualStyleBackColor = false;
@@ -265,12 +280,14 @@
             btnPrint.FlatStyle = FlatStyle.Flat;
             btnPrint.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
             btnPrint.ForeColor = Color.White;
-            btnPrint.Location = new Point(188, 0);
+            btnPrint.Location = new Point(164, 0);
+            btnPrint.Margin = new Padding(3, 2, 3, 2);
             btnPrint.Name = "btnPrint";
-            btnPrint.Size = new Size(175, 50);
+            btnPrint.Size = new Size(153, 38);
             btnPrint.TabIndex = 21;
             btnPrint.Text = "Εκτύπωση";
             btnPrint.UseVisualStyleBackColor = false;
+            btnPrint.Click += btnPrint_Click;
             // 
             // btnFilters
             // 
@@ -280,9 +297,10 @@
             btnFilters.FlatStyle = FlatStyle.Flat;
             btnFilters.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 161);
             btnFilters.ForeColor = Color.Black;
-            btnFilters.Location = new Point(613, 0);
+            btnFilters.Location = new Point(536, 0);
+            btnFilters.Margin = new Padding(3, 2, 3, 2);
             btnFilters.Name = "btnFilters";
-            btnFilters.Size = new Size(125, 31);
+            btnFilters.Size = new Size(109, 23);
             btnFilters.TabIndex = 22;
             btnFilters.Text = "Φίλτρα";
             btnFilters.TextAlign = ContentAlignment.TopCenter;
@@ -290,15 +308,16 @@
             // 
             // ReportsUC
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.WhiteSmoke;
             Controls.Add(btnFilters);
             Controls.Add(tabControl1);
             Controls.Add(label1);
             Controls.Add(panel1);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "ReportsUC";
-            Size = new Size(738, 493);
+            Size = new Size(646, 370);
             Load += ReportsUC_Load;
             tabControl1.ResumeLayout(false);
             AppointmentsByDateGrid.ResumeLayout(false);
