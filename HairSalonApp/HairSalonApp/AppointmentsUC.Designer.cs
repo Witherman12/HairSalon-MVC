@@ -65,6 +65,7 @@
             dgvAppointments.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvAppointments.Size = new Size(738, 411);
             dgvAppointments.TabIndex = 1;
+            dgvAppointments.CellContentClick += dgvAppointments_CellContentClick_1;
             // 
             // btnNewAppointment
             // 

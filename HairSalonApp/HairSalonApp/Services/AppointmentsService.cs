@@ -15,6 +15,20 @@ namespace HairSalonApp.Services
             _appointmentRepository = new AppointmentRepository();
         }
 
+        // Ανάκτηση ενός ραντεβού βάσει ID (Για την επεξεργασία)
+        public AppointmentView? GetAppointmentById(int id)
+        {
+            try
+            {
+                // Το Service απλά ζητάει το ραντεβού από το Data Layer (Repository)
+                return _appointmentRepository.GetAppointmentViewById(id);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
         // Ανάκτηση όλων των ραντεβού (σε μορφή View με ονόματα)
         public List<AppointmentView> GetAllAppointments()
         {

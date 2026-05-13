@@ -219,8 +219,12 @@ namespace HairSalonApp.Data
                     a.AppDate,
                     a.AppTime,
                     a.Status,
+                    c.Id AS CustomerId,
                     CONCAT(c.FirstName, ' ', c.LastName) AS CustomerName,
+                    c.Phone AS CustomerPhone,
+                    e.Id AS EmployeeId,
                     CONCAT(e.FirstName, ' ', e.LastName) AS EmployeeName,
+                    s.Id AS ServiceId,
                     s.ServiceName,
                     s.Price,
                     s.DurationMinutes

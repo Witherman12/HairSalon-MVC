@@ -17,13 +17,13 @@ namespace HairSalonApp
             InitializeComponent();
 
             // 1. Ρυθμίσεις εμφάνισης
-            dgvAppointments.AutoGenerateColumns = false; // Τώρα το κλείνουμε γιατί θα τις φτιάξουμε εμείς σωστά
+            dgvAppointments.AutoGenerateColumns = false;
             dgvAppointments.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvAppointments.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvAppointments.RowTemplate.Height = 45;
             dgvAppointments.AllowUserToAddRows = false;
 
-            // 2. Σύνδεση Events (με object? για να μην έχεις warnings)
+            // 2. Σύνδεση Events
             dgvAppointments.DataBindingComplete += dgvAppointments_DataBindingComplete;
             dgvAppointments.CellContentClick += dgvAppointments_CellContentClick;
             dtpDateFilter.ValueChanged += dtpDateFilter_ValueChanged;
@@ -41,8 +41,8 @@ namespace HairSalonApp
             dgvAppointments.Columns.Add(new DataGridViewCheckBoxColumn
             {
                 Name = "colCompleteCheck",
-                HeaderText = "Ολοκλ.",
-                Width = 60
+                HeaderText = "Ολοκληρώθηκε",
+                Width = 30
             });
 
             // Κρυφό ID (για να το βρίσκει ο κώδικας)
@@ -53,9 +53,14 @@ namespace HairSalonApp
                 Visible = false
             });
 
-            // Δεδομένα από το AppointmentView (Προσοχή: Τα DataPropertyName είναι ακριβώς όπως στο .cs αρχείο σου)
+            // Δεδομένα από το AppointmentView
             dgvAppointments.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Ημερομηνία", DataPropertyName = "AppDate", DefaultCellStyle = new DataGridViewCellStyle { Format = "dd/MM/yyyy" } });
-            dgvAppointments.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Ώρα", DataPropertyName = "AppTime" });
+            dgvAppointments.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                HeaderText = "Ώρα",
+                DataPropertyName = "AppTime",
+                DefaultCellStyle = new DataGridViewCellStyle { Format = @"hh\:mm" }
+            });
             dgvAppointments.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Πελάτης", DataPropertyName = "CustomerName" });
             dgvAppointments.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Υπηρεσία", DataPropertyName = "ServiceName" });
             dgvAppointments.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Υπάλληλος", DataPropertyName = "EmployeeName" });
@@ -66,12 +71,16 @@ namespace HairSalonApp
         {
             try
             {
-                // Επαναφέρουμε το φίλτρο ημερομηνίας!
+                // 1. Διαβάζουμε ποια ημερομηνία δείχνει το ημερολόγιο πάνω δεξιά
                 DateTime selectedDate = dtpDateFilter.Value.Date;
+
+                // 2. Ζητάμε από τη βάση μόνο τα ραντεβού αυτής της ημερομηνίας
                 var filteredList = _appointmentService.GetAppointmentsByDate(selectedDate);
 
+                // 3. Ταξινομούμε τα ραντεβού της ημέρας με βάση την ώρα τους
                 var sortedList = filteredList.OrderBy(a => a.AppTime).ToList();
 
+                // 4. Τα εμφανίζουμε στον πίνακα
                 dgvAppointments.DataSource = null;
                 dgvAppointments.DataSource = sortedList;
             }
@@ -127,8 +136,6 @@ namespace HairSalonApp
             LoadAppointments();
         }
 
-        // --- Λοιπά Κουμπιά ---
-
         private void btnNewAppointment_Click(object sender, EventArgs e)
         {
             using (NewAppointmentForm popup = new NewAppointmentForm())
@@ -164,6 +171,11 @@ namespace HairSalonApp
                     LoadAppointments();
                 }
             }
+        }
+
+        private void dgvAppointments_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

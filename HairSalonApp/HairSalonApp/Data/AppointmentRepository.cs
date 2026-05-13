@@ -4,6 +4,7 @@ using HairSalonApp.Models;
 /*
 GetAll: Επιστρέφει όλα τα ραντεβού σε μορφή AppointmentView.
 GetById: Επιστρέφει ένα ραντεβού με βάση το ID.
+GetAppointmentViewById: Επιστρέφει ένα ραντεβού σε μορφή View με βάση το ID (για επεξεργασία).
 GetByDate: Επιστρέφει τα ραντεβού συγκεκριμένης ημερομηνίας.
 GetByEmployee: Επιστρέφει τα ραντεβού συγκεκριμένου υπαλλήλου.
 Insert: Δημιουργεί νέο ραντεβού και επιστρέφει το νέο ID.
@@ -68,6 +69,37 @@ namespace HairSalonApp.Data
                         if (reader.Read())
                         {
                             return MapAppointment(reader);
+                        }
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Επιστρέφει ένα ραντεβού σε μορφή View (με τα ονόματα) με βάση το ID του.
+        /// Χρησιμοποιείται για το γέμισμα της φόρμας Επεξεργασίας.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public AppointmentView? GetAppointmentViewById(int id)
+        {
+            using (MySqlConnection connection = Database.GetConnection())
+            {
+                connection.Open();
+
+                // Χρησιμοποιούμε το SQL Query με τα JOINs που φτιάξαμε πριν
+                using (MySqlCommand command = new MySqlCommand(SqlQueries.Appointments.GetById, connection))
+                {
+                    command.Parameters.AddWithValue("@Id", id);
+
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            // Εκμεταλλευόμαστε τη δική σου έτοιμη μέθοδο!
+                            return MapAppointmentView(reader);
                         }
                     }
                 }

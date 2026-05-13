@@ -49,9 +49,9 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
-            label1.Location = new Point(194, 15);
+            label1.Location = new Point(202, 20);
             label1.Name = "label1";
-            label1.Size = new Size(79, 21);
+            label1.Size = new Size(98, 28);
             label1.TabIndex = 0;
             label1.Text = "Πελάτης:";
             // 
@@ -59,19 +59,18 @@
             // 
             cmbCustomer.Cursor = Cursors.Hand;
             cmbCustomer.FormattingEnabled = true;
-            cmbCustomer.Location = new Point(304, 15);
-            cmbCustomer.Margin = new Padding(3, 2, 3, 2);
+            cmbCustomer.Location = new Point(327, 20);
             cmbCustomer.Name = "cmbCustomer";
-            cmbCustomer.Size = new Size(133, 23);
+            cmbCustomer.Size = new Size(191, 28);
             cmbCustomer.TabIndex = 1;
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
-            label2.Location = new Point(194, 49);
+            label2.Location = new Point(202, 65);
             label2.Name = "label2";
-            label2.Size = new Size(87, 21);
+            label2.Size = new Size(108, 28);
             label2.TabIndex = 2;
             label2.Text = "Υπηρεσία:";
             // 
@@ -79,9 +78,9 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
-            label3.Location = new Point(194, 83);
+            label3.Location = new Point(202, 111);
             label3.Name = "label3";
-            label3.Size = new Size(100, 21);
+            label3.Size = new Size(123, 28);
             label3.TabIndex = 3;
             label3.Text = "Υπάλληλος:";
             // 
@@ -89,29 +88,27 @@
             // 
             cmbService.Cursor = Cursors.Hand;
             cmbService.FormattingEnabled = true;
-            cmbService.Location = new Point(304, 49);
-            cmbService.Margin = new Padding(3, 2, 3, 2);
+            cmbService.Location = new Point(327, 65);
             cmbService.Name = "cmbService";
-            cmbService.Size = new Size(133, 23);
+            cmbService.Size = new Size(191, 28);
             cmbService.TabIndex = 4;
             // 
             // cmbEmployee
             // 
             cmbEmployee.Cursor = Cursors.Hand;
             cmbEmployee.FormattingEnabled = true;
-            cmbEmployee.Location = new Point(304, 83);
-            cmbEmployee.Margin = new Padding(3, 2, 3, 2);
+            cmbEmployee.Location = new Point(327, 111);
             cmbEmployee.Name = "cmbEmployee";
-            cmbEmployee.Size = new Size(133, 23);
+            cmbEmployee.Size = new Size(191, 28);
             cmbEmployee.TabIndex = 5;
             // 
             // label4
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
-            label4.Location = new Point(194, 143);
+            label4.Location = new Point(221, 191);
             label4.Name = "label4";
-            label4.Size = new Size(107, 21);
+            label4.Size = new Size(134, 28);
             label4.TabIndex = 6;
             label4.Text = "Ημερομηνία:";
             // 
@@ -119,29 +116,27 @@
             // 
             dtpDate.Cursor = Cursors.Hand;
             dtpDate.Format = DateTimePickerFormat.Short;
-            dtpDate.Location = new Point(332, 143);
-            dtpDate.Margin = new Padding(3, 2, 3, 2);
+            dtpDate.Location = new Point(378, 191);
             dtpDate.Name = "dtpDate";
-            dtpDate.Size = new Size(106, 23);
+            dtpDate.Size = new Size(122, 27);
             dtpDate.TabIndex = 7;
             // 
             // txtTime
             // 
             txtTime.Cursor = Cursors.IBeam;
             txtTime.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 161);
-            txtTime.Location = new Point(329, 168);
-            txtTime.Margin = new Padding(3, 2, 3, 2);
+            txtTime.Location = new Point(375, 224);
             txtTime.Name = "txtTime";
-            txtTime.Size = new Size(110, 29);
+            txtTime.Size = new Size(125, 34);
             txtTime.TabIndex = 8;
             // 
             // label5
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
-            label5.Location = new Point(194, 172);
+            label5.Location = new Point(221, 229);
             label5.Name = "label5";
-            label5.Size = new Size(48, 21);
+            label5.Size = new Size(59, 28);
             label5.TabIndex = 9;
             label5.Text = "Ώρα:";
             // 
@@ -154,10 +149,9 @@
             btnSave.FlatStyle = FlatStyle.Flat;
             btnSave.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
             btnSave.ForeColor = Color.WhiteSmoke;
-            btnSave.Location = new Point(157, 0);
-            btnSave.Margin = new Padding(3, 2, 3, 2);
+            btnSave.Location = new Point(179, 0);
             btnSave.Name = "btnSave";
-            btnSave.Size = new Size(153, 38);
+            btnSave.Size = new Size(175, 51);
             btnSave.TabIndex = 10;
             btnSave.Text = "Αποθήκευση";
             btnSave.UseVisualStyleBackColor = false;
@@ -172,10 +166,9 @@
             btnCancel.FlatStyle = FlatStyle.Flat;
             btnCancel.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
             btnCancel.ForeColor = Color.WhiteSmoke;
-            btnCancel.Location = new Point(318, 0);
-            btnCancel.Margin = new Padding(3, 2, 3, 2);
+            btnCancel.Location = new Point(363, 0);
             btnCancel.Name = "btnCancel";
-            btnCancel.Size = new Size(153, 38);
+            btnCancel.Size = new Size(175, 51);
             btnCancel.TabIndex = 11;
             btnCancel.Text = "Ακύρωση";
             btnCancel.UseVisualStyleBackColor = false;
@@ -187,18 +180,17 @@
             panel1.Controls.Add(btnSave);
             panel1.Controls.Add(btnCancel);
             panel1.Dock = DockStyle.Bottom;
-            panel1.Location = new Point(0, 236);
-            panel1.Margin = new Padding(3, 2, 3, 2);
+            panel1.Location = new Point(0, 314);
             panel1.Name = "panel1";
-            panel1.Size = new Size(630, 38);
+            panel1.Size = new Size(720, 51);
             panel1.TabIndex = 12;
             // 
             // NewAppointmentForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.WhiteSmoke;
-            ClientSize = new Size(630, 274);
+            ClientSize = new Size(720, 365);
             Controls.Add(label5);
             Controls.Add(txtTime);
             Controls.Add(dtpDate);
@@ -212,7 +204,6 @@
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Margin = new Padding(3, 2, 3, 2);
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "NewAppointmentForm";
