@@ -76,6 +76,7 @@ namespace HairSalonApp.Services
         /// <summary>
         /// Επιστρέφει έσοδα ανά υπηρεσία.
         /// </summary>
+        /// miaou
         public List<RevenueByServiceReport> GetRevenueByService()
         {
             try
