@@ -7,85 +7,75 @@ namespace HairSalonApp.Services
 {
     public class ReportService
     {
-        private readonly ReportRepository _reportRepo = new ReportRepository();
+        private readonly ReportRepository _reportRepository;
 
-        /// <summary>
-        /// Επιστρέφει το συνολικό έσοδο από ολοκληρωμένα ραντεβού.
-        /// </summary>
+        public ReportService()
+        {
+            _reportRepository = new ReportRepository();
+        }
+
+        // Επιστρέφει το συνολικό έσοδο από ολοκληρωμένα ραντεβού
         public decimal GetTotalRevenue()
         {
             try
             {
-                return _reportRepo.GetTotalRevenue();
+                return _reportRepository.GetTotalRevenue();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Console.WriteLine("Error in GetTotalRevenue: " + ex.Message);
+                // Αν σκάσει η βάση, επιστρέφουμε 0 για να μην κρασάρει το UI
                 return 0;
             }
         }
 
-        /// <summary>
-        /// Επιστρέφει πλήθος ραντεβού ανά ημερομηνία.
-        /// </summary>
+        // Επιστρέφει πλήθος ραντεβού ανά ημερομηνία
         public List<AppointmentsByDateReport> GetAppointmentsByDate()
         {
             try
             {
-                return _reportRepo.GetAppointmentsByDate();
+                return _reportRepository.GetAppointmentsByDate();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Console.WriteLine("Error in GetAppointmentsByDate: " + ex.Message);
                 return new List<AppointmentsByDateReport>();
             }
         }
 
-        /// <summary>
-        /// Επιστρέφει πλήθος ραντεβού ανά υπάλληλο.
-        /// </summary>
+        // Επιστρέφει πλήθος ραντεβού ανά υπάλληλο
         public List<EmployeeAppointmentsReport> GetAppointmentsByEmployee()
         {
             try
             {
-                return _reportRepo.GetAppointmentsByEmployee();
+                return _reportRepository.GetAppointmentsByEmployee();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Console.WriteLine("Error in GetAppointmentsByEmployee: " + ex.Message);
                 return new List<EmployeeAppointmentsReport>();
             }
         }
 
-        /// <summary>
-        /// Επιστρέφει τις πιο δημοφιλείς υπηρεσίες βάσει χρήσης.
-        /// </summary>
+        // Επιστρέφει τις πιο δημοφιλείς υπηρεσίες βάσει χρήσης
         public List<ServiceUsageReport> GetPopularServices()
         {
             try
             {
-                return _reportRepo.GetPopularServices();
+                return _reportRepository.GetPopularServices();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Console.WriteLine("Error in GetPopularServices: " + ex.Message);
                 return new List<ServiceUsageReport>();
             }
         }
 
-        /// <summary>
-        /// Επιστρέφει έσοδα ανά υπηρεσία.
-        /// </summary>
-        /// miaou
+        // Επιστρέφει έσοδα ανά υπηρεσία
         public List<RevenueByServiceReport> GetRevenueByService()
         {
             try
             {
-                return _reportRepo.GetRevenueByService();
+                return _reportRepository.GetRevenueByService();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Console.WriteLine("Error in GetRevenueByService: " + ex.Message);
                 return new List<RevenueByServiceReport>();
             }
         }

@@ -8,61 +8,117 @@ namespace HairSalonApp.Services
 {
     public class ServiceService
     {
-        private readonly ServiceRepository _repo = new ServiceRepository();
+        private readonly ServiceRepository _serviceRepository;
 
+        public ServiceService()
+        {
+            _serviceRepository = new ServiceRepository();
+        }
+
+        // Ανάκτηση όλων των υπηρεσιών
         public List<Service> GetAllServices()
         {
-            try { return _repo.GetAll(); }
-            catch { return new List<Service>(); }
-        }
-
-        public OperationResult SaveService(int? id, string name, decimal price, int duration)
-        {
-            // Validation
-            if (string.IsNullOrWhiteSpace(name))
-                return new OperationResult { Success = false, ErrorMessage = "Το όνομα της υπηρεσίας είναι υποχρεωτικό." };
-
-            if (price < 0)
-                return new OperationResult { Success = false, ErrorMessage = "Η τιμή δεν μπορεί να είναι αρνητική." };
-
-            var service = new Service
-            {
-                Id = id ?? 0,
-                ServiceName = name.Trim(),
-                Price = price,
-                DurationMinutes = duration
-            };
-
             try
             {
-                if (service.Id == 0)
-                {
-                    int newId = _repo.Insert(service);
-                    return newId > 0 ? new OperationResult { Success = true } : new OperationResult { Success = false, ErrorMessage = "Η εισαγωγή απέτυχε." };
-                }
-                else
-                {
-                    bool success = _repo.Update(service);
-                    return success ? new OperationResult { Success = true } : new OperationResult { Success = false, ErrorMessage = "Η ενημέρωση απέτυχε." };
-                }
+                return _serviceRepository.GetAll();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return new OperationResult { Success = false, ErrorMessage = ex.Message };
+                // Αν σκάσει η βάση, επιστρέφουμε μια άδεια λίστα για να μην κρασάρει το UI
+                return new List<Service>();
             }
         }
 
+        // Εύρεση υπηρεσίας βάσει ID (Για το Edit)
+        public Service? GetServiceById(int id)
+        {
+            try
+            {
+                return _serviceRepository.GetById(id);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        // Διαγραφή Υπηρεσίας
         public OperationResult DeleteService(int id)
         {
             try
             {
-                bool success = _repo.Delete(id);
-                return success ? new OperationResult { Success = true } : new OperationResult { Success = false, ErrorMessage = "Η διαγραφή απέτυχε." };
+                bool isDeleted = _serviceRepository.Delete(id);
+
+                if (isDeleted)
+                {
+                    return new OperationResult { Success = true };
+                }
+
+                return new OperationResult { Success = false, ErrorMessage = "Η υπηρεσία δεν βρέθηκε. Ίσως έχει ήδη διαγραφεί." };
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // Εδώ συνήθως "χτυπάει" αν η υπηρεσία χρησιμοποιείται ήδη σε κάποιο ραντεβού
                 return new OperationResult { Success = false, ErrorMessage = "Δεν είναι δυνατή η διαγραφή. Η υπηρεσία πιθανώς χρησιμοποιείται σε ραντεβού." };
+            }
+        }
+
+        // Αποθήκευση Υπηρεσίας (Νέας ή Ενημέρωση)
+        public OperationResult SaveService(int? id, string name, decimal price, int duration)
+        {
+            // 1. Καθαρισμός δεδομένων
+            name = name?.Trim() ?? "";
+
+            // 2. Validation
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return new OperationResult { Success = false, ErrorMessage = "Το όνομα της υπηρεσίας είναι υποχρεωτικό." };
+            }
+
+            if (price < 0)
+            {
+                return new OperationResult { Success = false, ErrorMessage = "Η τιμή δεν μπορεί να είναι αρνητική." };
+            }
+
+            if (duration <= 0)
+            {
+                return new OperationResult { Success = false, ErrorMessage = "Η διάρκεια της υπηρεσίας πρέπει να είναι μεγαλύτερη από μηδέν." };
+            }
+
+            // 3. Δημιουργία του Model
+            var service = new Service
+            {
+                Id = id ?? 0,
+                ServiceName = name,
+                Price = price,
+                DurationMinutes = duration
+            };
+
+            // 4. Επικοινωνία με το Data Access Layer
+            try
+            {
+                if (service.Id == 0) // Νέα υπηρεσία
+                {
+                    int newId = _serviceRepository.Insert(service);
+                    if (newId <= 0)
+                    {
+                        return new OperationResult { Success = false, ErrorMessage = "Η αποθήκευση απέτυχε. Δοκιμάστε ξανά." };
+                    }
+                }
+                else // Υπάρχουσα υπηρεσία
+                {
+                    bool isUpdated = _serviceRepository.Update(service);
+                    if (!isUpdated)
+                    {
+                        return new OperationResult { Success = false, ErrorMessage = "Δεν βρέθηκε η υπηρεσία για ενημέρωση (ίσως έχει διαγραφεί)." };
+                    }
+                }
+
+                return new OperationResult { Success = true };
+            }
+            catch (Exception ex)
+            {
+                return new OperationResult { Success = false, ErrorMessage = "Σφάλμα κατά την αποθήκευση στη βάση: " + ex.Message };
             }
         }
     }

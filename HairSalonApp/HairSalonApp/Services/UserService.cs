@@ -31,7 +31,7 @@ namespace HairSalonApp.Services
                     return new OperationResult { Success = false, ErrorMessage = "Λάθος όνομα χρήστη." };
                 }
 
-                // 2. ΕΔΩ ΓΙΝΕΤΑΙ Η ΜΑΓΕΙΑ! Συγκρίνουμε τον απλό κωδικό με το Hash της βάσης
+                // 2. Συγκρίνουμε τον απλό κωδικό με το Hash της βάσης
                 bool isPasswordCorrect = BCrypt.Net.BCrypt.Verify(password, user.Password);
 
                 if (!isPasswordCorrect)

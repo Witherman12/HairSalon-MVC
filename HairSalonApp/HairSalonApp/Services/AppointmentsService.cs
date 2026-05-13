@@ -1,141 +1,210 @@
-﻿using HairSalonApp.Data;
-using HairSalonApp.Helpers;
-using HairSalonApp.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using HairSalonApp.Models;
+using HairSalonApp.Data;
+using HairSalonApp.Helpers;
 
 namespace HairSalonApp.Services
 {
     public class AppointmentService
     {
-        private readonly AppointmentRepository _repo = new AppointmentRepository();
+        private readonly AppointmentRepository _appointmentRepository;
 
-        /// <summary>
-        /// Επιστρέφει όλα τα ραντεβού σε μορφή View (με ονόματα).
-        /// </summary>
+        public AppointmentService()
+        {
+            _appointmentRepository = new AppointmentRepository();
+        }
+
+        // Ανάκτηση όλων των ραντεβού (σε μορφή View με ονόματα)
         public List<AppointmentView> GetAllAppointments()
         {
             try
             {
-                return _repo.GetAll();
+                return _appointmentRepository.GetAll();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Console.WriteLine("Error fetching appointments: " + ex.Message);
+                // Αν σκάσει η βάση, επιστρέφουμε μια άδεια λίστα για να μην κρασάρει το UI
                 return new List<AppointmentView>();
             }
         }
 
-        /// <summary>
-        /// Επιστρέφει τα ραντεβού μιας συγκεκριμένης ημέρας.
-        /// </summary>
+        // Ανάκτηση ραντεβού βάσει συγκεκριμένης ημερομηνίας
         public List<AppointmentView> GetAppointmentsByDate(DateTime date)
         {
             try
             {
-                return _repo.GetByDate(date);
+                return _appointmentRepository.GetByDate(date);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Console.WriteLine("Error fetching appointments by date: " + ex.Message);
                 return new List<AppointmentView>();
             }
         }
 
-        /// <summary>
-        /// Δημιουργεί ένα νέο ραντεβού αφού ελέγξει τη διαθεσιμότητα.
-        /// </summary>
+        // Δημιουργία νέου ραντεβού
         public OperationResult AddAppointment(Appointment app, int durationMinutes)
         {
+            // 1. Καθαρισμός δεδομένων
+            app.Status = app.Status?.Trim() ?? "Ενεργό";
+
+            // 2. Validation
+            if (app.CustomerId <= 0)
+            {
+                return new OperationResult { Success = false, ErrorMessage = "Παρακαλώ επιλέξτε πελάτη." };
+            }
+            if (app.EmployeeId <= 0)
+            {
+                return new OperationResult { Success = false, ErrorMessage = "Παρακαλώ επιλέξτε υπάλληλο." };
+            }
+            if (app.ServiceId <= 0)
+            {
+                return new OperationResult { Success = false, ErrorMessage = "Παρακαλώ επιλέξτε υπηρεσία." };
+            }
+            if (durationMinutes <= 0)
+            {
+                return new OperationResult { Success = false, ErrorMessage = "Η διάρκεια της υπηρεσίας δεν είναι έγκυρη." };
+            }
+
+            // 3. Έλεγχος Διαθεσιμότητας
             try
             {
-                // 1. Έλεγχος αν ο υπάλληλος είναι διαθέσιμος
-                bool available = _repo.IsAvailable(app.EmployeeId, app.AppDate, app.AppTime, durationMinutes);
+                bool isAvailable = _appointmentRepository.IsAvailable(app.EmployeeId, app.AppDate, app.AppTime, durationMinutes);
 
-                if (!available)
+                if (!isAvailable)
                 {
                     return new OperationResult { Success = false, ErrorMessage = "Ο υπάλληλος δεν είναι διαθέσιμος αυτή την ώρα." };
                 }
 
-                // 2. Αποθήκευση
-                int newId = _repo.Insert(app);
+                // 4. Επικοινωνία με το Data Access Layer
+                int newId = _appointmentRepository.Insert(app);
+                if (newId <= 0)
+                {
+                    return new OperationResult { Success = false, ErrorMessage = "Η αποθήκευση απέτυχε. Δοκιμάστε ξανά." };
+                }
+
                 return new OperationResult { Success = true };
             }
             catch (Exception ex)
             {
-                return new OperationResult { Success = false, ErrorMessage = "Σφάλμα κατά την αποθήκευση: " + ex.Message };
+                return new OperationResult { Success = false, ErrorMessage = "Σφάλμα κατά την αποθήκευση στη βάση: " + ex.Message };
             }
         }
 
-        /// <summary>
-        /// Ενημερώνει ένα ραντεβού ελέγχοντας τη διαθεσιμότητα (εκτός του εαυτού του).
-        /// </summary>
+        // Ενημέρωση υπάρχοντος ραντεβού
         public OperationResult UpdateAppointment(Appointment app, int durationMinutes)
         {
+            // 1. Καθαρισμός δεδομένων
+            app.Status = app.Status?.Trim() ?? "";
+
+            // 2. Validation
+            if (app.Id <= 0) return new OperationResult { Success = false, ErrorMessage = "Μη έγκυρο ραντεβού." };
+            if (app.CustomerId <= 0) return new OperationResult { Success = false, ErrorMessage = "Παρακαλώ επιλέξτε πελάτη." };
+            if (app.EmployeeId <= 0) return new OperationResult { Success = false, ErrorMessage = "Παρακαλώ επιλέξτε υπάλληλο." };
+            if (app.ServiceId <= 0) return new OperationResult { Success = false, ErrorMessage = "Παρακαλώ επιλέξτε υπηρεσία." };
+
+            // 3. Έλεγχος Διαθεσιμότητας (εξαιρείται το τρέχον ραντεβού)
             try
             {
-                // 1. Έλεγχος διαθεσιμότητας για update
-                bool available = _repo.IsAvailableForUpdate(app.Id, app.EmployeeId, app.AppDate, app.AppTime, durationMinutes);
+                bool isAvailable = _appointmentRepository.IsAvailableForUpdate(app.Id, app.EmployeeId, app.AppDate, app.AppTime, durationMinutes);
 
-                if (!available)
+                if (!isAvailable)
                 {
                     return new OperationResult { Success = false, ErrorMessage = "Ο υπάλληλος έχει άλλο ραντεβού εκείνη την ώρα." };
                 }
 
-                bool updated = _repo.Update(app);
-                return updated ? new OperationResult { Success = true } : new OperationResult { Success = false, ErrorMessage = "Δεν βρέθηκε το ραντεβού προς ενημέρωση." };
+                // 4. Επικοινωνία με το Data Access Layer
+                bool isUpdated = _appointmentRepository.Update(app);
+                if (!isUpdated)
+                {
+                    return new OperationResult { Success = false, ErrorMessage = "Δεν βρέθηκε το ραντεβού για ενημέρωση (ίσως έχει διαγραφεί)." };
+                }
+
+                return new OperationResult { Success = true };
             }
             catch (Exception ex)
             {
-                return new OperationResult { Success = false, ErrorMessage = "Σφάλμα κατά την ενημέρωση: " + ex.Message };
+                return new OperationResult { Success = false, ErrorMessage = "Σφάλμα κατά την ενημέρωση στη βάση: " + ex.Message };
             }
         }
 
-        /// <summary>
-        /// Ακυρώνει ένα ραντεβού (Status = "Ακυρώθηκε").
-        /// </summary>
+        // Ακύρωση Ραντεβού
         public OperationResult CancelAppointment(int id)
         {
             try
             {
-                bool result = _repo.Cancel(id);
-                return result ? new OperationResult { Success = true } : new OperationResult { Success = false, ErrorMessage = "Αποτυχία ακύρωσης." };
+                bool isCanceled = _appointmentRepository.Cancel(id);
+
+                if (isCanceled)
+                {
+                    return new OperationResult { Success = true };
+                }
+
+                return new OperationResult { Success = false, ErrorMessage = "Το ραντεβού δεν βρέθηκε." };
             }
             catch (Exception ex)
             {
-                return new OperationResult { Success = false, ErrorMessage = ex.Message };
+                return new OperationResult { Success = false, ErrorMessage = "Σφάλμα κατά την ακύρωση: " + ex.Message };
             }
         }
 
-        /// <summary>
-        /// Ολοκληρώνει ένα ραντεβού (Status = "Ολοκληρώθηκε").
-        /// </summary>
+        // Ολοκλήρωση Ραντεβού
         public OperationResult CompleteAppointment(int id)
         {
             try
             {
-                bool result = _repo.Complete(id);
-                return result ? new OperationResult { Success = true } : new OperationResult { Success = false, ErrorMessage = "Αποτυχία ολοκλήρωσης." };
+                bool isCompleted = _appointmentRepository.Complete(id);
+
+                if (isCompleted)
+                {
+                    return new OperationResult { Success = true };
+                }
+
+                return new OperationResult { Success = false, ErrorMessage = "Το ραντεβού δεν βρέθηκε." };
             }
             catch (Exception ex)
             {
-                return new OperationResult { Success = false, ErrorMessage = ex.Message };
+                return new OperationResult { Success = false, ErrorMessage = "Σφάλμα κατά την ολοκλήρωση: " + ex.Message };
             }
         }
 
-        /// <summary>
-        /// Διαγράφει οριστικά ένα ραντεβού.
-        /// </summary>
+        // Επαναφορά Ραντεβού σε Ενεργό (Untick CheckBox)
+        public OperationResult ReactivateAppointment(int id)
+        {
+            try
+            {
+                bool isReactivated = _appointmentRepository.Reactivate(id);
+
+                if (isReactivated)
+                {
+                    return new OperationResult { Success = true };
+                }
+
+                return new OperationResult { Success = false, ErrorMessage = "Το ραντεβού δεν βρέθηκε." };
+            }
+            catch (Exception ex)
+            {
+                return new OperationResult { Success = false, ErrorMessage = "Σφάλμα κατά την επαναφορά: " + ex.Message };
+            }
+        }
+
+        // Διαγραφή Ραντεβού
         public OperationResult DeleteAppointment(int id)
         {
             try
             {
-                bool result = _repo.Delete(id);
-                return result ? new OperationResult { Success = true } : new OperationResult { Success = false, ErrorMessage = "Αποτυχία διαγραφής." };
+                bool isDeleted = _appointmentRepository.Delete(id);
+
+                if (isDeleted)
+                {
+                    return new OperationResult { Success = true };
+                }
+
+                return new OperationResult { Success = false, ErrorMessage = "Το ραντεβού δεν βρέθηκε. Ίσως έχει ήδη διαγραφεί." };
             }
             catch (Exception ex)
             {
-                return new OperationResult { Success = false, ErrorMessage = ex.Message };
+                return new OperationResult { Success = false, ErrorMessage = "Σφάλμα κατά την διαγραφή: " + ex.Message };
             }
         }
     }

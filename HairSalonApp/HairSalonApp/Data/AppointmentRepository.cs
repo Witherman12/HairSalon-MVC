@@ -10,6 +10,7 @@ Insert: Δημιουργεί νέο ραντεβού και επιστρέφει
 Update: Ενημερώνει υπάρχον ραντεβού.
 Cancel: Ακυρώνει ραντεβού αλλάζοντας την κατάστασή του.
 Complete: Ολοκληρώνει ραντεβού αλλάζοντας την κατάστασή του.
+Reactivate: Επαναφέρει ραντεβού σε ενεργό (χρησιμοποιείται στο Untick).
 Delete: Διαγράφει ραντεβού με βάση το ID.
 IsAvailable: Ελέγχει διαθεσιμότητα υπαλλήλου για νέο ραντεβού.
 IsAvailableForUpdate: Ελέγχει διαθεσιμότητα υπαλλήλου κατά την ενημέρωση ραντεβού.
@@ -231,6 +232,28 @@ namespace HairSalonApp.Data
         }
 
         /// <summary>
+        /// Επαναφέρει την κατάσταση ενός ραντεβού σε "Ενεργό" με βάση το ID του (χρησιμοποιείται στο Untick).
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public bool Reactivate(int id)
+        {
+            using (MySqlConnection connection = Database.GetConnection())
+            {
+                connection.Open();
+
+                using (MySqlCommand command = new MySqlCommand(SqlQueries.Appointments.Reactivate, connection))
+                {
+                    command.Parameters.AddWithValue("@Id", id);
+
+                    int rowsAffected = command.ExecuteNonQuery();
+
+                    return rowsAffected > 0;
+                }
+            }
+        }
+
+        /// <summary>
         /// Διαγράφει ένα ραντεβού από τη βάση δεδομένων με βάση το ID του.
         /// </summary>
         /// <param name="id"></param>
@@ -391,11 +414,10 @@ namespace HairSalonApp.Data
         }
 
         /// <summary>
-        /// Ελέγχει αν ένας υπάλληλος έχει ήδη ένα ενεργό ραντεβού που επικαλύπτεται
-        /// με τη νέα ώρα ραντεβού, εξαιρώντας το τρέχον ραντεβού που ενημερώνεται. Η διάρκεια του νέου ραντεβού περνάει ως λεπτά.
-        /// Εάν αυτή η μέθοδος επιστρέψει false, τότε το slot ραντεβού δεν είναι διαθέσιμο.
+        /// Μετατρέπει με ασφάλεια μια τιμή από τη βάση δεδομένων σε TimeSpan.
+        /// Επιστρέφει TimeSpan.Zero αν η τιμή είναι κενή ή μη έγκυρη.
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="value">Η τιμή από τον DataReader</param>
         /// <returns></returns>
         private TimeSpan GetTimeSpan(object value)
         {

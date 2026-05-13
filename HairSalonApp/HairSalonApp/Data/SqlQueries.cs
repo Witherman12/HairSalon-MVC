@@ -292,6 +292,12 @@ namespace HairSalonApp.Data
                 DELETE FROM Appointments
                 WHERE Id = @Id;";
 
+            // +++ ΝΕΟ QUERY +++
+            public const string Reactivate = @"
+                UPDATE Appointments
+                SET Status = 'Ενεργό'
+                WHERE Id = @Id;";
+
             /// <summary>
             /// Checks whether an employee already has an active appointment that overlaps
             /// with the new appointment time. The new appointment duration is passed as minutes.

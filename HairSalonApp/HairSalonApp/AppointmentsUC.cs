@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using HairSalonApp.Services;
 using HairSalonApp.Models;
 using System.Linq;
+using System.Drawing;
 
 namespace HairSalonApp
 {
@@ -15,16 +16,20 @@ namespace HairSalonApp
         {
             InitializeComponent();
 
-            // 1. Ρύθμιση του Grid για να πιάνει όλη την οθόνη
-            dgvAppointments.AutoGenerateColumns = false;
+            // 1. Ρυθμίσεις εμφάνισης
+            dgvAppointments.AutoGenerateColumns = false; // Τώρα το κλείνουμε γιατί θα τις φτιάξουμε εμείς σωστά
             dgvAppointments.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvAppointments.RowTemplate.Height = 45;
             dgvAppointments.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvAppointments.RowTemplate.Height = 45;
+            dgvAppointments.AllowUserToAddRows = false;
 
-            // 2. Δημιουργία Στηλών (Όπως στον Customer/Employee)
+            // 2. Σύνδεση Events (με object? για να μην έχεις warnings)
+            dgvAppointments.DataBindingComplete += dgvAppointments_DataBindingComplete;
+            dgvAppointments.CellContentClick += dgvAppointments_CellContentClick;
+            dtpDateFilter.ValueChanged += dtpDateFilter_ValueChanged;
+
+            // 3. Προετοιμασία
             ConfigureColumns();
-
-            // 3. Φόρτωση Δεδομένων
             LoadAppointments();
         }
 
@@ -32,47 +37,103 @@ namespace HairSalonApp
         {
             dgvAppointments.Columns.Clear();
 
-            // Κρυφό ID
-            dgvAppointments.Columns.Add(new DataGridViewTextBoxColumn { Name = "Id", DataPropertyName = "Id", Visible = false });
+            // Στήλη CheckBox
+            dgvAppointments.Columns.Add(new DataGridViewCheckBoxColumn
+            {
+                Name = "colCompleteCheck",
+                HeaderText = "Ολοκλ.",
+                Width = 60
+            });
 
-            // Εμφανή δεδομένα (από το AppointmentView model)
+            // Κρυφό ID (για να το βρίσκει ο κώδικας)
+            dgvAppointments.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                Name = "Id",
+                DataPropertyName = "Id",
+                Visible = false
+            });
+
+            // Δεδομένα από το AppointmentView (Προσοχή: Τα DataPropertyName είναι ακριβώς όπως στο .cs αρχείο σου)
             dgvAppointments.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Ημερομηνία", DataPropertyName = "AppDate", DefaultCellStyle = new DataGridViewCellStyle { Format = "dd/MM/yyyy" } });
             dgvAppointments.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Ώρα", DataPropertyName = "AppTime" });
             dgvAppointments.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Πελάτης", DataPropertyName = "CustomerName" });
             dgvAppointments.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Υπηρεσία", DataPropertyName = "ServiceName" });
             dgvAppointments.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Υπάλληλος", DataPropertyName = "EmployeeName" });
-            dgvAppointments.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Κατάσταση", DataPropertyName = "Status" });
+            dgvAppointments.Columns.Add(new DataGridViewTextBoxColumn { Name = "Status", HeaderText = "Κατάσταση", DataPropertyName = "Status" });
         }
 
         private void LoadAppointments()
         {
             try
             {
-                var list = _appointmentService.GetAllAppointments();
+                // Επαναφέρουμε το φίλτρο ημερομηνίας!
+                DateTime selectedDate = dtpDateFilter.Value.Date;
+                var filteredList = _appointmentService.GetAppointmentsByDate(selectedDate);
 
-                // Ταξινόμηση: Πρώτα ανά Ημερομηνία και μετά ανά Ώρα
-                var sortedList = list.OrderBy(a => a.AppDate)
-                                     .ThenBy(a => a.AppTime)
-                                     .ToList();
+                var sortedList = filteredList.OrderBy(a => a.AppTime).ToList();
 
                 dgvAppointments.DataSource = null;
                 dgvAppointments.DataSource = sortedList;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Σφάλμα φόρτωσης: " + ex.Message);
+                MessageBox.Show("Σφάλμα: " + ex.Message);
             }
         }
+
+        private void dgvAppointments_DataBindingComplete(object? sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            foreach (DataGridViewRow row in dgvAppointments.Rows)
+            {
+                if (row.DataBoundItem is AppointmentView app)
+                {
+                    // Ενημέρωση CheckBox
+                    row.Cells["colCompleteCheck"].Value = (app.Status == "Ολοκληρώθηκε");
+
+                    // Χρωματισμός
+                    if (app.Status == "Ολοκληρώθηκε")
+                    {
+                        row.DefaultCellStyle.BackColor = Color.FromArgb(245, 245, 245);
+                        row.DefaultCellStyle.ForeColor = Color.Gray;
+                    }
+                    else
+                    {
+                        row.DefaultCellStyle.BackColor = Color.White;
+                        row.DefaultCellStyle.ForeColor = Color.Black;
+                    }
+                }
+            }
+        }
+
+        private void dgvAppointments_CellContentClick(object? sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && dgvAppointments.Columns[e.ColumnIndex].Name == "colCompleteCheck")
+            {
+                dgvAppointments.CommitEdit(DataGridViewDataErrorContexts.Commit);
+                bool isChecked = Convert.ToBoolean(dgvAppointments.Rows[e.RowIndex].Cells["colCompleteCheck"].Value);
+
+                if (dgvAppointments.Rows[e.RowIndex].DataBoundItem is AppointmentView selected)
+                {
+                    if (isChecked) _appointmentService.CompleteAppointment(selected.Id);
+                    else _appointmentService.ReactivateAppointment(selected.Id);
+
+                    LoadAppointments(); // Refresh για να ενημερωθεί το Status text και το χρώμα
+                }
+            }
+        }
+
+        private void dtpDateFilter_ValueChanged(object? sender, EventArgs e)
+        {
+            LoadAppointments();
+        }
+
+        // --- Λοιπά Κουμπιά ---
 
         private void btnNewAppointment_Click(object sender, EventArgs e)
         {
             using (NewAppointmentForm popup = new NewAppointmentForm())
             {
-                popup.Text = "Νέο Ραντεβού";
-                if (popup.ShowDialog() == DialogResult.OK)
-                {
-                    LoadAppointments();
-                }
+                if (popup.ShowDialog() == DialogResult.OK) LoadAppointments();
             }
         }
 
@@ -80,97 +141,28 @@ namespace HairSalonApp
         {
             if (dgvAppointments.CurrentRow?.DataBoundItem is AppointmentView selected)
             {
-                // Εδώ θα περνούσες το selected.Id στη φόρμα σου
                 using (NewAppointmentForm popup = new NewAppointmentForm(selected.Id))
                 {
-                    popup.Text = "Επεξεργασία Ραντεβού";
-                    if (popup.ShowDialog() == DialogResult.OK)
-                    {
-                        LoadAppointments();
-                    }
+                    if (popup.ShowDialog() == DialogResult.OK) LoadAppointments();
                 }
-            }
-            else
-            {
-                MessageBox.Show("Παρακαλώ επιλέξτε ένα ραντεβού.", "Προσοχή", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
         private void btnCancelAppointment_Click(object sender, EventArgs e)
         {
-            // Χρησιμοποιούμε το SelectedRows[0] ή το CurrentRow για μεγαλύτερη ασφάλεια
-            if (dgvAppointments.CurrentRow != null && dgvAppointments.CurrentRow.DataBoundItem is AppointmentView selected)
-            {
-                DialogResult result = MessageBox.Show(
-                    $"Θέλετε σίγουρα να διαγράψετε οριστικά το ραντεβού του/της {selected.CustomerName};",
-                    "Επιβεβαίωση Διαγραφής",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Warning);
-
-                if (result == DialogResult.Yes)
-                {
-                    // Εδώ κάλεσε την DeleteAppointment αντί για την Cancel αν θες να σβηστεί τελείως από τη βάση
-                    var op = _appointmentService.DeleteAppointment(selected.Id);
-
-                    if (op.Success)
-                    {
-                        MessageBox.Show("Το ραντεβού διαγράφηκε!", "Επιτυχία", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        LoadAppointments(); // Φρεσκάρισμα του Grid
-                    }
-                    else
-                    {
-                        MessageBox.Show("Σφάλμα: " + op.ErrorMessage, "Αποτυχία", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }
-            else
-            {
-                MessageBox.Show("Παρακαλώ επιλέξτε πρώτα ένα ραντεβού από τη λίστα.", "Προσοχή", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
-
-        // Αυτό το κουμπί δεν υπήρχε αλλά είναι χρήσιμο για την ολοκλήρωση (Status = Ολοκληρώθηκε)
-        private void btnComplete_Click(object sender, EventArgs e)
-        {
             if (dgvAppointments.CurrentRow?.DataBoundItem is AppointmentView selected)
             {
-                var op = _appointmentService.CompleteAppointment(selected.Id);
-                if (op.Success) LoadAppointments();
-            }
-        }
-
-        private void dgvAppointments_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            // Προαιρετικά: Επιλογή ολόκληρης της γραμμής με απλό κλικ
-            if (e.RowIndex >= 0) dgvAppointments.Rows[e.RowIndex].Selected = true;
-        }
-
-        private void dtpDateFilter_ValueChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                // 1. Παίρνουμε την ημερομηνία που επέλεξε ο χρήστης στο ημερολόγιο
-                DateTime selectedDate = dtpDateFilter.Value.Date;
-
-                // 2. Καλούμε το Service για να φέρει τα ραντεβού ΜΟΝΟ για αυτή την ημερομηνία
-                var filteredList = _appointmentService.GetAppointmentsByDate(selectedDate);
-
-                // 3. Ταξινομούμε τη λίστα ανά Ώρα (AppTime) για να φαίνονται με τη σωστή σειρά
-                var sortedList = filteredList.OrderBy(a => a.AppTime).ToList();
-
-                // 4. Ενημερώνουμε το DataGridView
-                dgvAppointments.DataSource = null;
-                dgvAppointments.DataSource = sortedList;
-
-                // Προαιρετικό: Αν η λίστα είναι άδεια, εμφάνιση μηνύματος στην μπάρα κατάστασης ή τίτλο
-                if (sortedList.Count == 0)
+                if (selected.Status == "Ολοκληρώθηκε")
                 {
-                    // Μπορείς να προσθέσεις ένα Label που να λέει "Δεν υπάρχουν ραντεβού"
+                    MessageBox.Show("Δεν μπορείτε να διαγράψετε ολοκληρωμένο ραντεβού.", "Απαγόρευση", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    return;
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Σφάλμα κατά το φιλτράρισμα: " + ex.Message, "Σφάλμα", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                if (MessageBox.Show($"Οριστική διαγραφή ραντεβού για {selected.CustomerName};", "Επιβεβαίωση", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    _appointmentService.DeleteAppointment(selected.Id);
+                    LoadAppointments();
+                }
             }
         }
     }

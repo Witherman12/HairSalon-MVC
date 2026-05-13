@@ -8,58 +8,119 @@ namespace HairSalonApp.Services
 {
     public class EmployeeService
     {
-        private readonly EmployeeRepository _repo;
+        private readonly EmployeeRepository _employeeRepository;
 
         public EmployeeService()
         {
-            _repo = new EmployeeRepository();
+            _employeeRepository = new EmployeeRepository();
         }
 
+        // Ανάκτηση όλων των υπαλλήλων
         public List<Employee> GetAllEmployees()
         {
-            try { return _repo.GetAll(); }
-            catch { return new List<Employee>(); }
-        }
-
-        public OperationResult SaveEmployee(int? id, string firstName, string lastName, string phone, string specialty)
-        {
-            // Απλό validation
-            if (string.IsNullOrWhiteSpace(firstName) || string.IsNullOrWhiteSpace(lastName))
-                return new OperationResult { Success = false, ErrorMessage = "Όνομα και Επώνυμο είναι υποχρεωτικά." };
-
-            var emp = new Employee
-            {
-                Id = id ?? 0,
-                FirstName = firstName.Trim(),
-                LastName = lastName.Trim(),
-                Phone = phone?.Trim(),
-                Specialty = specialty?.Trim()
-            };
-
             try
             {
-                if (emp.Id == 0)
-                {
-                    int newId = _repo.Insert(emp);
-                    return newId > 0 ? new OperationResult { Success = true } : new OperationResult { Success = false, ErrorMessage = "Σφάλμα κατά την εισαγωγή." };
-                }
-                else
-                {
-                    bool success = _repo.Update(emp);
-                    return success ? new OperationResult { Success = true } : new OperationResult { Success = false, ErrorMessage = "Σφάλμα κατά την ενημέρωση." };
-                }
+                return _employeeRepository.GetAll();
             }
-            catch (Exception ex) { return new OperationResult { Success = false, ErrorMessage = ex.Message }; }
+            catch (Exception)
+            {
+                // Αν σκάσει η βάση, επιστρέφουμε μια άδεια λίστα για να μην κρασάρει το UI
+                return new List<Employee>();
+            }
         }
 
+        // Εύρεση υπαλλήλου βάσει ID (Για το Edit)
+        public Employee? GetEmployeeById(int id)
+        {
+            try
+            {
+                return _employeeRepository.GetById(id);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        // Διαγραφή Υπαλλήλου
         public OperationResult DeleteEmployee(int id)
         {
             try
             {
-                bool success = _repo.Delete(id);
-                return success ? new OperationResult { Success = true } : new OperationResult { Success = false, ErrorMessage = "Η διαγραφή απέτυχε." };
+                // ΣΗΜΕΙΩΣΗ: Εδώ στο μέλλον μπορούμε να προσθέσουμε έλεγχο 
+                // αν ο υπάλληλος έχει ενεργά ραντεβού πριν τον διαγράψουμε!
+
+                bool isDeleted = _employeeRepository.Delete(id);
+
+                if (isDeleted)
+                {
+                    return new OperationResult { Success = true };
+                }
+
+                return new OperationResult { Success = false, ErrorMessage = "Ο υπάλληλος δεν βρέθηκε. Ίσως έχει ήδη διαγραφεί." };
             }
-            catch (Exception ex) { return new OperationResult { Success = false, ErrorMessage = ex.Message }; }
+            catch (Exception ex)
+            {
+                return new OperationResult { Success = false, ErrorMessage = "Σφάλμα κατά την διαγραφή: " + ex.Message };
+            }
+        }
+
+        // Αποθήκευση Υπαλλήλου (Νέου ή Ενημέρωση)
+        public OperationResult SaveEmployee(int? id, string firstName, string lastName, string phone, string specialty)
+        {
+            // 1. Καθαρισμός δεδομένων
+            firstName = firstName?.Trim() ?? "";
+            lastName = lastName?.Trim() ?? "";
+            phone = phone?.Trim() ?? "";
+            specialty = specialty?.Trim() ?? "";
+
+            // 2. Validation
+            if (string.IsNullOrWhiteSpace(firstName))
+            {
+                return new OperationResult { Success = false, ErrorMessage = "Το Όνομα του υπαλλήλου είναι υποχρεωτικό." };
+            }
+
+            if (string.IsNullOrWhiteSpace(lastName))
+            {
+                return new OperationResult { Success = false, ErrorMessage = "Το Επώνυμο του υπαλλήλου είναι υποχρεωτικό." };
+            }
+
+            // 3. Δημιουργία του Model
+            var employee = new Employee
+            {
+                Id = id ?? 0,
+                FirstName = firstName,
+                LastName = lastName,
+                Phone = phone,
+                Specialty = specialty
+            };
+
+            // 4. Επικοινωνία με το Data Access Layer
+            try
+            {
+                if (employee.Id == 0) // Νέος υπάλληλος
+                {
+                    int newId = _employeeRepository.Insert(employee);
+                    if (newId <= 0)
+                    {
+                        return new OperationResult { Success = false, ErrorMessage = "Η αποθήκευση απέτυχε. Δοκιμάστε ξανά." };
+                    }
+                }
+                else // Υπάρχων υπάλληλος
+                {
+                    bool isUpdated = _employeeRepository.Update(employee);
+                    if (!isUpdated)
+                    {
+                        return new OperationResult { Success = false, ErrorMessage = "Δεν βρέθηκε ο υπάλληλος για ενημέρωση (ίσως έχει διαγραφεί)." };
+                    }
+                }
+
+                return new OperationResult { Success = true };
+            }
+            catch (Exception ex)
+            {
+                return new OperationResult { Success = false, ErrorMessage = "Σφάλμα κατά την αποθήκευση στη βάση: " + ex.Message };
+            }
         }
     }
 }
