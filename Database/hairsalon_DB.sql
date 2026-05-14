@@ -57,6 +57,12 @@ CREATE TABLE Appointments (
         REFERENCES Services(Id)
 );
 
--- Προσθήκη προκαθορισμένου διαχειριστή (Username: admin, Password: 01234) - ΠΡΟΣΩΡΙΝΑ
+-- Προσθήκη προκαθορισμένων χρηστών - ΠΡΟΣΩΡΙΝΑ
+
+-- (Username: admin, Password: 01234) 
 INSERT INTO `users` (`Username`, `Password`, `Role`) 
 VALUES ('admin', '$2a$12$vgO1pta34Wmn.huuG3SmxeJ20My4wee0wTwibqnAGB0jZ8SWOuwZC', 'Admin');
+
+-- (Username: secr, Password: 56789) 
+INSERT INTO `users` (`Username`, `Password`, `Role`) 
+VALUES ('secr', '$2a$12$8IQVHSBAudLlKR3ULu5bjOEe3dkAZN91JZUqw/dU8QHndQnlSElhm', 'Secretary');

@@ -19,7 +19,25 @@ namespace HairSalonApp
             {
                 // Χρησιμοποιούμε το .Role για να δείξει "Secretary" ή "Admin"
                 lblCurrentUser.Text = UserSession.CurrentUser.Role;
+
+                // ΚΑΛΟΥΜΕ ΤΗ  ΜΕΘΟΔΟ  ΓΙΑ ΤΑ ΔΙΚΑΙΩΜΑΤΑ
+                ApplyRolePermissions();
             }
+        }
+
+        // ΜΕΘΟΔΟΣ ΓΙΑ ΤΑ ΔΙΚΑΙΩΜΑΤΑ
+        private void ApplyRolePermissions()
+        {
+            // Ελέγχουμε αν ο συνδεδεμένος χρήστης είναι η Γραμματεία
+            if (UserSession.CurrentUser.Role == "Secretary")
+            {
+                // Κρύβουμε τα κουμπιά που είναι μόνο για τον Admin!
+                btnEmployees.Visible = false;
+                btnServices.Visible = false;
+                btnReports.Visible = false;
+            }
+            // Αν είναι "Admin", δεν χρειάζεται να κάνουμε κάτι, 
+            // γιατί τα κουμπιά είναι ήδη ορατά (Visible = true) από το Design.
         }
 
         // Βοηθητική μέθοδος για να φορτώνει τα User Controls στο κεντρικό Panel
@@ -35,25 +53,10 @@ namespace HairSalonApp
             MainPanel.Controls.Add(uc);
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblCurrentUser_Click(object sender, EventArgs e)
-        {
-
-        }
+        private void panel1_Paint(object sender, PaintEventArgs e) { }
+        private void label1_Click(object sender, EventArgs e) { }
+        private void pictureBox1_Click(object sender, EventArgs e) { }
+        private void lblCurrentUser_Click(object sender, EventArgs e) { }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -90,15 +93,8 @@ namespace HairSalonApp
             lblLiveDate.Text = DateTime.Now.ToString("dd/MM/yyyy");
         }
 
-        private void Sidebar_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void Sidebar_Paint_1(object sender, PaintEventArgs e)
-        {
-
-        }
+        private void Sidebar_Paint(object sender, PaintEventArgs e) { }
+        private void Sidebar_Paint_1(object sender, PaintEventArgs e) { }
 
         private void btnServices_Click(object sender, EventArgs e)
         {
@@ -112,9 +108,6 @@ namespace HairSalonApp
             LoadUserControl(uc);
         }
 
-        private void DashboardForm_Load(object sender, EventArgs e)
-        {
-
-        }
+        private void DashboardForm_Load(object sender, EventArgs e) { }
     }
 }

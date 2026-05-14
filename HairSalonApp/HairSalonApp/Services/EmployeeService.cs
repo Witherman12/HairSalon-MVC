@@ -47,8 +47,6 @@ namespace HairSalonApp.Services
         {
             try
             {
-                // ΣΗΜΕΙΩΣΗ: Εδώ στο μέλλον μπορούμε να προσθέσουμε έλεγχο 
-                // αν ο υπάλληλος έχει ενεργά ραντεβού πριν τον διαγράψουμε!
 
                 bool isDeleted = _employeeRepository.Delete(id);
 
@@ -83,6 +81,22 @@ namespace HairSalonApp.Services
             if (string.IsNullOrWhiteSpace(lastName))
             {
                 return new OperationResult { Success = false, ErrorMessage = "Το Επώνυμο του υπαλλήλου είναι υποχρεωτικό." };
+            }
+
+            // --- ΝΕΟΣ ΕΛΕΓΧΟΣ ΤΗΛΕΦΩΝΟΥ ---
+            if (!string.IsNullOrWhiteSpace(phone)) // Αν έχει γράψει κάτι (αν δεν είναι κενό)
+            {
+                // Ελέγχουμε αν έχει ακριβώς 10 χαρακτήρες ΚΑΙ αν είναι όλοι αριθμοί (digits)
+                if (phone.Length != 10 || !System.Linq.Enumerable.All(phone, char.IsDigit))
+                {
+                    return new OperationResult { Success = false, ErrorMessage = "Το τηλέφωνο πρέπει να αποτελείται από ακριβώς 10 ψηφία (χωρίς κενά ή γράμματα)." };
+                }
+
+                // Ελέγχουμε αν ξεκινάει από τα σωστά νούμερα για Ελλάδα
+                if (!phone.StartsWith("69") && !phone.StartsWith("2"))
+                {
+                    return new OperationResult { Success = false, ErrorMessage = "Το τηλέφωνο πρέπει να ξεκινάει από '2' (σταθερό) ή '69' (κινητό)." };
+                }
             }
 
             // 3. Δημιουργία του Model

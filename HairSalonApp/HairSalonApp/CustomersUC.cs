@@ -1,11 +1,12 @@
-﻿using System;
+﻿using HairSalonApp.Models;
+using HairSalonApp.Services; // Προσθήκη του Service
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using HairSalonApp.Services; // Προσθήκη του Service
 
 namespace HairSalonApp
 {
@@ -94,16 +95,52 @@ namespace HairSalonApp
 
         private void btnEditCustomer_Click(object sender, EventArgs e)
         {
-            // Ελέγχουμε αν έχει επιλεγεί γραμμή
-            if (dgvCustomers.SelectedRows.Count > 0)
+            // Ελέγχουμε αν υπάρχει όντως επιλεγμένη γραμμή και παίρνουμε τα δεδομένα της
+            if (dgvCustomers.CurrentRow?.DataBoundItem is Customer selectedCustomer)
             {
-                CustomerForm popup = new CustomerForm();
-                popup.Text = "Επεξεργασία Πελάτη";
-                popup.ShowDialog();
+                // Ανοίγουμε τη φόρμα περνώντας το ID του πελάτη στην παρένθεση
+                using (CustomerForm popup = new CustomerForm(selectedCustomer.Id))
+                {
+                    popup.Text = "Επεξεργασία Πελάτη";
+
+                    // Αν ο χρήστης πατήσει Αποθήκευση, ανανεώνουμε τον πίνακα για να δούμε τις αλλαγές
+                    if (popup.ShowDialog() == DialogResult.OK)
+                    {
+                        LoadCustomers();
+                    }
+                }
             }
             else
             {
                 MessageBox.Show("Παρακαλώ επιλέξτε έναν πελάτη πρώτα.", "Προσοχή", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            // Παίρνουμε το κείμενο που πληκτρολόγησε ο χρήστης
+            string keyword = txtSearchCustomer.Text.Trim();
+
+            // Αν το κουτάκι είναι άδειο, φορτώνουμε ξανά όλους τους πελάτες
+            if (string.IsNullOrWhiteSpace(keyword))
+            {
+                LoadCustomers();
+            }
+            else
+            {
+                try
+                {
+                    // Καλούμε τη μέθοδο Search
+                    var searchResults = _customerService.SearchCustomers(keyword);
+
+                    // Ανανεώνουμε τον πίνακα με τα αποτελέσματα
+                    dgvCustomers.DataSource = null;
+                    dgvCustomers.DataSource = searchResults;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Σφάλμα κατά την αναζήτηση: " + ex.Message);
+                }
             }
         }
     }

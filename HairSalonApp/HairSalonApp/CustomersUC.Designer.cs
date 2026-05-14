@@ -34,6 +34,8 @@
             btnEditCustomer = new Button();
             btnNewCustomer = new Button();
             panel1 = new Panel();
+            txtSearchCustomer = new TextBox();
+            label2 = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvCustomers).BeginInit();
             SuspendLayout();
             // 
@@ -125,11 +127,37 @@
             panel1.Size = new Size(738, 50);
             panel1.TabIndex = 11;
             // 
+            // txtSearchCustomer
+            // 
+            txtSearchCustomer.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            txtSearchCustomer.BackColor = Color.LightGray;
+            txtSearchCustomer.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 161);
+            txtSearchCustomer.Location = new Point(563, 0);
+            txtSearchCustomer.Name = "txtSearchCustomer";
+            txtSearchCustomer.Size = new Size(175, 30);
+            txtSearchCustomer.TabIndex = 12;
+            txtSearchCustomer.TextChanged += textBox1_TextChanged;
+            // 
+            // label2
+            // 
+            label2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            label2.AutoSize = true;
+            label2.BackColor = Color.WhiteSmoke;
+            label2.Font = new Font("Segoe UI Semibold", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 161);
+            label2.ForeColor = Color.Black;
+            label2.Location = new Point(409, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(138, 31);
+            label2.TabIndex = 13;
+            label2.Text = "Αναζήτηση:";
+            // 
             // CustomersUC
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.WhiteSmoke;
+            Controls.Add(label2);
+            Controls.Add(txtSearchCustomer);
             Controls.Add(btnDeleteCustomer);
             Controls.Add(btnEditCustomer);
             Controls.Add(btnNewCustomer);
@@ -151,5 +179,7 @@
         private Button btnEditCustomer;
         private Button btnNewCustomer;
         private Panel panel1;
+        private TextBox txtSearchCustomer;
+        private Label label2;
     }
 }

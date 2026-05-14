@@ -4,6 +4,9 @@ using System.Windows.Forms;
 using ClosedXML.Excel;
 using HairSalonApp.Services;
 using HairSalonApp.Models;
+using System.IO;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 
 namespace HairSalonApp
 {
@@ -145,19 +148,155 @@ namespace HairSalonApp
             }
         }
 
+        // Η μέθοδος που μετατρέπει τον πίνακα σε PDF
+        private void ExportToPdf(DataGridView dgv, string fileName, bool openAfterSave)
+        {
+            try
+            {
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.Filter = "PDF files (*.pdf)|*.pdf";
+                sfd.FileName = fileName + "_" + DateTime.Now.ToString("ddMMyyyy");
+
+                string filePath = "";
+
+                // Αν πατήσαμε "Εκτύπωση", το σώζουμε σε προσωρινό φάκελο (Temp) για να ανοίξει αμέσως.
+                // Αν πατήσαμε "Εξαγωγή PDF", ρωτάμε το χρήστη πού να το αποθηκεύσει.
+                if (openAfterSave)
+                {
+                    filePath = Path.Combine(Path.GetTempPath(), sfd.FileName + ".pdf");
+                }
+                else
+                {
+                    if (sfd.ShowDialog() == DialogResult.OK)
+                    {
+                        filePath = sfd.FileName;
+                    }
+                    else
+                    {
+                        return; // Ο χρήστης πάτησε ακύρωση
+                    }
+                }
+
+                // Δημιουργία του εγγράφου PDF
+                Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 20f, 10f);
+                PdfWriter.GetInstance(pdfDoc, new FileStream(filePath, FileMode.Create));
+                pdfDoc.Open();
+
+                // Φόρτωση της γραμματοσειράς Arial για να διαβάζονται τα Ελληνικά
+                string fontPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Fonts), "arial.ttf");
+                BaseFont bf = BaseFont.CreateFont(fontPath, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+                iTextSharp.text.Font greekFont = new iTextSharp.text.Font(bf, 10, iTextSharp.text.Font.NORMAL);
+                iTextSharp.text.Font headerFont = new iTextSharp.text.Font(bf, 11, iTextSharp.text.Font.BOLD);
+
+                // Τίτλος του PDF
+                Paragraph title = new Paragraph("Αναφορά: " + fileName.Replace("_", " "), headerFont);
+                title.Alignment = Element.ALIGN_CENTER;
+                title.SpacingAfter = 15f;
+                pdfDoc.Add(title);
+
+                // Δημιουργία του πίνακα στο PDF με τον αριθμό των στηλών του DataGridView
+                PdfPTable pdfTable = new PdfPTable(dgv.Columns.Count);
+                pdfTable.WidthPercentage = 100;
+
+                // Προσθήκη Επικεφαλίδων
+                foreach (DataGridViewColumn column in dgv.Columns)
+                {
+                    PdfPCell cell = new PdfPCell(new Phrase(column.HeaderText, headerFont));
+                    cell.BackgroundColor = new BaseColor(240, 240, 240); // Ελαφρύ γκρι
+                    cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                    pdfTable.AddCell(cell);
+                }
+
+                // Προσθήκη Δεδομένων
+                foreach (DataGridViewRow row in dgv.Rows)
+                {
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        string cellValue = cell.Value != null ? cell.Value.ToString() : "";
+                        PdfPCell pdfCell = new PdfPCell(new Phrase(cellValue, greekFont));
+                        pdfTable.AddCell(pdfCell);
+                    }
+                }
+
+                pdfDoc.Add(pdfTable);
+                pdfDoc.Close();
+
+                // Αν πατήσαμε Εκτύπωση, ανοίγουμε αυτόματα το αρχείο (το οποίο θα έχει κουμπί εκτύπωσης)
+                if (openAfterSave)
+                {
+                    System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo()
+                    {
+                        FileName = filePath,
+                        UseShellExecute = true
+                    });
+                }
+                else
+                {
+                    MessageBox.Show("Η εξαγωγή σε PDF ολοκληρώθηκε!", "Επιτυχία", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Σφάλμα κατά την εξαγωγή PDF: " + ex.Message, "Σφάλμα", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnExportPdf_Click(object sender, EventArgs e)
+        {
+            DataGridView targetGrid = null;
+            string reportName = "";
+
+            // Βρίσκουμε ποιο grid είναι ανοιχτό
+            switch (tabControl1.SelectedIndex)
+            {
+                case 0: targetGrid = dgvAppointmentsByDate; reportName = "Ραντεβού_Ανά_Ημερομηνία"; break;
+                case 1: targetGrid = dgvEmployeeAppointments; reportName = "Ραντεβού_Ανά_Υπάλληλο"; break;
+                case 2: targetGrid = dgvRevenueService; reportName = "Έσοδα_Ανά_Υπηρεσία"; break;
+                case 3: targetGrid = dgvServiceUsage; reportName = "Δημοφιλείς_Υπηρεσίες"; break;
+                default: return;
+            }
+
+            if (targetGrid != null && targetGrid.Rows.Count > 0)
+            {
+                // openAfterSave: false γιατί θέλουμε απλά να το αποθηκεύσει
+                ExportToPdf(targetGrid, reportName, false);
+            }
+            else
+            {
+                MessageBox.Show("Δεν υπάρχουν δεδομένα στον πίνακα για εξαγωγή!", "Προσοχή", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        // Αντικατέστησε το παλιό σου btnPrint_Click με αυτό!
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Η λειτουργία εκτύπωσης θα είναι διαθέσιμη σύντομα μέσω PDF εξαγωγής.", "Πληροφορία");
+            DataGridView targetGrid = null;
+            string reportName = "";
+
+            switch (tabControl1.SelectedIndex)
+            {
+                case 0: targetGrid = dgvAppointmentsByDate; reportName = "Εκτύπωση_Ραντεβού_Ημερομηνίας"; break;
+                case 1: targetGrid = dgvEmployeeAppointments; reportName = "Εκτύπωση_Ραντεβού_Υπαλλήλου"; break;
+                case 2: targetGrid = dgvRevenueService; reportName = "Εκτύπωση_Εσόδων"; break;
+                case 3: targetGrid = dgvServiceUsage; reportName = "Εκτύπωση_Χρήσης_Υπηρεσιών"; break;
+                default: return;
+            }
+
+            if (targetGrid != null && targetGrid.Rows.Count > 0)
+            {
+                // openAfterSave: true για να δημιουργήσει το αρχείο αόρατα και να το ανοίξει κατευθείαν για εκτύπωση
+                ExportToPdf(targetGrid, reportName, true);
+            }
+            else
+            {
+                MessageBox.Show("Δεν υπάρχουν δεδομένα για εκτύπωση!", "Προσοχή", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         // Κενές μέθοδοι για αποφυγή σφαλμάτων αν είναι συνδεδεμένες στο UI
         private void dgvAppointmentsByDate_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
         private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
         private void dataGridView4_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
-
-        private void dgvRevenueService_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
+        private void dgvRevenueService_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
     }
 }

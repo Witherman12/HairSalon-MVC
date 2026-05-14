@@ -117,6 +117,17 @@ namespace HairSalonApp.Services
             if (app.EmployeeId <= 0) return new OperationResult { Success = false, ErrorMessage = "Παρακαλώ επιλέξτε υπάλληλο." };
             if (app.ServiceId <= 0) return new OperationResult { Success = false, ErrorMessage = "Παρακαλώ επιλέξτε υπηρεσία." };
 
+            // Κανόνας 24 ωρών (Business Rule)
+            DateTime appointmentDateTime = app.AppDate.Date.Add(app.AppTime);
+            if (appointmentDateTime < DateTime.Now.AddHours(24))
+            {
+                return new OperationResult
+                {
+                    Success = false,
+                    ErrorMessage = "Δεν επιτρέπεται η μεταβολή ραντεβού σε λιγότερο από 24 ώρες από την προγραμματισμένη ώρα."
+                };
+            }
+
             // 3. Έλεγχος Διαθεσιμότητας (εξαιρείται το τρέχον ραντεβού)
             try
             {

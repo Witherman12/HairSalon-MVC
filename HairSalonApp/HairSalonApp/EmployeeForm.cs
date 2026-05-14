@@ -35,25 +35,36 @@ namespace HairSalonApp
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            // 3. Καλούμε το Service για αποθήκευση στη βάση
+            string phone = txtPhone.Text.Trim(); // Υποθέτω το TextBox λέγεται txtPhone
+
+            // Γρήγορος έλεγχος στο UI
+            if (!string.IsNullOrWhiteSpace(phone))
+            {
+                if (phone.Length != 10 || !System.Linq.Enumerable.All(phone, char.IsDigit))
+                {
+                    MessageBox.Show("Το τηλέφωνο πρέπει να αποτελείται ακριβώς από 10 ψηφία.", "Λάθος Τηλέφωνο", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtPhone.Focus();
+                    txtPhone.SelectAll();
+                    return; // Σταματάμε εδώ!
+                }
+            }
+
             var result = _employeeService.SaveEmployee(
                 _employeeId,
                 txtFirstName.Text,
                 txtLastName.Text,
                 txtPhone.Text,
-                txtSpecialty.Text
-            );
+                txtSpecialty.Text);
 
-            // 4. Έλεγχος αποτελέσματος
             if (result.Success)
             {
-                MessageBox.Show("Η αποθήκευση ολοκληρώθηκε επιτυχώς!", "Ενημέρωση", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.DialogResult = DialogResult.OK; // Επιστρέφει OK στο UC για να κάνει Refresh το Grid
+                MessageBox.Show("Ο υπάλληλος αποθηκεύτηκε επιτυχώς!");
+                this.DialogResult = DialogResult.OK;
                 this.Close();
             }
             else
             {
-                MessageBox.Show(result.ErrorMessage, "Σφάλμα", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(result.ErrorMessage, "Προσοχή", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
     }

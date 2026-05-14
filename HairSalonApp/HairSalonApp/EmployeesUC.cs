@@ -15,7 +15,7 @@ namespace HairSalonApp
             InitializeComponent();
             _employeeService = new EmployeeService();
 
-            // 1. Ρύθμιση Στηλών (Όπως στον Customer)
+            // 1. Ρύθμιση Στηλών
             dgvEmployees.AutoGenerateColumns = false;
             dgvEmployees.Columns.Clear();
 
@@ -106,6 +106,11 @@ namespace HairSalonApp
         private void dgvEmployees_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             // Κενό για μελλοντική χρήση
+        }
+
+        private void EmployeesUC_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

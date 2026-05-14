@@ -181,7 +181,7 @@
             txtFirstName.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 161);
             txtFirstName.Location = new Point(297, 47);
             txtFirstName.Name = "txtFirstName";
-            txtFirstName.Size = new Size(125, 34);
+            txtFirstName.Size = new Size(150, 34);
             txtFirstName.TabIndex = 19;
             // 
             // txtNotes
@@ -214,7 +214,7 @@
             txtLastName.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 161);
             txtLastName.Location = new Point(297, 87);
             txtLastName.Name = "txtLastName";
-            txtLastName.Size = new Size(125, 34);
+            txtLastName.Size = new Size(150, 34);
             txtLastName.TabIndex = 23;
             // 
             // CustomerForm

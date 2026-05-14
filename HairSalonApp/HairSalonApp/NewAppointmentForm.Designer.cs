@@ -37,11 +37,11 @@
             cmbEmployee = new ComboBox();
             label4 = new Label();
             dtpDate = new DateTimePicker();
-            txtTime = new TextBox();
             label5 = new Label();
             btnSave = new Button();
             btnCancel = new Button();
             panel1 = new Panel();
+            dtpTime = new DateTimePicker();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -57,6 +57,8 @@
             // 
             // cmbCustomer
             // 
+            cmbCustomer.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbCustomer.AutoCompleteSource = AutoCompleteSource.ListItems;
             cmbCustomer.Cursor = Cursors.Hand;
             cmbCustomer.FormattingEnabled = true;
             cmbCustomer.Location = new Point(327, 20);
@@ -86,6 +88,8 @@
             // 
             // cmbService
             // 
+            cmbService.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbService.AutoCompleteSource = AutoCompleteSource.ListItems;
             cmbService.Cursor = Cursors.Hand;
             cmbService.FormattingEnabled = true;
             cmbService.Location = new Point(327, 65);
@@ -95,6 +99,8 @@
             // 
             // cmbEmployee
             // 
+            cmbEmployee.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbEmployee.AutoCompleteSource = AutoCompleteSource.ListItems;
             cmbEmployee.Cursor = Cursors.Hand;
             cmbEmployee.FormattingEnabled = true;
             cmbEmployee.Location = new Point(327, 111);
@@ -106,7 +112,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
-            label4.Location = new Point(221, 191);
+            label4.Location = new Point(228, 191);
             label4.Name = "label4";
             label4.Size = new Size(134, 28);
             label4.TabIndex = 6;
@@ -115,26 +121,18 @@
             // dtpDate
             // 
             dtpDate.Cursor = Cursors.Hand;
+            dtpDate.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 161);
             dtpDate.Format = DateTimePickerFormat.Short;
-            dtpDate.Location = new Point(378, 191);
+            dtpDate.Location = new Point(370, 191);
             dtpDate.Name = "dtpDate";
-            dtpDate.Size = new Size(122, 27);
+            dtpDate.Size = new Size(122, 30);
             dtpDate.TabIndex = 7;
-            // 
-            // txtTime
-            // 
-            txtTime.Cursor = Cursors.IBeam;
-            txtTime.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 161);
-            txtTime.Location = new Point(375, 224);
-            txtTime.Name = "txtTime";
-            txtTime.Size = new Size(125, 34);
-            txtTime.TabIndex = 8;
             // 
             // label5
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
-            label5.Location = new Point(221, 229);
+            label5.Location = new Point(228, 229);
             label5.Name = "label5";
             label5.Size = new Size(59, 28);
             label5.TabIndex = 9;
@@ -185,14 +183,25 @@
             panel1.Size = new Size(720, 51);
             panel1.TabIndex = 12;
             // 
+            // dtpTime
+            // 
+            dtpTime.CustomFormat = "HH:mm";
+            dtpTime.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 161);
+            dtpTime.Format = DateTimePickerFormat.Custom;
+            dtpTime.Location = new Point(370, 227);
+            dtpTime.Name = "dtpTime";
+            dtpTime.ShowUpDown = true;
+            dtpTime.Size = new Size(72, 31);
+            dtpTime.TabIndex = 13;
+            // 
             // NewAppointmentForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.WhiteSmoke;
             ClientSize = new Size(720, 365);
+            Controls.Add(dtpTime);
             Controls.Add(label5);
-            Controls.Add(txtTime);
             Controls.Add(dtpDate);
             Controls.Add(label4);
             Controls.Add(cmbEmployee);
@@ -224,10 +233,10 @@
         private ComboBox cmbEmployee;
         private Label label4;
         private DateTimePicker dtpDate;
-        private TextBox txtTime;
         private Label label5;
         private Button btnSave;
         private Button btnCancel;
         private Panel panel1;
+        private DateTimePicker dtpTime;
     }
 }

@@ -72,8 +72,8 @@ namespace HairSalonApp
                     // Ημερομηνία
                     dtpDate.Value = appointment.AppDate;
 
-                    // Ώρα (Τη μετατρέπουμε σε κείμενο HH:mm για να μπει στο TextBox)
-                    txtTime.Text = appointment.AppTime.ToString(@"hh\:mm");
+                    // Επειδή το DateTimePicker περιμένει ολόκληρη ημερομηνία, του δίνουμε το "Σήμερα" συν την Ώρα του ραντεβού
+                    dtpTime.Value = DateTime.Today.Add(appointment.AppTime);
 
                     // Επιλογή στα DropDowns (ComboBoxes)
                     cmbCustomer.SelectedValue = appointment.CustomerId;
@@ -103,24 +103,7 @@ namespace HairSalonApp
                     return;
                 }
 
-                // 2. Έλεγχος ώρας
-                TimeSpan parsedTime;
-                // Το TryParseExact διασφαλίζει ότι δέχεται μόνο μορφές όπως "14:30" (hh:mm) ή "9:30" (h:mm)
-                bool isValidTime = TimeSpan.TryParseExact(
-                    txtTime.Text.Trim(),
-                    new[] { "hh\\:mm", "h\\:mm" },
-                    null,
-                    out parsedTime);
-
-                if (!isValidTime)
-                {
-                    MessageBox.Show("Παρακαλώ εισάγετε μια έγκυρη ώρα στη μορφή ΩΩ:ΛΛ (π.χ. 14:30 ή 09:15).", "Λάθος Μορφή Ώρας", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-                    // Κάνουμε focus στο κουτάκι για να το διορθώσει ο χρήστης
-                    txtTime.Focus();
-                    txtTime.SelectAll();
-                    return; // Σταματάμε την αποθήκευση!
-                }
+                TimeSpan parsedTime = dtpTime.Value.TimeOfDay;
 
                 // Έλεγχος Ωραρίου
                 if (parsedTime.Hours < 9 || parsedTime.Hours > 21) // π.χ. ωράριο 09:00 - 21:00
@@ -188,5 +171,6 @@ namespace HairSalonApp
             this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
+
     }
 }
