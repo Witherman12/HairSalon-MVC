@@ -31,6 +31,12 @@
             label1 = new Label();
             tabControl1 = new TabControl();
             AppointmentsByDateGrid = new TabPage();
+            panelFilters = new Panel();
+            btnApplyFilter = new Button();
+            dtpFrom = new DateTimePicker();
+            dtpTo = new DateTimePicker();
+            label3 = new Label();
+            label2 = new Label();
             dgvAppointmentsByDate = new DataGridView();
             EmployeeAppointmentsGrid = new TabPage();
             dgvEmployeeAppointments = new DataGridView();
@@ -46,6 +52,7 @@
             btnFilters = new Button();
             tabControl1.SuspendLayout();
             AppointmentsByDateGrid.SuspendLayout();
+            panelFilters.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvAppointmentsByDate).BeginInit();
             EmployeeAppointmentsGrid.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvEmployeeAppointments).BeginInit();
@@ -87,6 +94,7 @@
             // AppointmentsByDateGrid
             // 
             AppointmentsByDateGrid.BackColor = Color.WhiteSmoke;
+            AppointmentsByDateGrid.Controls.Add(panelFilters);
             AppointmentsByDateGrid.Controls.Add(dgvAppointmentsByDate);
             AppointmentsByDateGrid.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 161);
             AppointmentsByDateGrid.Location = new Point(4, 37);
@@ -96,9 +104,79 @@
             AppointmentsByDateGrid.TabIndex = 0;
             AppointmentsByDateGrid.Text = "Ραντεβού ανά Ημερομηνία";
             // 
+            // panelFilters
+            // 
+            panelFilters.BackColor = Color.Gainsboro;
+            panelFilters.Controls.Add(btnApplyFilter);
+            panelFilters.Controls.Add(dtpFrom);
+            panelFilters.Controls.Add(dtpTo);
+            panelFilters.Controls.Add(label3);
+            panelFilters.Controls.Add(label2);
+            panelFilters.Dock = DockStyle.Top;
+            panelFilters.Location = new Point(3, 3);
+            panelFilters.Name = "panelFilters";
+            panelFilters.Size = new Size(724, 85);
+            panelFilters.TabIndex = 4;
+            panelFilters.Visible = false;
+            // 
+            // btnApplyFilter
+            // 
+            btnApplyFilter.BackColor = Color.SpringGreen;
+            btnApplyFilter.FlatAppearance.BorderSize = 0;
+            btnApplyFilter.FlatStyle = FlatStyle.Flat;
+            btnApplyFilter.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 161);
+            btnApplyFilter.ForeColor = Color.Black;
+            btnApplyFilter.Location = new Point(3, 51);
+            btnApplyFilter.Name = "btnApplyFilter";
+            btnApplyFilter.Size = new Size(125, 31);
+            btnApplyFilter.TabIndex = 23;
+            btnApplyFilter.Text = "Εφαρμογή";
+            btnApplyFilter.TextAlign = ContentAlignment.TopCenter;
+            btnApplyFilter.UseVisualStyleBackColor = false;
+            btnApplyFilter.Click += btnApplyFilter_Click;
+            // 
+            // dtpFrom
+            // 
+            dtpFrom.Location = new Point(64, 6);
+            dtpFrom.Name = "dtpFrom";
+            dtpFrom.Size = new Size(250, 34);
+            dtpFrom.TabIndex = 20;
+            // 
+            // dtpTo
+            // 
+            dtpTo.Location = new Point(405, 7);
+            dtpTo.Name = "dtpTo";
+            dtpTo.Size = new Size(250, 34);
+            dtpTo.TabIndex = 19;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.BackColor = Color.Transparent;
+            label3.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            label3.ForeColor = Color.Black;
+            label3.Location = new Point(3, 12);
+            label3.Name = "label3";
+            label3.Size = new Size(55, 28);
+            label3.TabIndex = 18;
+            label3.Text = "Από:";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.BackColor = Color.Transparent;
+            label2.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            label2.ForeColor = Color.Black;
+            label2.Location = new Point(345, 12);
+            label2.Name = "label2";
+            label2.Size = new Size(54, 28);
+            label2.TabIndex = 17;
+            label2.Text = "Έως:";
+            // 
             // dgvAppointmentsByDate
             // 
             dgvAppointmentsByDate.AllowUserToAddRows = false;
+            dgvAppointmentsByDate.AllowUserToDeleteRows = false;
             dgvAppointmentsByDate.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvAppointmentsByDate.BackgroundColor = Color.GhostWhite;
             dgvAppointmentsByDate.BorderStyle = BorderStyle.None;
@@ -106,6 +184,7 @@
             dgvAppointmentsByDate.Dock = DockStyle.Fill;
             dgvAppointmentsByDate.Location = new Point(3, 3);
             dgvAppointmentsByDate.Name = "dgvAppointmentsByDate";
+            dgvAppointmentsByDate.ReadOnly = true;
             dgvAppointmentsByDate.RowHeadersVisible = false;
             dgvAppointmentsByDate.RowHeadersWidth = 51;
             dgvAppointmentsByDate.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -135,6 +214,7 @@
             dgvEmployeeAppointments.Dock = DockStyle.Fill;
             dgvEmployeeAppointments.Location = new Point(3, 3);
             dgvEmployeeAppointments.Name = "dgvEmployeeAppointments";
+            dgvEmployeeAppointments.ReadOnly = true;
             dgvEmployeeAppointments.RowHeadersVisible = false;
             dgvEmployeeAppointments.RowHeadersWidth = 51;
             dgvEmployeeAppointments.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -163,6 +243,7 @@
             dgvRevenueService.Dock = DockStyle.Fill;
             dgvRevenueService.Location = new Point(3, 3);
             dgvRevenueService.Name = "dgvRevenueService";
+            dgvRevenueService.ReadOnly = true;
             dgvRevenueService.RowHeadersVisible = false;
             dgvRevenueService.RowHeadersWidth = 51;
             dgvRevenueService.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -192,6 +273,7 @@
             dgvServiceUsage.Dock = DockStyle.Fill;
             dgvServiceUsage.Location = new Point(3, 3);
             dgvServiceUsage.Name = "dgvServiceUsage";
+            dgvServiceUsage.ReadOnly = true;
             dgvServiceUsage.RowHeadersVisible = false;
             dgvServiceUsage.RowHeadersWidth = 51;
             dgvServiceUsage.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -291,6 +373,7 @@
             btnFilters.Text = "Φίλτρα";
             btnFilters.TextAlign = ContentAlignment.TopCenter;
             btnFilters.UseVisualStyleBackColor = false;
+            btnFilters.Click += btnFilters_Click;
             // 
             // ReportsUC
             // 
@@ -306,6 +389,8 @@
             Load += ReportsUC_Load;
             tabControl1.ResumeLayout(false);
             AppointmentsByDateGrid.ResumeLayout(false);
+            panelFilters.ResumeLayout(false);
+            panelFilters.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvAppointmentsByDate).EndInit();
             EmployeeAppointmentsGrid.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvEmployeeAppointments).EndInit();
@@ -335,5 +420,11 @@
         private DataGridView dgvEmployeeAppointments;
         private DataGridView dgvRevenueService;
         private Button btnExportExcel;
+        private Panel panelFilters;
+        private Label label3;
+        private Label label2;
+        private DateTimePicker dtpFrom;
+        private DateTimePicker dtpTo;
+        private Button btnApplyFilter;
     }
 }

@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
-using ClosedXML.Excel;
-using HairSalonApp.Services;
+﻿using ClosedXML.Excel;
 using HairSalonApp.Models;
-using System.IO;
+using HairSalonApp.Services;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
+using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Windows.Forms;
+using System.Data;
+using HairSalonApp.Data;
 
 namespace HairSalonApp
 {
@@ -298,5 +301,43 @@ namespace HairSalonApp
         private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
         private void dataGridView4_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
         private void dgvRevenueService_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
+
+        private void btnFilters_Click(object sender, EventArgs e)
+        {
+            // Αν το panel είναι κρυφό το εμφανίζει, αν είναι ορατό το κρύβει
+            panelFilters.Visible = !panelFilters.Visible;
+        }
+
+        private void btnApplyFilter_Click(object sender, EventArgs e)
+        {
+            DateTime fromDate = dtpFrom.Value.Date;
+            DateTime toDate = dtpTo.Value.Date.AddDays(1).AddTicks(-1);
+
+            if (fromDate > toDate)
+            {
+                MessageBox.Show("Η αρχική ημερομηνία δεν μπορεί να είναι μεγαλύτερη από την τελική.", "Σφάλμα", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            try
+            {
+                ReportRepository repo = new ReportRepository();
+
+                // 1. Ενημερώνουμε τον πίνακα "Ανά Υπάλληλο"
+                var filteredEmployees = repo.GetAppointmentsByEmployee(fromDate, toDate);
+                dgvEmployeeAppointments.DataSource = filteredEmployees;
+
+                // 2. Ενημερώνουμε τον πίνακα "Ανά Ημερομηνία"
+                var filteredDates = repo.GetAppointmentsByDate(fromDate, toDate);
+                dgvAppointmentsByDate.DataSource = filteredDates;
+
+                // Κρύβουμε το panel με τα φίλτρα
+                panelFilters.Visible = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Σφάλμα κατά τη φόρτωση: " + ex.Message);
+            }
+        }
     }
 }

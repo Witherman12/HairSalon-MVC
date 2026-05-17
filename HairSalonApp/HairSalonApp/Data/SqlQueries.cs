@@ -26,7 +26,7 @@ namespace HairSalonApp.Data
                 FROM Users
                 WHERE Id = @Id;";
 
-            // +++ ΑΥΤΟ ΕΙΝΑΙ ΤΟ ΝΕΟ QUERY ΓΙΑ ΤΟ BCRYPT +++
+            // +++ ΝΕΟ QUERY ΓΙΑ ΤΟ BCRYPT +++
             public const string GetByUsername = @"
                 SELECT Id, Username, `Password`, Role
                 FROM Users
@@ -346,6 +346,13 @@ namespace HairSalonApp.Data
                 GROUP BY AppDate
                 ORDER BY AppDate;";
 
+            public const string AppointmentsByDateFiltered = @"
+                SELECT AppDate, COUNT(*) AS TotalAppointments
+                FROM Appointments
+                WHERE AppDate >= @FromDate AND AppDate <= @ToDate
+                GROUP BY AppDate
+                ORDER BY AppDate;";
+
             public const string TotalRevenue = @"
                 SELECT SUM(s.Price) AS TotalRevenue
                 FROM Appointments a
@@ -358,6 +365,18 @@ namespace HairSalonApp.Data
                     COUNT(a.Id) AS TotalAppointments
                 FROM Employees e
                 LEFT JOIN Appointments a ON e.Id = a.EmployeeId
+                GROUP BY e.Id, e.FirstName, e.LastName
+                ORDER BY TotalAppointments DESC;";
+
+            // +++++ ΝΕΟ ΦΙΛΤΡΑΡΙΣΜΕΝΟ QUERY ΓΙΑ ΤΟ ΚΙΤΡΙΝΟ ΚΟΥΜΠΙ +++++
+            public const string AppointmentsByEmployeeFiltered = @"
+                SELECT 
+                    CONCAT(e.FirstName, ' ', e.LastName) AS EmployeeName, 
+                    COUNT(a.Id) AS TotalAppointments
+                FROM Employees e
+                INNER JOIN Appointments a ON e.Id = a.EmployeeId
+                WHERE a.AppDate >= @FromDate 
+                  AND a.AppDate <= @ToDate
                 GROUP BY e.Id, e.FirstName, e.LastName
                 ORDER BY TotalAppointments DESC;";
 

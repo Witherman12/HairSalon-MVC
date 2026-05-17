@@ -1,12 +1,16 @@
 using MySql.Data.MySqlClient;
 using HairSalonApp.Models;
+using System;
+using System.Collections.Generic;
 
 /*
 GetAppointmentsByDate: Επιστρέφει πλήθος ραντεβού ανά ημερομηνία.
+GetAppointmentsByDate: Επιστρέφει πλήθος ραντεβού ανά ημερομηνία με φίλτρο ημερομηνιών.
 GetTotalRevenue: Υπολογίζει τα συνολικά έσοδα από ολοκληρωμένα ραντεβού.
 GetAppointmentsByEmployee: Επιστρέφει πλήθος ραντεβού ανά υπάλληλο.
 GetPopularServices: Επιστρέφει τις υπηρεσίες με βάση τη χρήση τους.
 GetRevenueByService: Επιστρέφει έσοδα ανά υπηρεσία.
+GetAppointmentsByEmployee : Επιστρέφει πλήθος ραντεβού ανά υπάλληλο με φίλτρο ημερομηνιών.
 */
 
 namespace HairSalonApp.Data
@@ -28,6 +32,40 @@ namespace HairSalonApp.Data
 
                 using (MySqlCommand command = new MySqlCommand(SqlQueries.Reports.AppointmentsByDate, connection))
                 {
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            AppointmentsByDateReport report = new AppointmentsByDateReport();
+
+                            report.AppDate = Convert.ToDateTime(reader["AppDate"]);
+                            report.TotalAppointments = Convert.ToInt32(reader["TotalAppointments"]);
+
+                            reports.Add(report);
+                        }
+                    }
+                }
+            }
+
+            return reports;
+        }
+
+        /// <summary>
+        /// Επιστρέφει μια λίστα με τον αριθμό των ραντεβού ανά ημερομηνία (ΦΙΛΤΡΑΡΙΣΜΕΝΗ).
+        /// </summary>
+        public List<AppointmentsByDateReport> GetAppointmentsByDate(DateTime fromDate, DateTime toDate)
+        {
+            List<AppointmentsByDateReport> reports = new List<AppointmentsByDateReport>();
+
+            using (MySqlConnection connection = Database.GetConnection())
+            {
+                connection.Open();
+
+                using (MySqlCommand command = new MySqlCommand(SqlQueries.Reports.AppointmentsByDateFiltered, connection))
+                {
+                    command.Parameters.AddWithValue("@FromDate", fromDate);
+                    command.Parameters.AddWithValue("@ToDate", toDate);
+
                     using (MySqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
@@ -161,6 +199,40 @@ namespace HairSalonApp.Data
                             report.ServiceName = Convert.ToString(reader["ServiceName"]) ?? string.Empty;
                             report.CompletedAppointments = Convert.ToInt32(reader["CompletedAppointments"]);
                             report.Revenue = Convert.ToDecimal(reader["Revenue"]);
+
+                            reports.Add(report);
+                        }
+                    }
+                }
+            }
+
+            return reports;
+        }
+
+        /// <summary>
+        /// Επιστρέφει μια λίστα με τον αριθμό των ραντεβού ανά εργαζόμενο ΦΙΛΤΡΑΡΙΣΜΕΝΗ ανά ημερομηνία.
+        /// </summary>
+        public List<EmployeeAppointmentsReport> GetAppointmentsByEmployee(DateTime fromDate, DateTime toDate)
+        {
+            List<EmployeeAppointmentsReport> reports = new List<EmployeeAppointmentsReport>();
+
+            using (MySqlConnection connection = Database.GetConnection())
+            {
+                connection.Open();
+
+                using (MySqlCommand command = new MySqlCommand(SqlQueries.Reports.AppointmentsByEmployeeFiltered, connection))
+                {
+                    command.Parameters.AddWithValue("@FromDate", fromDate);
+                    command.Parameters.AddWithValue("@ToDate", toDate);
+
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            EmployeeAppointmentsReport report = new EmployeeAppointmentsReport();
+
+                            report.EmployeeName = Convert.ToString(reader["EmployeeName"]) ?? string.Empty;
+                            report.TotalAppointments = Convert.ToInt32(reader["TotalAppointments"]);
 
                             reports.Add(report);
                         }

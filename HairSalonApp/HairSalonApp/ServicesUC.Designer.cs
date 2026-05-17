@@ -45,10 +45,9 @@
             panel1.Controls.Add(btnEditService);
             panel1.Controls.Add(btnNewService);
             panel1.Dock = DockStyle.Bottom;
-            panel1.Location = new Point(0, 332);
-            panel1.Margin = new Padding(3, 2, 3, 2);
+            panel1.Location = new Point(0, 442);
             panel1.Name = "panel1";
-            panel1.Size = new Size(646, 38);
+            panel1.Size = new Size(738, 51);
             panel1.TabIndex = 12;
             // 
             // btnDeleteService
@@ -60,10 +59,9 @@
             btnDeleteService.FlatStyle = FlatStyle.Flat;
             btnDeleteService.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
             btnDeleteService.ForeColor = Color.WhiteSmoke;
-            btnDeleteService.Location = new Point(453, 0);
-            btnDeleteService.Margin = new Padding(3, 2, 3, 2);
+            btnDeleteService.Location = new Point(518, 0);
             btnDeleteService.Name = "btnDeleteService";
-            btnDeleteService.Size = new Size(192, 38);
+            btnDeleteService.Size = new Size(219, 51);
             btnDeleteService.TabIndex = 13;
             btnDeleteService.Text = "Διαγραφή";
             btnDeleteService.UseVisualStyleBackColor = false;
@@ -78,10 +76,9 @@
             btnEditService.FlatStyle = FlatStyle.Flat;
             btnEditService.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
             btnEditService.ForeColor = Color.WhiteSmoke;
-            btnEditService.Location = new Point(227, 0);
-            btnEditService.Margin = new Padding(3, 2, 3, 2);
+            btnEditService.Location = new Point(259, 0);
             btnEditService.Name = "btnEditService";
-            btnEditService.Size = new Size(192, 38);
+            btnEditService.Size = new Size(219, 51);
             btnEditService.TabIndex = 13;
             btnEditService.Text = "Επεξεργασία";
             btnEditService.UseVisualStyleBackColor = false;
@@ -97,9 +94,8 @@
             btnNewService.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
             btnNewService.ForeColor = Color.WhiteSmoke;
             btnNewService.Location = new Point(0, 0);
-            btnNewService.Margin = new Padding(3, 2, 3, 2);
             btnNewService.Name = "btnNewService";
-            btnNewService.Size = new Size(192, 38);
+            btnNewService.Size = new Size(219, 51);
             btnNewService.TabIndex = 13;
             btnNewService.Text = "Νέα Υπηρεσία";
             btnNewService.UseVisualStyleBackColor = false;
@@ -114,7 +110,7 @@
             label1.ForeColor = Color.Black;
             label1.Location = new Point(0, 0);
             label1.Name = "label1";
-            label1.Size = new Size(106, 25);
+            label1.Size = new Size(127, 31);
             label1.TabIndex = 13;
             label1.Text = "Υπηρεσίες";
             // 
@@ -126,25 +122,24 @@
             dgvServices.BorderStyle = BorderStyle.None;
             dgvServices.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvServices.Dock = DockStyle.Fill;
-            dgvServices.Location = new Point(0, 25);
-            dgvServices.Margin = new Padding(3, 2, 3, 2);
+            dgvServices.Location = new Point(0, 31);
             dgvServices.Name = "dgvServices";
+            dgvServices.ReadOnly = true;
             dgvServices.RowHeadersWidth = 51;
             dgvServices.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvServices.Size = new Size(646, 307);
+            dgvServices.Size = new Size(738, 411);
             dgvServices.TabIndex = 14;
             dgvServices.CellContentClick += dgvServices_CellContentClick;
             // 
             // ServicesUC
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(dgvServices);
             Controls.Add(label1);
             Controls.Add(panel1);
-            Margin = new Padding(3, 2, 3, 2);
             Name = "ServicesUC";
-            Size = new Size(646, 370);
+            Size = new Size(738, 493);
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvServices).EndInit();
             ResumeLayout(false);

@@ -107,6 +107,7 @@
             dgvEmployees.Dock = DockStyle.Fill;
             dgvEmployees.Location = new Point(0, 31);
             dgvEmployees.Name = "dgvEmployees";
+            dgvEmployees.ReadOnly = true;
             dgvEmployees.RowHeadersWidth = 51;
             dgvEmployees.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvEmployees.Size = new Size(738, 411);
