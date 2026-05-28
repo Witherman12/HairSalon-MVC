@@ -14,6 +14,11 @@ namespace HairSalonApp.Services
             _userRepository = new UserRepository();
         }
 
+        public UserService(UserRepository userRepository)
+        {
+            _userRepository = userRepository;
+        }
+
         public OperationResult Login(string username, string password)
         {
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))

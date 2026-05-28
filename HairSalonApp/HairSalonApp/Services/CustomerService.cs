@@ -83,6 +83,11 @@ namespace HairSalonApp.Services
             _customerRepository = new CustomerRepository();
         }
 
+        public CustomerService(CustomerRepository customerRepository)
+        {
+            _customerRepository = customerRepository;
+        }
+
         public OperationResult SaveCustomer(int? id, string firstName, string lastName, string phone, string email, string notes)
         {
             // 1. Καθαρισμός δεδομένων
