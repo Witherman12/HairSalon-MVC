@@ -17,7 +17,7 @@ namespace HairSalonApp.Data
         /// Επιστρέφει μια λίστα με όλους τους υπαλλήλους από τη βάση δεδομένων.
         /// </summary>
         /// <returns></returns>
-        public List<Employee> GetAll()
+        public virtual List<Employee> GetAll()
         {
             List<Employee> employees = new List<Employee>();
 
@@ -47,7 +47,7 @@ namespace HairSalonApp.Data
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Employee? GetById(int id)
+        public virtual Employee? GetById(int id)
         {
             using (MySqlConnection connection = Database.GetConnection())
             {
@@ -75,7 +75,7 @@ namespace HairSalonApp.Data
         /// </summary>
         /// <param name="employee"></param>
         /// <returns></returns>
-        public int Insert(Employee employee)
+        public virtual int Insert(Employee employee)
         {
             using (MySqlConnection connection = Database.GetConnection())
             {
@@ -101,7 +101,7 @@ namespace HairSalonApp.Data
         /// </summary>
         /// <param name="employee"></param>
         /// <returns></returns>
-        public bool Update(Employee employee)
+        public virtual bool Update(Employee employee)
         {
             using (MySqlConnection connection = Database.GetConnection())
             {
@@ -124,7 +124,7 @@ namespace HairSalonApp.Data
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public bool Delete(int id)
+        public virtual bool Delete(int id)
         {
             using (MySqlConnection connection = Database.GetConnection())
             {

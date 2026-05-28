@@ -18,7 +18,7 @@ namespace HairSalonApp.Data
         /// Επιστρέφει μια λίστα με όλους τους πελάτες από τη βάση δεδομένων.
         /// </summary>
         /// <returns></returns>
-        public List<Customer> GetAll()
+        public virtual List<Customer> GetAll()
         {
             List<Customer> customers = new List<Customer>();
 
@@ -47,7 +47,7 @@ namespace HairSalonApp.Data
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Customer? GetById(int id)
+        public virtual Customer? GetById(int id)
         {
             using (MySqlConnection connection = Database.GetConnection())
             {
@@ -76,7 +76,7 @@ namespace HairSalonApp.Data
         /// </summary>
         /// <param name="searchText"></param>
         /// <returns></returns>
-        public List<Customer> Search(string searchText)
+        public virtual List<Customer> Search(string searchText)
         {
             List<Customer> customers = new List<Customer>();
 
@@ -107,7 +107,7 @@ namespace HairSalonApp.Data
         /// </summary>
         /// <param name="customer"></param>
         /// <returns></returns>
-        public int Insert(Customer customer)
+        public virtual int Insert(Customer customer)
         {
             using (MySqlConnection connection = Database.GetConnection())
             {
@@ -134,7 +134,7 @@ namespace HairSalonApp.Data
         /// </summary>
         /// <param name="customer"></param>
         /// <returns></returns>
-        public bool Update(Customer customer)
+        public virtual bool Update(Customer customer)
         {
             using (MySqlConnection connection = Database.GetConnection())
             {
@@ -158,7 +158,7 @@ namespace HairSalonApp.Data
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public bool Delete(int id)
+        public virtual bool Delete(int id)
         {
             using (MySqlConnection connection = Database.GetConnection())
             {

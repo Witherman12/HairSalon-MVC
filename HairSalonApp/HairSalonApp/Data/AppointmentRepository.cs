@@ -25,7 +25,7 @@ namespace HairSalonApp.Data
         /// Επιστρέφει μια λίστα με όλα τα ραντεβού από τη βάση δεδομένων,
         /// </summary>
         /// <returns></returns>
-        public List<AppointmentView> GetAll()
+        public virtual List<AppointmentView> GetAll()
         {
             List<AppointmentView> appointments = new List<AppointmentView>();
 
@@ -54,7 +54,7 @@ namespace HairSalonApp.Data
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Appointment? GetById(int id)
+        public virtual Appointment? GetById(int id)
         {
             using (MySqlConnection connection = Database.GetConnection())
             {
@@ -83,7 +83,7 @@ namespace HairSalonApp.Data
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public AppointmentView? GetAppointmentViewById(int id)
+        public virtual AppointmentView? GetAppointmentViewById(int id)
         {
             using (MySqlConnection connection = Database.GetConnection())
             {
@@ -224,7 +224,7 @@ namespace HairSalonApp.Data
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public bool Cancel(int id)
+        public virtual bool Cancel(int id)
         {
             using (MySqlConnection connection = Database.GetConnection())
             {
@@ -246,7 +246,7 @@ namespace HairSalonApp.Data
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public bool Complete(int id)
+        public virtual bool Complete(int id)
         {
             using (MySqlConnection connection = Database.GetConnection())
             {
@@ -268,7 +268,7 @@ namespace HairSalonApp.Data
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public bool Reactivate(int id)
+        public virtual bool Reactivate(int id)
         {
             using (MySqlConnection connection = Database.GetConnection())
             {
@@ -290,7 +290,7 @@ namespace HairSalonApp.Data
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public bool Delete(int id)
+        public virtual bool Delete(int id)
         {
             using (MySqlConnection connection = Database.GetConnection())
             {

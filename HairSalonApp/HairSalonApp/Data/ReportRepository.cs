@@ -22,7 +22,7 @@ namespace HairSalonApp.Data
         /// Κάθε αντικείμενο στη λίστα περιέχει την ημερομηνία και τον συνολικό αριθμό ραντεβού για αυτήν την ημερομηνία.
         /// </summary>
         /// <returns></returns>
-        public List<AppointmentsByDateReport> GetAppointmentsByDate()
+        public virtual List<AppointmentsByDateReport> GetAppointmentsByDate()
         {
             List<AppointmentsByDateReport> reports = new List<AppointmentsByDateReport>();
 
@@ -53,7 +53,7 @@ namespace HairSalonApp.Data
         /// <summary>
         /// Επιστρέφει μια λίστα με τον αριθμό των ραντεβού ανά ημερομηνία (ΦΙΛΤΡΑΡΙΣΜΕΝΗ).
         /// </summary>
-        public List<AppointmentsByDateReport> GetAppointmentsByDate(DateTime fromDate, DateTime toDate)
+        public virtual List<AppointmentsByDateReport> GetAppointmentsByDate(DateTime fromDate, DateTime toDate)
         {
             List<AppointmentsByDateReport> reports = new List<AppointmentsByDateReport>();
 
@@ -89,7 +89,7 @@ namespace HairSalonApp.Data
         /// Εάν δεν υπάρχουν ολοκληρωμένα ραντεβού, επιστρέφει 0.
         /// </summary>
         /// <returns></returns>
-        public decimal GetTotalRevenue()
+        public virtual decimal GetTotalRevenue()
         {
             using (MySqlConnection connection = Database.GetConnection())
             {
@@ -114,7 +114,7 @@ namespace HairSalonApp.Data
         /// Κάθε αντικείμενο στη λίστα περιέχει το όνομα του εργαζόμενου και τον συνολικό αριθμό ραντεβού του.
         /// </summary>
         /// <returns></returns>
-        public List<EmployeeAppointmentsReport> GetAppointmentsByEmployee()
+        public virtual List<EmployeeAppointmentsReport> GetAppointmentsByEmployee()
         {
             List<EmployeeAppointmentsReport> reports = new List<EmployeeAppointmentsReport>();
 
@@ -148,7 +148,7 @@ namespace HairSalonApp.Data
         /// Η λίστα είναι ταξινομημένη κατά φθίνουσα σειρά του αριθμού ραντεβού.
         /// </summary>
         /// <returns></returns>
-        public List<ServiceUsageReport> GetPopularServices()
+        public virtual List<ServiceUsageReport> GetPopularServices()
         {
             List<ServiceUsageReport> reports = new List<ServiceUsageReport>();
 
@@ -180,7 +180,7 @@ namespace HairSalonApp.Data
         /// Επιστρέφει μια λίστα με τα έσοδα ανά υπηρεσία.
         /// </summary>
         /// <returns></returns>
-        public List<RevenueByServiceReport> GetRevenueByService()
+        public virtual List<RevenueByServiceReport> GetRevenueByService()
         {
             List<RevenueByServiceReport> reports = new List<RevenueByServiceReport>();
 
@@ -212,7 +212,10 @@ namespace HairSalonApp.Data
         /// <summary>
         /// Επιστρέφει μια λίστα με τον αριθμό των ραντεβού ανά εργαζόμενο ΦΙΛΤΡΑΡΙΣΜΕΝΗ ανά ημερομηνία.
         /// </summary>
-        public List<EmployeeAppointmentsReport> GetAppointmentsByEmployee(DateTime fromDate, DateTime toDate)
+        /// <param name="fromDate"></param>
+        /// <param name="toDate"></param>
+        /// <returns></returns>
+        public virtual List<EmployeeAppointmentsReport> GetAppointmentsByEmployee(DateTime fromDate, DateTime toDate)
         {
             List<EmployeeAppointmentsReport> reports = new List<EmployeeAppointmentsReport>();
 

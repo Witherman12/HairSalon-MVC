@@ -21,7 +21,7 @@ namespace HairSalonApp.Data
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public User? Login(string username, string password)
+        public virtual User? Login(string username, string password)
         {
             using (MySqlConnection connection = Database.GetConnection())
             {
@@ -54,7 +54,7 @@ namespace HairSalonApp.Data
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
-        public User? GetByUsername(string username)
+        public virtual User? GetByUsername(string username)
         {
             using (MySqlConnection connection = Database.GetConnection())
             {
@@ -82,7 +82,7 @@ namespace HairSalonApp.Data
         /// Επιστρέφει μια λίστα με όλους τους χρήστες από τη βάση δεδομένων.
         /// </summary>
         /// <returns></returns>
-        public List<User> GetAll()
+        public virtual List<User> GetAll()
         {
             List<User> users = new List<User>();
 
@@ -112,7 +112,7 @@ namespace HairSalonApp.Data
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public User? GetById(int id)
+        public virtual User? GetById(int id)
         {
             using (MySqlConnection connection = Database.GetConnection())
             {
@@ -140,7 +140,7 @@ namespace HairSalonApp.Data
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        public int Insert(User user)
+        public virtual int Insert(User user)
         {
             using (MySqlConnection connection = Database.GetConnection())
             {
