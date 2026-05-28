@@ -15,6 +15,11 @@ namespace HairSalonApp.Services
             _employeeRepository = new EmployeeRepository();
         }
 
+        public EmployeeService(EmployeeRepository employeeRepository)
+        {
+            _employeeRepository = employeeRepository;
+        }
+
         // Ανάκτηση όλων των υπαλλήλων
         public List<Employee> GetAllEmployees()
         {

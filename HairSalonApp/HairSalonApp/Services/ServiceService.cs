@@ -15,6 +15,11 @@ namespace HairSalonApp.Services
             _serviceRepository = new ServiceRepository();
         }
 
+        public ServiceService(ServiceRepository serviceRepository)
+        {
+            _serviceRepository = serviceRepository;
+        }
+
         // Ανάκτηση όλων των υπηρεσιών
         public List<Service> GetAllServices()
         {

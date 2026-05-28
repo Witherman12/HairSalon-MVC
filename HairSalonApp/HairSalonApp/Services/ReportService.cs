@@ -14,6 +14,11 @@ namespace HairSalonApp.Services
             _reportRepository = new ReportRepository();
         }
 
+        public ReportService(ReportRepository reportRepository)
+        {
+            _reportRepository = reportRepository;
+        }
+
         // Επιστρέφει το συνολικό έσοδο από ολοκληρωμένα ραντεβού
         public decimal GetTotalRevenue()
         {
